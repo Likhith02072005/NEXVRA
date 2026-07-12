@@ -49,11 +49,11 @@ export const ThreeDMarquee = ({
               if (subarray.length === 0) return null;
               
               // Set responsive visibility class matching grid-cols configuration
-              let visibilityClass = "flex flex-col items-center gap-6";
+              let visibilityClass = "w-full flex flex-col items-center gap-6";
               if (colIndex === 1 || colIndex === 3) {
-                visibilityClass = "flex flex-col items-center gap-6 hidden sm:flex";
+                visibilityClass = "w-full flex flex-col items-center gap-6 hidden sm:flex";
               } else if (colIndex === 4 || colIndex === 5) {
-                visibilityClass = "flex flex-col items-center gap-6 hidden lg:flex";
+                visibilityClass = "w-full flex flex-col items-center gap-6 hidden lg:flex";
               }
 
               // Continuous linear animation without pauses
@@ -73,7 +73,7 @@ export const ThreeDMarquee = ({
                   {subarray.map((image, imageIndex) => (
                     <div className="relative w-full" key={imageIndex + image}>
                       <GridLineHorizontal className="-top-3" offset="10px" />
-                      <div className="rounded-xl overflow-hidden border border-white/5 bg-white/[0.01] p-1.5 shadow-xl hover:border-gold-accent/40 transition-all duration-300">
+                      <div className="w-full rounded-xl overflow-hidden border border-white/5 bg-white/[0.01] p-1.5 shadow-xl hover:border-gold-accent/40 transition-all duration-300">
                         <MotionImage
                           whileHover={{
                             y: -6,

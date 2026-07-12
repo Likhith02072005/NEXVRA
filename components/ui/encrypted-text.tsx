@@ -55,20 +55,27 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
   revealedClassName,
 }) => {
   const ref = useRef<HTMLSpanElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
   const isInView = useInView(ref, { once: true });
 
   const [revealCount, setRevealCount] = useState<number>(0);
   const animationFrameRef = useRef<number | null>(null);
   const startTimeRef = useRef<number>(0);
   const lastFlipTimeRef = useRef<number>(0);
-  const scrambleCharsRef = useRef<string[]>(
-    text ? generateGibberishPreservingSpaces(text, charset).split("") : [],
-  );
+  const scrambleCharsRef = useRef<string[]>([]);
+
+  // Simple client-side mount hook to bypass SSR text mismatch
+  useEffect(() => {
+    setIsMounted(true);
+    scrambleCharsRef.current = text 
+      ? generateGibberishPreservingSpaces(text, charset).split("") 
+      : [];
+  }, [text, charset]);
 
   useEffect(() => {
-    if (!isInView) return;
+    // Only run animation after mounted on client AND when container is in view
+    if (!isMounted || !isInView) return;
 
-    // Reset state for a fresh animation whenever dependencies change
     const initial = text
       ? generateGibberishPreservingSpaces(text, charset)
       : "";
@@ -95,7 +102,6 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
         return;
       }
 
-      // Re-randomize unrevealed scramble characters on an interval
       const timeSinceLastFlip = now - lastFlipTimeRef.current;
       if (timeSinceLastFlip >= Math.max(0, flipDelayMs)) {
         for (let index = 0; index < totalLength; index += 1) {
@@ -122,7 +128,7 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [isInView, text, revealDelayMs, charset, flipDelayMs]);
+  }, [isMounted, isInView, text, revealDelayMs, charset, flipDelayMs]);
 
   if (!text) return null;
 
@@ -134,13 +140,13 @@ export const EncryptedText: React.FC<EncryptedTextProps> = ({
       role="text"
     >
       {text.split("").map((char, index) => {
-        const isRevealed = index < revealCount;
+        // If not mounted yet, render the real character to prevent hydration mismatch!
+        const isRevealed = !isMounted || (index < revealCount);
         const displayChar = isRevealed
           ? char
           : char === " "
             ? " "
-            : (scrambleCharsRef.current[index] ??
-              generateRandomCharacter(charset));
+            : (scrambleCharsRef.current[index] ?? char);
 
         return (
           <span
