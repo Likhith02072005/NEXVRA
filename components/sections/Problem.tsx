@@ -2,7 +2,7 @@
 
 export default function Problem() {
   return (
-    <section id="problems" className="py-24 bg-[#0a0a0f] relative overflow-hidden">
+    <section id="problems" className="py-24 bg-bg-primary relative overflow-hidden">
       {/* Subtle details */}
       <div className="absolute top-0 left-1/4 w-[1px] h-full bg-[linear-gradient(to_bottom,rgba(255,255,255,0.03),transparent)] pointer-events-none" />
       <div className="absolute top-0 right-1/4 w-[1px] h-full bg-[linear-gradient(to_bottom,rgba(255,255,255,0.03),transparent)] pointer-events-none" />
@@ -14,10 +14,10 @@ export default function Problem() {
           <span className="text-xs font-bold uppercase tracking-wider text-[#7c3aed] bg-[#7c3aed]/10 px-3.5 py-1.5 rounded-full border border-[#7c3aed]/15">
             The Problem
           </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white mt-6 mb-4 leading-tight font-display">
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text-primary mt-6 mb-4 leading-tight font-display">
             Your Competitors Are Eating<br />Your Lunch. Here's Why.
           </h2>
-          <p className="text-slate-400 text-sm md:text-base">
+          <p className="text-text-secondary text-sm md:text-base">
             Most local businesses in Bangalore are bleeding money on bad websites and worse ads. Sound familiar?
           </p>
         </div>
@@ -28,8 +28,8 @@ export default function Problem() {
           {/* Card 1 */}
           <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-[#7c3aed]/20 transition-all hover:-translate-y-1 hover:bg-white/[0.04]" data-cursor-label="Pain Point">
             <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-red-500/10 text-2xl mb-6">💸</span>
-            <h3 className="text-lg font-bold text-white mb-3">Burning Money on Ads That Don't Convert</h3>
-            <p className="text-slate-400 text-sm leading-relaxed">
+            <h3 className="text-lg font-bold text-text-primary mb-3">Burning Money on Ads That Don't Convert</h3>
+            <p className="text-text-secondary text-sm leading-relaxed">
               You're pouring ₹10,000/month into Meta Ads but getting nothing back. No leads, no calls, no ROI. Your ad spend is funding Meta's shareholders, not your growth.
             </p>
           </div>
@@ -37,8 +37,8 @@ export default function Problem() {
           {/* Card 2 */}
           <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-[#7c3aed]/20 transition-all hover:-translate-y-1 hover:bg-white/[0.04]" data-cursor-label="Pain Point">
             <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-orange-500/10 text-2xl mb-6">🕸️</span>
-            <h3 className="text-lg font-bold text-white mb-3">Your Website Looks Like It's From 2010</h3>
-            <p className="text-slate-400 text-sm leading-relaxed">
+            <h3 className="text-lg font-bold text-text-primary mb-3">Your Website Looks Like It's From 2010</h3>
+            <p className="text-text-secondary text-sm leading-relaxed">
               Visitors land on your site and bounce in 3 seconds. A slow, ugly, mobile-unfriendly website is silently killing your credibility and costing you customers every single day.
             </p>
           </div>
@@ -46,8 +46,8 @@ export default function Problem() {
           {/* Card 3 */}
           <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-[#7c3aed]/20 transition-all hover:-translate-y-1 hover:bg-white/[0.04]" data-cursor-label="Pain Point">
             <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-purple-500/10 text-2xl mb-6">📉</span>
-            <h3 className="text-lg font-bold text-white mb-3">Competitors Are Stealing Your Customers</h3>
-            <p className="text-slate-400 text-sm leading-relaxed">
+            <h3 className="text-lg font-bold text-text-primary mb-3">Competitors Are Stealing Your Customers</h3>
+            <p className="text-text-secondary text-sm leading-relaxed">
               While you're stuck with a generic template site, your competitors have polished funnels, retargeting pixels, and automated follow-ups. They're playing chess; you're playing checkers.
             </p>
           </div>

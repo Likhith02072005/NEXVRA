@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
+import { Inter, Space_Grotesk, Geist } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from '@/components/SmoothScrollProvider';
 import GrainOverlay from '@/components/GrainOverlay';
 import CustomCursor from '@/components/CustomCursor';
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const inter = Inter({
   subsets: ["latin"],
@@ -43,7 +46,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${spaceGrotesk.variable} scroll-smooth`}
+      className={cn("scroll-smooth", inter.variable, spaceGrotesk.variable, "font-sans", geist.variable)}
     >
       <body className="bg-[#0a0a12] text-[#f5f0e8] font-sans selection:bg-[#00d4ff]/30 selection:text-white">
         <SmoothScrollProvider>

@@ -4,20 +4,20 @@ import Link from 'next/link';
 
 export default function PrivacyPage() {
   return (
-    <div className="bg-[#050508] text-slate-100 min-h-screen py-16 px-6">
+    <div className="bg-bg-primary text-text-primary min-h-screen py-16 px-6">
       <div className="max-w-3xl mx-auto">
         
         {/* Header */}
         <div className="text-center mb-12">
-          <Link href="/" className="text-xl font-extrabold tracking-widest text-white font-display uppercase hover:opacity-85 transition-opacity">
+          <Link href="/" className="text-xl font-extrabold tracking-widest text-text-primary font-display uppercase hover:opacity-85 transition-opacity">
             <span className="text-[#00d4ff]">NEX</span>VRA
           </Link>
-          <h1 className="text-3xl font-extrabold font-display text-white mt-6 mb-2">Privacy Policy</h1>
-          <div className="text-xs text-slate-500 font-semibold">Last updated: July 12, 2026</div>
+          <h1 className="text-3xl font-extrabold font-display text-text-primary mt-6 mb-2">Privacy Policy</h1>
+          <div className="text-xs text-text-muted font-semibold">Last updated: July 12, 2026</div>
         </div>
 
         {/* Content */}
-        <div className="space-y-8 text-slate-300 text-xs md:text-sm leading-relaxed font-medium">
+        <div className="space-y-8 text-text-secondary text-xs md:text-sm leading-relaxed font-medium">
           
           <div className="p-6 rounded-2xl bg-white/[0.01] border border-white/5">
             <p>
@@ -97,9 +97,9 @@ export default function PrivacyPage() {
 
           <div>
             <h2 className="text-base md:text-lg font-bold text-[#00d4ff] mb-3 border-b border-white/5 pb-2 font-display">8. Contact Us</h2>
-            <div className="p-6 rounded-2xl bg-white/[0.01] border border-white/5 font-bold text-white space-y-1">
+            <div className="p-6 rounded-2xl bg-white/[0.01] border border-white/5 font-bold text-text-primary space-y-1">
               <div>NEXVRA Digital</div>
-              <div className="text-slate-400 font-semibold">Bengaluru, India</div>
+              <div className="text-text-secondary font-semibold">Bengaluru, India</div>
               <div>Email: <a href="mailto:nexvratech@gmail.com" className="text-[#00d4ff] underline hover:text-[#7c3aed] transition-colors">nexvratech@gmail.com</a></div>
             </div>
           </div>
@@ -107,8 +107,8 @@ export default function PrivacyPage() {
         </div>
 
         {/* Footer */}
-        <div className="mt-16 pt-8 border-t border-white/5 text-center text-xs text-slate-500 font-semibold">
-          NEXVRA Digital &copy; 2026 &bull; All rights reserved. &bull; <Link href="/" className="text-[#00d4ff] underline hover:text-white transition-colors ml-1">Back to Home</Link>
+        <div className="mt-16 pt-8 border-t border-white/5 text-center text-xs text-text-muted font-semibold">
+          NEXVRA Digital &copy; 2026 &bull; All rights reserved. &bull; <Link href="/" className="text-[#00d4ff] underline hover:text-text-primary transition-colors ml-1">Back to Home</Link>
         </div>
 
       </div>

@@ -10,14 +10,14 @@ interface ServiceCardProps {
 function ServiceCard({ icon, title, desc, tags }: ServiceCardProps) {
   return (
     <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-[#00d4ff]/20 transition-all duration-300 hover:scale-[1.02] hover:bg-white/[0.04] flex flex-col items-start" data-cursor-label="Services">
-      <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-[#00d4ff]/10 to-[#7c3aed]/10 border border-[#00d4ff]/15 flex items-center justify-center text-white mb-6">
+      <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-[#00d4ff]/10 to-[#7c3aed]/10 border border-[#00d4ff]/15 flex items-center justify-center text-text-primary mb-6">
         {icon}
       </div>
-      <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
-      <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">{desc}</p>
+      <h3 className="text-xl font-bold text-text-primary mb-3">{title}</h3>
+      <p className="text-text-secondary text-sm leading-relaxed mb-6 flex-grow">{desc}</p>
       <div className="flex flex-wrap gap-2">
         {tags.map((tag, idx) => (
-          <span key={idx} className="text-[10px] md:text-xs font-semibold px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-slate-300">
+          <span key={idx} className="text-[10px] md:text-xs font-semibold px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-text-secondary">
             {tag}
           </span>
         ))}
@@ -28,7 +28,7 @@ function ServiceCard({ icon, title, desc, tags }: ServiceCardProps) {
 
 export default function Services() {
   return (
-    <section id="services" className="py-24 bg-[#050508] relative overflow-hidden">
+    <section id="services" className="py-24 bg-bg-primary relative overflow-hidden">
       {/* Background gradients */}
       <div className="absolute top-1/4 right-0 w-[300px] h-[300px] rounded-full bg-[#00d4ff]/5 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-0 w-[300px] h-[300px] rounded-full bg-[#7c3aed]/5 blur-[120px] pointer-events-none" />
@@ -40,10 +40,10 @@ export default function Services() {
           <span className="text-xs font-bold uppercase tracking-wider text-[#00d4ff] bg-[#00d4ff]/10 px-3.5 py-1.5 rounded-full border border-[#00d4ff]/15">
             What I Do
           </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white mt-6 mb-4 leading-tight font-display">
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text-primary mt-6 mb-4 leading-tight font-display">
             Services That Move<br />The Revenue Needle
           </h2>
-          <p className="text-slate-400 text-sm md:text-base">
+          <p className="text-text-secondary text-sm md:text-base">
             End-to-end digital solutions designed for Bangalore businesses that want to dominate their market.
           </p>
         </div>
