@@ -140,7 +140,7 @@ export default function Hero() {
       </div>
 
       {/* Full-bleed 3D marquee background covering the entire hero space */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-45">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-45 border-[5px] border-red-600">
         <ThreeDMarquee images={marqueeImages} className="h-full w-full bg-transparent border-none rounded-none" />
       </div>
 
