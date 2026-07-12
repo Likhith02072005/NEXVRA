@@ -42,6 +42,9 @@ function StatCounter({ end, suffix = '', prefix = '', decimals = false, duration
 }
 
 const marqueeImages = [
+  "https://picsum.photos/600/400?random=1",
+  "https://picsum.photos/600/400?random=2",
+  "https://picsum.photos/600/400?random=3",
   "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80",
   "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80",
   "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80",
@@ -64,9 +67,6 @@ export default function Hero() {
     <section id="hero" className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-bg-primary bg-[radial-gradient(circle_at_70%_50%,rgba(124,58,237,0.06)_0%,rgba(0,212,255,0.03)_50%,rgba(10,10,18,1)_100%)]">
       {/* Grid Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.005)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.005)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)] pointer-events-none" />
-
-      {/* Dark gradient overlay for text legibility */}
-      <div className="absolute inset-0 z-5 bg-gradient-to-b from-bg-primary/95 via-bg-primary/80 to-bg-primary lg:bg-gradient-to-r lg:from-bg-primary lg:via-bg-primary/85 lg:to-transparent pointer-events-none select-none" />
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -143,7 +143,7 @@ export default function Hero() {
       </div>
 
       {/* Full-bleed 3D marquee background covering the entire hero space */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-45">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-45 border-[5px] border-red-600">
         <ThreeDMarquee images={marqueeImages} className="h-full w-full bg-transparent border-none rounded-none" />
       </div>
 
