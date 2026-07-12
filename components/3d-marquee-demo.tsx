@@ -1,7 +1,7 @@
 "use client";
 import { ThreeDMarquee } from "@/components/ui/3d-marquee";
 
-export default function ThreeDMarqueeDemo() {
+export function ThreeDMarqueeDemo() {
   const images = [
     "https://assets.aceternity.com/cloudinary_bkp/3d-card.png",
     "https://assets.aceternity.com/animated-modal.png",
