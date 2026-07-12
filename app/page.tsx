@@ -10,7 +10,6 @@ import Pricing from '@/components/sections/Pricing';
 import Booking from '@/components/sections/Booking';
 import Footer from '@/components/sections/Footer';
 import CookieConsent from '@/components/sections/CookieConsent';
-import { ThreeDMarqueeDemo } from '@/components/3d-marquee-demo';
 
 export default function Home() {
   return (
@@ -34,9 +33,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        {/* 3D Showcase Marquee Demo */}
-        <ThreeDMarqueeDemo />
 
         <Problem />
         <Services />

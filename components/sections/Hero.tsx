@@ -42,9 +42,6 @@ function StatCounter({ end, suffix = '', prefix = '', decimals = false, duration
 }
 
 const marqueeImages = [
-  "https://picsum.photos/600/400?random=1",
-  "https://picsum.photos/600/400?random=2",
-  "https://picsum.photos/600/400?random=3",
   "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80",
   "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80",
   "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80",
@@ -143,7 +140,7 @@ export default function Hero() {
       </div>
 
       {/* Full-bleed 3D marquee background covering the entire hero space */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-45 border-[5px] border-red-600">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-45">
         <ThreeDMarquee images={marqueeImages} className="h-full w-full bg-transparent border-none rounded-none" />
       </div>
 
