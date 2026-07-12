@@ -3,7 +3,7 @@ import { Inter, Space_Grotesk, Geist } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from '@/components/SmoothScrollProvider';
 import GrainOverlay from '@/components/GrainOverlay';
-import CustomCursor from '@/components/CustomCursor';
+import FluidGlass from '@/components/ui/fluid-glass';
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -51,7 +51,7 @@ export default function RootLayout({
       <body className="bg-[#0a0a12] text-[#f5f0e8] font-sans selection:bg-[#00d4ff]/30 selection:text-white">
         <SmoothScrollProvider>
           <GrainOverlay />
-          <CustomCursor />
+          <FluidGlass />
           {children}
         </SmoothScrollProvider>
       </body>
