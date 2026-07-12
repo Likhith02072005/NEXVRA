@@ -73,7 +73,7 @@ export default function Hero() {
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-text-primary mb-6 leading-[1.1] font-display min-h-[2.2em] lg:min-h-[2.4em]">
               <EncryptedText 
-                text="I Build Websites That" 
+                text="We Build Websites That" 
                 revealDelayMs={30}
                 revealedClassName="text-text-primary"
               />
