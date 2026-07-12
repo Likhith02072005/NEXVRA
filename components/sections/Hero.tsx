@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { EncryptedText } from '@/components/ui/encrypted-text';
 import { NoiseBackground } from '@/components/ui/noise-background';
-import Ballpit from '@/components/ui/ballpit';
+import Ballpit from '@/components/Ballpit';
 
 interface StatProps {
   end: number;
@@ -98,14 +98,17 @@ export default function Hero() {
       </div>
 
       {/* Full-bleed 3D Ballpit physics background covering the entire hero space */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-50">
+      <div 
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', pointerEvents: 'none', userSelect: 'none', opacity: 0.5 }}
+        className="z-0"
+      >
         <Ballpit
           count={80}
           gravity={0.01}
           friction={0.9975}
           wallBounce={0.95}
           followCursor={true}
-          colors={['#00d4ff', '#7c3aed', '#b8860b']}
+          colors={[0x00d4ff, 0x7c3aed]}
         />
       </div>
 
