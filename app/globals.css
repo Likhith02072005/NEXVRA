@@ -89,12 +89,6 @@ html, body {
   overflow-x: hidden;
 }
 
-/* Hide default cursor on desktop since CustomCursor is active */
-@media (pointer: fine) {
-  body, a, button, select, input, textarea {
-    cursor: none !important;
-  }
-}
 
 /* Webkit Scrollbar */
 ::-webkit-scrollbar {
