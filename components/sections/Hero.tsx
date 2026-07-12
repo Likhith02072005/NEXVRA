@@ -133,12 +133,12 @@ export default function Hero() {
               <StatCounter end={15} prefix="₹" suffix="L+" label="Ad Spend Managed" />
             </div>
           </div>
-
-          {/* Right Side Marquee container */}
-          <div className="lg:col-span-4 w-full relative z-10 mt-12 lg:mt-0 overflow-hidden rounded-2xl border border-white/5 bg-white/[0.01]">
-            <ThreeDMarquee images={marqueeImages} />
-          </div>
         </div>
+      </div>
+
+      {/* Right Side Marquee container positioned absolutely in background space on the right */}
+      <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[48vw] z-0 overflow-hidden pointer-events-none select-none hidden lg:block opacity-65">
+        <ThreeDMarquee images={marqueeImages} className="h-full w-full bg-transparent border-none rounded-none" />
       </div>
 
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:block">
