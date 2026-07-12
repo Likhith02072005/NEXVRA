@@ -10,42 +10,9 @@ interface NumberProps {
 }
 
 function AnimatedNumber({ end, suffix = '', prefix = '', decimals = false }: NumberProps) {
-  const [value, setValue] = useState(0);
-  const elementRef = useRef<HTMLDivElement>(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          let startTimestamp: number | null = null;
-          const duration = 1200;
-          const step = (timestamp: number) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            const val = progress * end;
-            setValue(decimals ? Math.round(val * 10) / 10 : Math.floor(val));
-            if (progress < 1) {
-              window.requestAnimationFrame(step);
-            }
-          };
-          window.requestAnimationFrame(step);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, [end, decimals, hasAnimated]);
-
   return (
-    <div ref={elementRef} className="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed]">
-      {prefix}{decimals ? value.toFixed(1) : value}{suffix}
+    <div className="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed]">
+      {prefix}{decimals ? end.toFixed(1) : end}{suffix}
     </div>
   );
 }

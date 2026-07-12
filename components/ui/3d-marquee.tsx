@@ -28,22 +28,22 @@ export const ThreeDMarquee = ({
   return (
     <div
       className={cn(
-        "relative mx-auto block h-[650px] w-full overflow-hidden rounded-3xl max-sm:h-100",
-        className,
+        "relative mx-auto block w-full overflow-hidden",
+        className || "h-[650px] rounded-3xl",
       )}
     >
       {/* Edge vignette fade to blend grid with dark background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_15%,#0a0a12_85%)] pointer-events-none z-30" />
 
       <div className="flex size-full items-center justify-center">
-        {/* Enlarge coordinate space to prevent clipping gaps during rotation */}
-        <div className="w-[140%] h-[140%] shrink-0 scale-75 sm:scale-90 lg:scale-110 relative">
+        {/* Fixed pixel bounding box to enable correct perspective matrix projection in browser layout */}
+        <div className="size-[1720px] shrink-0 scale-[0.45] sm:scale-[0.6] lg:scale-[0.8] relative origin-center">
           <div
             style={{
               transform: "perspective(1200px) rotateX(45deg) rotateY(-5deg) rotateZ(-30deg)",
               transformStyle: "preserve-3d",
             }}
-            className="absolute top-10 left-[10%] grid w-[120%] h-[120%] origin-center grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 transform-3d"
+            className="absolute inset-0 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 transform-3d"
           >
             {chunks.map((subarray, colIndex) => {
               if (subarray.length === 0) return null;
@@ -59,9 +59,9 @@ export const ThreeDMarquee = ({
               // Continuous linear animation without pauses
               return (
                 <motion.div
-                  animate={{ y: colIndex % 2 === 0 ? [30, -120] : [-120, 30] }}
+                  animate={{ y: colIndex % 2 === 0 ? [50, -450] : [-450, 50] }}
                   transition={{
-                    duration: colIndex % 2 === 0 ? 25 : 32,
+                    duration: colIndex % 2 === 0 ? 22 : 28,
                     repeat: Infinity,
                     repeatType: "mirror",
                     ease: "linear",

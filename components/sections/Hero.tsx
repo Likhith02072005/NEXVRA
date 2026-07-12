@@ -14,27 +14,11 @@ interface StatProps {
   label: string;
 }
 
-function StatCounter({ end, suffix = '', prefix = '', decimals = false, duration = 1500, label }: StatProps) {
-  const [count, setCount] = useState(0);
-
-  useEffect(() => {
-    let startTimestamp: number | null = null;
-    const step = (timestamp: number) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      const val = progress * end;
-      setCount(decimals ? Math.round(val * 10) / 10 : Math.floor(val));
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      }
-    };
-    window.requestAnimationFrame(step);
-  }, [end, decimals, duration]);
-
+function StatCounter({ end, suffix = '', prefix = '', decimals = false, label }: StatProps) {
   return (
     <div className="flex flex-col">
       <div className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed]">
-        {prefix}{decimals ? count.toFixed(1) : count}{suffix}
+        {prefix}{decimals ? end.toFixed(1) : end}{suffix}
       </div>
       <div className="text-text-secondary text-xs md:text-sm font-medium mt-1">{label}</div>
     </div>
@@ -74,19 +58,10 @@ export default function Hero() {
               Now accepting 3 new clients for July
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-text-primary mb-6 leading-[1.1] font-display min-h-[2.2em] lg:min-h-[2.4em]">
-              <EncryptedText 
-                text="We Build Websites That" 
-                revealDelayMs={30}
-                revealedClassName="text-text-primary"
-              />
-              <br />
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-text-primary mb-6 leading-[1.1] font-display">
+              We Build Websites That <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed] glow-hover inline-block">
-                <EncryptedText 
-                  text="Print Money" 
-                  revealDelayMs={40}
-                  revealedClassName="text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed]"
-                />
+                Print Money
               </span>
             </h1>
 
@@ -140,7 +115,7 @@ export default function Hero() {
       </div>
 
       {/* Full-bleed 3D marquee background covering the entire hero space */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-45 border-[5px] border-red-600">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-45">
         <ThreeDMarquee images={marqueeImages} className="h-full w-full bg-transparent border-none rounded-none" />
       </div>
 
