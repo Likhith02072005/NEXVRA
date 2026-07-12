@@ -1,8 +1,7 @@
 'use client';
 
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { MeshDistortMaterial, Icosahedron, Environment, MeshTransmissionMaterial } from '@react-three/drei';
-import { EffectComposer, Bloom, Vignette, ChromaticAberration } from '@react-three/postprocessing';
+import { Icosahedron, Environment } from '@react-three/drei';
 import { useRef, Suspense, useState, useEffect } from 'react';
 import { useControls } from 'leva';
 import * as THREE from 'three';
@@ -83,38 +82,22 @@ function TiltingObject() {
     <group position={[positionX, positionY, 0]} scale={finalScale}>
       {/* Faceted Core Low-Poly Glass Icosahedron */}
       <Icosahedron ref={meshRef} args={[1.4, 1]}>
-        {isDesktop ? (
-          <MeshTransmissionMaterial
-            color={color}
-            attach="material"
-            thickness={thickness}
-            roughness={0.08}
-            transmission={1.0}
-            ior={ior}
-            chromaticAberration={0.03}
-            backside={true}
-            clearcoat={1.0}
-            clearcoatRoughness={0.08}
-          />
-        ) : (
-          <MeshDistortMaterial
-            color={color}
-            attach="material"
-            distort={distort}
-            speed={speed}
-            roughness={0.15}
-            metalness={0.65}
-          />
-        )}
+        <meshPhysicalMaterial
+          color={color}
+          thickness={thickness}
+          roughness={0.08}
+          transmission={1.0}
+          ior={ior}
+          clearcoat={1.0}
+          clearcoatRoughness={0.08}
+          metalness={0.15}
+        />
       </Icosahedron>
 
       {/* Volumetric Pulsing Glow Shell */}
       <Icosahedron ref={glowMeshRef} args={[1.48, 1]}>
-        <MeshDistortMaterial
+        <meshPhysicalMaterial
           color={color}
-          attach="material"
-          distort={distort}
-          speed={speed}
           roughness={0.6}
           metalness={0.1}
           transparent={true}
@@ -129,28 +112,22 @@ function TiltingObject() {
 
 export default function HeroScene() {
   const [mounted, setMounted] = useState(false);
-  const [width, setWidth] = useState(1200);
 
   useEffect(() => {
     setMounted(true);
-    const handleResize = () => setWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    handleResize();
-    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   if (!mounted) {
     return <div style={{ width: '100%', height: '100%', position: 'relative' }} />;
   }
 
-  const isDesktop = width > 768;
-
   return (
     <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-      <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+      {/* Cap Canvas DPR to maximum 1.5 to prevent GPU bottleneck on Retina/4K displays */}
+      <Canvas camera={{ position: [0, 0, 5], fov: 45 }} dpr={[1, 1.5]}>
         <Suspense fallback={null}>
           {/* Three-point luxury lighting rig */}
-          <ambientLight intensity={0.25} />
+          <ambientLight intensity={0.3} />
           
           {/* Key Light (Blue, Upper-Right) */}
           <directionalLight position={[4, 4, 3]} intensity={1.8} color="#00d4ff" />
@@ -163,15 +140,6 @@ export default function HeroScene() {
           
           <TiltingObject />
           <Environment preset="city" />
-          
-          {/* Post-processing pass for desktop users */}
-          {isDesktop && (
-            <EffectComposer>
-              <Bloom luminanceThreshold={0.55} luminanceSmoothing={0.8} intensity={0.35} />
-              <Vignette eskil={false} offset={0.15} darkness={0.95} />
-              <ChromaticAberration offset={new THREE.Vector2(0.0018, 0.0018)} />
-            </EffectComposer>
-          )}
         </Suspense>
       </Canvas>
     </div>
