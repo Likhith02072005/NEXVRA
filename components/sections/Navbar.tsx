@@ -11,9 +11,9 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 border-b border-white/5 bg-[#050508]/80 backdrop-blur-md transition-all duration-300">
+      <nav className="fixed top-0 left-0 w-full z-50 border-b border-white/5 bg-[#0a0a12]/80 backdrop-blur-md transition-all duration-300">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <a href="#" className="flex items-center text-xl font-extrabold tracking-tight text-white" data-cursor-label="NEXVRA">
+          <a href="#" className="flex items-center text-xl font-extrabold tracking-tight text-[#f5f0e8]" data-cursor-label="NEXVRA">
             <span className="relative w-8 h-8 rounded-lg overflow-hidden mr-2.5">
               <Image 
                 src="/brand-assets/nexvra-icon-square.jpg" 
@@ -28,10 +28,30 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <ul className="hidden md:flex items-center gap-8 font-medium text-slate-300 text-sm">
-            <li><a href="#services" className="hover:text-white transition-colors" data-cursor-label="Services">Services</a></li>
-            <li><a href="#results" className="hover:text-white transition-colors" data-cursor-label="Results">Results</a></li>
-            <li><a href="#process" className="hover:text-white transition-colors" data-cursor-label="Process">Process</a></li>
-            <li><a href="#pricing" className="hover:text-white transition-colors" data-cursor-label="Pricing">Pricing</a></li>
+            <li>
+              <a href="#services" className="relative hover:text-[#f5f0e8] transition-colors group py-1" data-cursor-label="Services">
+                Services
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#b8860b] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+              </a>
+            </li>
+            <li>
+              <a href="#results" className="relative hover:text-[#f5f0e8] transition-colors group py-1" data-cursor-label="Results">
+                Results
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#b8860b] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+              </a>
+            </li>
+            <li>
+              <a href="#process" className="relative hover:text-[#f5f0e8] transition-colors group py-1" data-cursor-label="Process">
+                Process
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#b8860b] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+              </a>
+            </li>
+            <li>
+              <a href="#pricing" className="relative hover:text-[#f5f0e8] transition-colors group py-1" data-cursor-label="Pricing">
+                Pricing
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#b8860b] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+              </a>
+            </li>
             <li>
               <a 
                 href="#booking" 
@@ -58,7 +78,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div 
-        className={`fixed inset-0 z-40 bg-[#050508]/95 backdrop-blur-lg flex flex-col items-center justify-center gap-8 text-xl font-bold text-slate-100 transition-all duration-300 md:hidden ${
+        className={`fixed inset-0 z-40 bg-[#0a0a12]/95 backdrop-blur-lg flex flex-col items-center justify-center gap-8 text-xl font-bold text-slate-100 transition-all duration-300 md:hidden ${
           isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >

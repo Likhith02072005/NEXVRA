@@ -9,6 +9,7 @@ import * as THREE from 'three';
 function TiltingObject() {
   const meshRef = useRef<THREE.Mesh>(null);
   const glowMeshRef = useRef<THREE.Mesh>(null);
+  const groupRef = useRef<THREE.Group>(null);
   const { viewport } = useThree();
   const mouseRef = useRef({ x: 0, y: 0 });
 
@@ -37,12 +38,12 @@ function TiltingObject() {
   const finalScale = scale * (isDesktop ? 1.2 : 0.95);
 
   useFrame((state) => {
-    if (!meshRef.current) return;
+    if (!meshRef.current || !groupRef.current) return;
     
     // Gentle idle rotation
     meshRef.current.rotation.y += 0.002;
     
-    // Lerp toward cursor position using normalized global coordinates
+    // Lerp toward cursor position using normalized global coordinates (rotation)
     meshRef.current.rotation.x = THREE.MathUtils.lerp(
       meshRef.current.rotation.x,
       mouseRef.current.y * 0.25,
@@ -53,6 +54,12 @@ function TiltingObject() {
       -mouseRef.current.x * 0.25,
       0.05
     );
+
+    // Lerp translation position based on cursor location
+    const targetX = positionX + mouseRef.current.x * (isDesktop ? 1.0 : 0.4);
+    const targetY = positionY + mouseRef.current.y * (isDesktop ? 0.7 : 0.3);
+    groupRef.current.position.x = THREE.MathUtils.lerp(groupRef.current.position.x, targetX, 0.08);
+    groupRef.current.position.y = THREE.MathUtils.lerp(groupRef.current.position.y, targetY, 0.08);
 
     // Apply organic liquid-glass scale wobble based on speed and distort values
     const time = state.clock.getElapsedTime();
@@ -79,7 +86,7 @@ function TiltingObject() {
   });
 
   return (
-    <group position={[positionX, positionY, 0]} scale={finalScale}>
+    <group ref={groupRef} position={[positionX, positionY, 0]} scale={finalScale}>
       {/* Faceted Core Low-Poly Glass Icosahedron */}
       <Icosahedron ref={meshRef} args={[1.4, 1]}>
         <meshPhysicalMaterial

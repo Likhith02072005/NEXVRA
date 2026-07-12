@@ -1,20 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --bg-primary: #050508;
-  --bg-secondary: #0b0b12;
-  --bg-card: rgba(255, 255, 255, 0.03);
-  --bg-card-hover: rgba(255, 255, 255, 0.06);
-  --text-primary: #ffffff;
-  --text-secondary: #a0a0a0;
-  --text-muted: #6b6b6b;
+  --bg-primary: #0a0a12;
+  --bg-secondary: #0e0e1b;
+  --bg-card: rgba(245, 240, 232, 0.02);
+  --bg-card-hover: rgba(245, 240, 232, 0.05);
+  --text-primary: #f5f0e8;
+  --text-secondary: #a8a4b8;
+  --text-muted: #747087;
   --accent-blue: #00d4ff;
   --accent-violet: #7c3aed;
+  --accent-gold: #b8860b;
   --accent-gradient: linear-gradient(135deg, #00d4ff, #7c3aed);
   --accent-gradient-reverse: linear-gradient(135deg, #7c3aed, #00d4ff);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.04);
-  --glass-bg-strong: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(245, 240, 232, 0.06);
+  --glass-bg: rgba(245, 240, 232, 0.03);
+  --glass-bg-strong: rgba(245, 240, 232, 0.06);
   --shadow-glow: 0 0 60px rgba(0, 212, 255, 0.1);
   --font-body: var(--font-inter);
   --font-display: var(--font-space-grotesk);
@@ -23,6 +24,26 @@
 @theme {
   --font-sans: var(--font-inter);
   --font-display: var(--font-space-grotesk);
+  
+  /* Override Tailwind v4 slate colors to match warm ivory & lavender-gray theme */
+  --color-slate-50: var(--text-primary);
+  --color-slate-100: var(--text-primary);
+  --color-slate-200: var(--text-primary);
+  --color-slate-300: var(--text-secondary);
+  --color-slate-400: var(--text-secondary);
+  --color-slate-500: var(--text-muted);
+  --color-slate-600: var(--text-muted);
+  
+  --color-gray-100: var(--text-primary);
+  --color-gray-200: var(--text-primary);
+  --color-gray-300: var(--text-secondary);
+  --color-gray-400: var(--text-secondary);
+  --color-gray-500: var(--text-muted);
+  
+  /* Register custom background & gold accent */
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-gold-accent: var(--accent-gold);
 }
 
 /* Base resets & adjustments */

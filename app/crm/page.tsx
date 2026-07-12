@@ -308,7 +308,7 @@ export default function CRMPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="fixed inset-0 bg-[#050508] z-50 flex items-center justify-center p-6">
+      <div className="fixed inset-0 bg-[#0a0a12] z-50 flex items-center justify-center p-6">
         <form onSubmit={handleAuthSubmit} className="bg-white/[0.01] border border-white/5 p-10 rounded-2xl w-full max-w-[400px] text-center shadow-2xl glass-panel relative">
           <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#00d4ff] to-[#7c3aed]" />
           <h2 className="text-xl font-extrabold tracking-tight text-white mb-2 font-display">NEXVRA Command Center</h2>
@@ -316,7 +316,7 @@ export default function CRMPage() {
           
           <input
             type="password"
-            className="w-full bg-[#0a0a0f] border border-white/5 focus:border-[#00d4ff]/30 text-white rounded-xl px-4 py-3 text-center text-lg tracking-[0.3em] font-bold outline-none transition-colors mb-6"
+            className="w-full bg-[#0e0e1b] border border-white/5 focus:border-[#00d4ff]/30 text-white rounded-xl px-4 py-3 text-center text-lg tracking-[0.3em] font-bold outline-none transition-colors mb-6"
             placeholder="••••"
             value={passcode}
             onChange={(e) => setPasscode(e.target.value)}
@@ -341,9 +341,9 @@ export default function CRMPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#050508] text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-[#0a0a12] text-slate-100 flex flex-col">
       {/* Header bar */}
-      <nav className="fixed top-0 left-0 right-0 h-16 border-b border-white/5 bg-[#050508]/80 backdrop-blur-md z-40 px-6 flex items-center justify-between">
+      <nav className="fixed top-0 left-0 right-0 h-16 border-b border-white/5 bg-[#0a0a12]/80 backdrop-blur-md z-40 px-6 flex items-center justify-between">
         <div className="flex items-center text-sm font-extrabold text-white">
           <span className="relative w-6 h-6 rounded overflow-hidden mr-2">
             <Image 
@@ -720,7 +720,7 @@ export default function CRMPage() {
       {/* ===================== VIEW LEAD DETAIL MODAL ===================== */}
       {selectedLeadForView && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-6 animate-fadeIn">
-          <div className="bg-[#0a0a0f] border border-white/5 rounded-2xl max-w-[500px] w-full p-8 shadow-2xl relative text-left">
+          <div className="bg-[#0e0e1b] border border-white/5 rounded-2xl max-w-[500px] w-full p-8 shadow-2xl relative text-left">
             <button onClick={() => setSelectedLeadForView(null)} className="absolute top-4 right-4 text-slate-500 hover:text-white text-lg font-bold">×</button>
             <h3 className="text-lg font-bold font-display text-white mb-2">{selectedLeadForView.name}</h3>
             <span className="text-[10px] px-2 py-0.5 rounded bg-blue-500/10 text-blue-400 font-bold uppercase tracking-wider">{selectedLeadForView.status}</span>
@@ -750,7 +750,7 @@ export default function CRMPage() {
 
               <div>
                 <span className="text-[10px] text-slate-500 uppercase font-bold block mb-1">Notes & Validation Reports</span>
-                <div className="p-3 bg-[#050508] border border-white/5 rounded-xl text-slate-400 text-xs font-mono whitespace-pre-wrap leading-relaxed">
+                <div className="p-3 bg-[#0a0a12] border border-white/5 rounded-xl text-slate-400 text-xs font-mono whitespace-pre-wrap leading-relaxed">
                   {selectedLeadForView.notes}
                 </div>
               </div>
@@ -780,7 +780,7 @@ export default function CRMPage() {
       {/* ===================== ADD EVENT MODAL ===================== */}
       {activeModal === 'add-event' && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-6">
-          <form onSubmit={addEvent} className="bg-[#0a0a0f] border border-white/5 rounded-2xl max-w-[420px] w-full p-8 shadow-2xl relative text-left">
+          <form onSubmit={addEvent} className="bg-[#0e0e1b] border border-white/5 rounded-2xl max-w-[420px] w-full p-8 shadow-2xl relative text-left">
             <h3 className="text-base font-bold font-display text-white mb-6">Create New Calendar Event</h3>
 
             <div className="space-y-4">
@@ -789,7 +789,7 @@ export default function CRMPage() {
                 <input
                   type="text"
                   placeholder="e.g. Follow-up Call"
-                  className="bg-[#050508] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
+                  className="bg-[#0a0a12] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
                   value={eventForm.title}
                   onChange={(e) => setEventForm({ ...eventForm, title: e.target.value })}
                   required
@@ -801,7 +801,7 @@ export default function CRMPage() {
                   <label className="text-[10px] text-slate-500 font-bold uppercase mb-1.5">Date *</label>
                   <input
                     type="date"
-                    className="bg-[#050508] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
+                    className="bg-[#0a0a12] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
                     value={eventForm.date}
                     onChange={(e) => setEventForm({ ...eventForm, date: e.target.value })}
                     required
@@ -812,7 +812,7 @@ export default function CRMPage() {
                   <input
                     type="text"
                     placeholder="12:00"
-                    className="bg-[#050508] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
+                    className="bg-[#0a0a12] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
                     value={eventForm.time}
                     onChange={(e) => setEventForm({ ...eventForm, time: e.target.value })}
                     required
@@ -823,7 +823,7 @@ export default function CRMPage() {
               <div className="flex flex-col">
                 <label className="text-[10px] text-slate-500 font-bold uppercase mb-1.5">Event Type *</label>
                 <select
-                  className="bg-[#050508] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
+                  className="bg-[#0a0a12] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
                   value={eventForm.type}
                   onChange={(e) => setEventForm({ ...eventForm, type: e.target.value as any })}
                   required
@@ -847,7 +847,7 @@ export default function CRMPage() {
       {/* ===================== ADD LEAD MODAL ===================== */}
       {activeModal === 'add-lead' && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-6">
-          <form onSubmit={addLead} className="bg-[#0a0a0f] border border-white/5 rounded-2xl max-w-[450px] w-full p-8 shadow-2xl relative text-left">
+          <form onSubmit={addLead} className="bg-[#0e0e1b] border border-white/5 rounded-2xl max-w-[450px] w-full p-8 shadow-2xl relative text-left">
             <h3 className="text-base font-bold font-display text-white mb-6">Create Manually Added Lead</h3>
 
             <div className="space-y-4">
@@ -856,7 +856,7 @@ export default function CRMPage() {
                   <label className="text-[10px] text-slate-500 font-bold uppercase mb-1.5">Client Name *</label>
                   <input
                     type="text"
-                    className="bg-[#050508] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
+                    className="bg-[#0a0a12] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
                     value={leadForm.name}
                     onChange={(e) => setLeadForm({ ...leadForm, name: e.target.value })}
                     required
@@ -866,7 +866,7 @@ export default function CRMPage() {
                   <label className="text-[10px] text-slate-500 font-bold uppercase mb-1.5">Business Name *</label>
                   <input
                     type="text"
-                    className="bg-[#050508] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
+                    className="bg-[#0a0a12] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
                     value={leadForm.business}
                     onChange={(e) => setLeadForm({ ...leadForm, business: e.target.value })}
                     required
@@ -879,7 +879,7 @@ export default function CRMPage() {
                   <label className="text-[10px] text-slate-500 font-bold uppercase mb-1.5">Phone *</label>
                   <input
                     type="tel"
-                    className="bg-[#050508] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
+                    className="bg-[#0a0a12] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
                     value={leadForm.phone}
                     onChange={(e) => setLeadForm({ ...leadForm, phone: e.target.value })}
                   />
@@ -888,7 +888,7 @@ export default function CRMPage() {
                   <label className="text-[10px] text-slate-500 font-bold uppercase mb-1.5">Email *</label>
                   <input
                     type="email"
-                    className="bg-[#050508] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
+                    className="bg-[#0a0a12] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
                     value={leadForm.email}
                     onChange={(e) => setLeadForm({ ...leadForm, email: e.target.value })}
                   />
@@ -900,7 +900,7 @@ export default function CRMPage() {
                   <label className="text-[10px] text-slate-500 font-bold uppercase mb-1.5">Deal Value (₹) *</label>
                   <input
                     type="number"
-                    className="bg-[#050508] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
+                    className="bg-[#0a0a12] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
                     value={leadForm.value}
                     onChange={(e) => setLeadForm({ ...leadForm, value: Number(e.target.value) })}
                     required
@@ -909,7 +909,7 @@ export default function CRMPage() {
                 <div className="flex flex-col">
                   <label className="text-[10px] text-slate-500 font-bold uppercase mb-1.5">Pipeline Stage *</label>
                   <select
-                    className="bg-[#050508] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
+                    className="bg-[#0a0a12] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white"
                     value={leadForm.status}
                     onChange={(e) => setLeadForm({ ...leadForm, status: e.target.value as any })}
                     required
@@ -928,7 +928,7 @@ export default function CRMPage() {
                 <label className="text-[10px] text-slate-500 font-bold uppercase mb-1.5">Notes</label>
                 <textarea
                   rows={3}
-                  className="bg-[#050508] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white resize-none"
+                  className="bg-[#0a0a12] border border-white/5 rounded-xl px-4 py-3 text-xs outline-none focus:border-[#00d4ff]/30 text-white resize-none"
                   value={leadForm.notes}
                   onChange={(e) => setLeadForm({ ...leadForm, notes: e.target.value })}
                 />

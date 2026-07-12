@@ -44,7 +44,7 @@ function StatCounter({ end, suffix = '', prefix = '', decimals = false, duration
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-[#050508] bg-[radial-gradient(circle_at_70%_50%,rgba(124,58,237,0.06)_0%,rgba(0,212,255,0.03)_50%,rgba(5,5,8,1)_100%)]">
+    <section id="hero" className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-[#0a0a12] bg-[radial-gradient(circle_at_70%_50%,rgba(124,58,237,0.06)_0%,rgba(0,212,255,0.03)_50%,rgba(10,10,18,1)_100%)]">
       {/* Grid Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.005)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.005)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)] pointer-events-none" />
 
@@ -54,14 +54,14 @@ export default function Hero() {
       </div>
 
       {/* Dark gradient overlay for text legibility */}
-      <div className="absolute inset-0 z-5 bg-gradient-to-b from-[#050508]/95 via-[#050508]/80 to-[#050508] lg:bg-gradient-to-r lg:from-[#050508] lg:via-[#050508]/85 lg:to-transparent pointer-events-none select-none" />
+      <div className="absolute inset-0 z-5 bg-gradient-to-b from-[#0a0a12]/95 via-[#0a0a12]/80 to-[#0a0a12] lg:bg-gradient-to-r lg:from-[#0a0a12] lg:via-[#0a0a12]/85 lg:to-transparent pointer-events-none select-none" />
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Side text */}
           <div className="lg:col-span-8 flex flex-col items-start text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#00d4ff]/15 bg-[#00d4ff]/5 text-xs font-semibold tracking-wide text-[#00d4ff] mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00d4ff] animate-pulse"></span>
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#b8860b]/40 bg-[#b8860b]/5 text-xs font-semibold tracking-wide text-[#f5f0e8] mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#b8860b] animate-pulse"></span>
               Now accepting 3 new clients for July
             </div>
 

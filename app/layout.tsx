@@ -45,7 +45,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${spaceGrotesk.variable} scroll-smooth`}
     >
-      <body className="bg-[#050508] text-slate-100 font-sans selection:bg-[#00d4ff]/30 selection:text-white">
+      <body className="bg-[#0a0a12] text-[#f5f0e8] font-sans selection:bg-[#00d4ff]/30 selection:text-white">
         <SmoothScrollProvider>
           <GrainOverlay />
           <CustomCursor />
