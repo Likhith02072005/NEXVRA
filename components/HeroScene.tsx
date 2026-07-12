@@ -3,11 +3,19 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { MeshDistortMaterial, Sphere, Environment } from '@react-three/drei';
 import { useRef, Suspense, useState, useEffect } from 'react';
+import { useControls } from 'leva';
 import * as THREE from 'three';
 
 function TiltingObject() {
   const meshRef = useRef<THREE.Mesh>(null);
   const { pointer } = useThree();
+
+  const { color, distort, speed, scale } = useControls('Sphere Controller', {
+    color: '#7c3aed',
+    distort: { value: 0.4, min: 0, max: 1, step: 0.01 },
+    speed: { value: 1.8, min: 0, max: 5, step: 0.1 },
+    scale: { value: 1.0, min: 0.5, max: 3, step: 0.1 },
+  });
 
   useFrame((state) => {
     if (!meshRef.current) return;
@@ -27,12 +35,12 @@ function TiltingObject() {
   });
 
   return (
-    <Sphere ref={meshRef} args={[1.4, 128, 128]}>
+    <Sphere ref={meshRef} args={[1.4, 128, 128]} scale={scale}>
       <MeshDistortMaterial
-        color="#7c3aed"
+        color={color}
         attach="material"
-        distort={0.4}
-        speed={1.8}
+        distort={distort}
+        speed={speed}
         roughness={0.1}
         metalness={0.6}
       />
