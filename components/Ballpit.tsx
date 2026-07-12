@@ -1,5 +1,4 @@
 'use client';
-// @ts-nocheck
 import { useEffect, useRef } from 'react';
 import {
   Vector3 as a,
@@ -162,7 +161,7 @@ class x {
       this.size.wWidth = this.size.wHeight * this.camera.aspect;
     } else if (this.camera.isOrthographicCamera) {
       this.size.wHeight = this.camera.top - this.camera.bottom;
-      this.size.wWidth = this.size.wHeight * this.camera.aspect;
+      this.size.wWidth = this.camera.right - this.camera.left;
     }
   }
   #b() {
@@ -309,25 +308,6 @@ function processInteraction() {
   }
 }
 
-function C(e) {
-  A.x = e.clientX;
-  A.y = e.clientY;
-  for (const [elem, t] of b) {
-    const i = elem.getBoundingClientRect();
-    P(t, i);
-    if (D(i)) t.onClick(t);
-  }
-}
-
-function L() {
-  for (const t of b.values()) {
-    if (t.hover) {
-      t.hover = false;
-      t.onLeave(t);
-    }
-  }
-}
-
 function TouchStart(e) {
   if (e.touches.length > 0) {
     e.preventDefault();
@@ -381,6 +361,26 @@ function TouchEnd() {
         t.hover = false;
         t.onLeave(t);
       }
+    }
+  }
+}
+
+function C(e) {
+  A.x = e.clientX;
+  A.y = e.clientY;
+  for (const [elem, t] of b) {
+    const i = elem.getBoundingClientRect();
+    P(t, i);
+    if (D(i)) t.onClick(t);
+  }
+}
+
+// Fixed missing L function
+function L() {
+  for (const t of b.values()) {
+    if (t.hover) {
+      t.hover = false;
+      t.onLeave(t);
     }
   }
 }
@@ -713,14 +713,6 @@ function createBallpit(e, t = {}) {
     setCount(e) {
       initialize({ ...s.config, count: e });
     },
-    updateConfig(newConfig) {
-      if (s) {
-        Object.assign(s.config, newConfig);
-        if (s.physics) {
-          Object.assign(s.physics.config, newConfig);
-        }
-      }
-    },
     togglePause() {
       c = !c;
     },
@@ -731,16 +723,7 @@ function createBallpit(e, t = {}) {
   };
 }
 
-const Ballpit = ({
-  className = '',
-  followCursor = true,
-  count = 200,
-  gravity = 0.5,
-  friction = 0.9975,
-  wallBounce = 0.95,
-  colors = [0xff0000, 0x00ff00, 0x0000ff],
-  ...props
-}) => {
+const Ballpit = ({ className = '', followCursor = true, ...props }) => {
   const canvasRef = useRef(null);
   const spheresInstanceRef = useRef(null);
 
@@ -748,15 +731,7 @@ const Ballpit = ({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    spheresInstanceRef.current = createBallpit(canvas, {
-      followCursor,
-      count,
-      gravity,
-      friction,
-      wallBounce,
-      colors,
-      ...props
-    });
+    spheresInstanceRef.current = createBallpit(canvas, { followCursor, ...props });
 
     return () => {
       if (spheresInstanceRef.current) {
@@ -765,26 +740,6 @@ const Ballpit = ({
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // Sync count dynamically
-  useEffect(() => {
-    if (spheresInstanceRef.current) {
-      spheresInstanceRef.current.setCount(count);
-    }
-  }, [count]);
-
-  // Sync other configuration dynamics
-  useEffect(() => {
-    if (spheresInstanceRef.current) {
-      spheresInstanceRef.current.updateConfig({
-        gravity,
-        friction,
-        wallBounce,
-        followCursor,
-        colors
-      });
-    }
-  }, [gravity, friction, wallBounce, followCursor, colors]);
 
   return <canvas className={`${className} w-full h-full`} ref={canvasRef} />;
 };
