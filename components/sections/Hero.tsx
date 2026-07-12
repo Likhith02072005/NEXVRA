@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { EncryptedText } from '@/components/ui/encrypted-text';
 import { NoiseBackground } from '@/components/ui/noise-background';
-import { ThreeDMarquee } from '@/components/ui/3d-marquee';
+import Ballpit from '@/components/ui/ballpit';
 
 interface StatProps {
   end: number;
@@ -25,23 +25,6 @@ function StatCounter({ end, suffix = '', prefix = '', decimals = false, label }:
   );
 }
 
-const marqueeImages = [
-  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1542744094-3a31f103e35f?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1531535934200-8734bb9ce7c1?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600&q=80"
-];
 
 export default function Hero() {
   return (
@@ -114,9 +97,16 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Full-bleed 3D marquee background covering the entire hero space */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-45">
-        <ThreeDMarquee images={marqueeImages} className="h-full w-full bg-transparent border-none rounded-none" />
+      {/* Full-bleed 3D Ballpit physics background covering the entire hero space */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-50">
+        <Ballpit
+          count={80}
+          gravity={0.01}
+          friction={0.9975}
+          wallBounce={0.95}
+          followCursor={true}
+          colors={['#00d4ff', '#7c3aed', '#b8860b']}
+        />
       </div>
 
       {/* Primary dark vignette and layout overlay to guarantee high text contrast */}
