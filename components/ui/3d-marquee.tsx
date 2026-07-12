@@ -43,11 +43,19 @@ export const ThreeDMarquee = ({
               transform: "perspective(1200px) rotateX(45deg) rotateY(-5deg) rotateZ(-30deg)",
               transformStyle: "preserve-3d",
             }}
-            className="absolute top-10 left-[10%] grid w-[120%] h-[120%] origin-center grid-cols-6 gap-6 transform-3d"
+            className="absolute top-10 left-[10%] grid w-[120%] h-[120%] origin-center grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-6 transform-3d"
           >
             {chunks.map((subarray, colIndex) => {
               if (subarray.length === 0) return null;
               
+              // Set responsive visibility class matching grid-cols configuration
+              let visibilityClass = "flex flex-col items-center gap-6";
+              if (colIndex === 1 || colIndex === 3) {
+                visibilityClass = "flex flex-col items-center gap-6 hidden sm:flex";
+              } else if (colIndex === 4 || colIndex === 5) {
+                visibilityClass = "flex flex-col items-center gap-6 hidden lg:flex";
+              }
+
               // Continuous linear animation without pauses
               return (
                 <motion.div
@@ -59,7 +67,7 @@ export const ThreeDMarquee = ({
                     ease: "linear",
                   }}
                   key={colIndex + "marquee"}
-                  className="flex flex-col items-center gap-6"
+                  className={visibilityClass}
                 >
                   <GridLineVertical className="-left-3" offset="50px" />
                   {subarray.map((image, imageIndex) => (

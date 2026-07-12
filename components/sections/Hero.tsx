@@ -42,15 +42,21 @@ function StatCounter({ end, suffix = '', prefix = '', decimals = false, duration
 }
 
 const marqueeImages = [
-  "/showcase/bridal_portrait_rosewood_1783146093972.webp",
-  "/showcase/bridal_showcase_terracotta_1783146071211.webp",
-  "/showcase/editorial_champagne_gold_1783146082698.webp",
-  "/showcase/makeup_artist_palette_1783146104551.webp",
-  "/showcase/nexvra_before_after_1783101463103.webp",
-  "/showcase/nexvra_instagram_post_1783101451021.webp",
-  "/showcase/nexvra_logo_1783101248575.webp",
-  "/showcase/nexvra_logo_square_1783101275457.webp",
-  "/showcase/nexvra_email_design_1783609939294.webp"
+  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1542744094-3a31f103e35f?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1531535934200-8734bb9ce7c1?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600&q=80"
 ];
 
 export default function Hero() {
@@ -62,7 +68,7 @@ export default function Hero() {
       {/* Dark gradient overlay for text legibility */}
       <div className="absolute inset-0 z-5 bg-gradient-to-b from-bg-primary/95 via-bg-primary/80 to-bg-primary lg:bg-gradient-to-r lg:from-bg-primary lg:via-bg-primary/85 lg:to-transparent pointer-events-none select-none" />
 
-      <div className="max-w-7xl mx-auto px-6 w-full relative z-10">
+      <div className="max-w-7xl mx-auto px-6 w-full relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Side text */}
           <div className="lg:col-span-8 flex flex-col items-start text-left">
@@ -136,10 +142,13 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Right Side Marquee container positioned absolutely in background space on the right */}
-      <div className="absolute right-0 top-0 bottom-0 w-full lg:w-[48vw] z-0 overflow-hidden pointer-events-none select-none hidden lg:block opacity-65">
+      {/* Full-bleed 3D marquee background covering the entire hero space */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none opacity-45">
         <ThreeDMarquee images={marqueeImages} className="h-full w-full bg-transparent border-none rounded-none" />
       </div>
+
+      {/* Primary dark vignette and layout overlay to guarantee high text contrast */}
+      <div className="absolute inset-0 z-10 bg-[#0a0a12]/85 lg:bg-gradient-to-r lg:from-[#0a0a12] lg:via-[#0a0a12]/80 lg:to-[#0a0a12]/20 pointer-events-none select-none" />
 
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:block">
         <div className="w-6 h-10 border-2 border-text-secondary/10 rounded-full flex justify-center p-1.5 opacity-60">
