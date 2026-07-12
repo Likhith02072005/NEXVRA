@@ -129,6 +129,7 @@ class x {
       e = window.innerWidth;
       t = window.innerHeight;
     }
+    console.log('[Ballpit] Measured canvas parent dimensions:', { width: e, height: t });
     this.size.width = e;
     this.size.height = t;
     this.size.ratio = e / t;
