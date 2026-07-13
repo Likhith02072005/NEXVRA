@@ -13,11 +13,11 @@ function ServiceCard({ icon, title, desc, tags }: ServiceCardProps) {
       <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-[#00d4ff]/10 to-[#7c3aed]/10 border border-[#00d4ff]/15 flex items-center justify-center text-text-primary mb-6">
         {icon}
       </div>
-      <h3 className="text-xl font-bold text-text-primary mb-3">{title}</h3>
-      <p className="text-text-secondary text-sm leading-relaxed mb-6 flex-grow">{desc}</p>
+      <h3 className="text-xl font-bold text-text-primary mb-3 font-nevera">{title}</h3>
+      <p className="text-text-secondary text-sm leading-relaxed mb-6 flex-grow font-heming">{desc}</p>
       <div className="flex flex-wrap gap-2">
         {tags.map((tag, idx) => (
-          <span key={idx} className="text-[10px] md:text-xs font-semibold px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-text-secondary">
+          <span key={idx} className="text-[10px] md:text-xs font-semibold px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-text-secondary font-resist-mono">
             {tag}
           </span>
         ))}
@@ -37,13 +37,13 @@ export default function Services() {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#00d4ff] bg-[#00d4ff]/10 px-3.5 py-1.5 rounded-full border border-[#00d4ff]/15">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#00d4ff] bg-[#00d4ff]/10 px-3.5 py-1.5 rounded-full border border-[#00d4ff]/15 font-nothern">
             What I Do
           </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text-primary mt-6 mb-4 leading-tight font-display">
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text-primary mt-6 mb-4 leading-tight font-durer">
             Services That Move<br />The Revenue Needle
           </h2>
-          <p className="text-text-secondary text-sm md:text-base">
+          <p className="text-text-secondary text-sm md:text-base font-heming">
             End-to-end digital solutions designed for Bangalore businesses that want to dominate their market.
           </p>
         </div>

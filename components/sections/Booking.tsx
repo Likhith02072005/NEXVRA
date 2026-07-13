@@ -140,14 +140,14 @@ export default function Booking() {
           
           {/* Left Column: Benefits Info */}
           <div className="lg:col-span-6 flex flex-col items-start">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#00d4ff] bg-[#00d4ff]/10 px-3.5 py-1.5 rounded-full border border-[#00d4ff]/15">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#00d4ff] bg-[#00d4ff]/10 px-3.5 py-1.5 rounded-full border border-[#00d4ff]/15 font-nothern">
               Let's Talk
             </span>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text-primary mt-6 mb-6 leading-tight font-display">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text-primary mt-6 mb-6 leading-tight font-durer">
               Book Your Free <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed]">Strategy Call</span>
             </h2>
-            <p className="text-text-secondary text-sm md:text-base leading-relaxed mb-8 max-w-xl">
+            <p className="text-text-secondary text-sm md:text-base leading-relaxed mb-8 max-w-xl font-heming">
               In 30 minutes, I'll show you exactly how to turn your website into a lead-generating machine. No pitch, no pressure — just value.
             </p>
 
@@ -161,7 +161,7 @@ export default function Booking() {
               ].map((b, idx) => (
                 <li key={idx} className="flex gap-4 items-start">
                   <span className="text-lg bg-white/5 border border-white/5 w-8 h-8 rounded-lg flex items-center justify-center shrink-0">{b.emoji}</span>
-                  <span className="text-text-secondary text-sm font-medium pt-1.5">{b.title}</span>
+                  <span className="text-text-secondary text-sm font-medium pt-1.5 font-heming">{b.title}</span>
                 </li>
               ))}
             </ul>
@@ -173,8 +173,8 @@ export default function Booking() {
               
               {!success ? (
                 <div>
-                  <h3 className="text-xl font-bold text-text-primary mb-1">Schedule Your Call</h3>
-                  <p className="text-text-secondary text-xs md:text-sm mb-6">Pick a date and time that works for you.</p>
+                  <h3 className="text-xl font-bold text-text-primary mb-1 font-nevera">Schedule Your Call</h3>
+                  <p className="text-text-secondary text-xs md:text-sm mb-6 font-heming">Pick a date and time that works for you.</p>
 
                   <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Error display */}
@@ -187,7 +187,7 @@ export default function Booking() {
                     {/* Inputs */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="flex flex-col">
-                        <label className="text-xs text-text-secondary font-semibold mb-2">Full Name *</label>
+                        <label className="text-xs text-text-secondary font-semibold mb-2 font-heming">Full Name *</label>
                         <input
                           type="text"
                           className="w-full bg-bg-secondary border border-white/5 focus:border-[#00d4ff]/30 text-text-primary rounded-xl px-4 py-3 text-xs md:text-sm outline-none transition-colors"
@@ -198,7 +198,7 @@ export default function Booking() {
                         />
                       </div>
                       <div className="flex flex-col">
-                        <label className="text-xs text-text-secondary font-semibold mb-2">Email *</label>
+                        <label className="text-xs text-text-secondary font-semibold mb-2 font-heming">Email *</label>
                         <input
                           type="email"
                           className="w-full bg-bg-secondary border border-white/5 focus:border-[#00d4ff]/30 text-text-primary rounded-xl px-4 py-3 text-xs md:text-sm outline-none transition-colors"
@@ -212,7 +212,7 @@ export default function Booking() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="flex flex-col">
-                        <label className="text-xs text-text-secondary font-semibold mb-2">Phone *</label>
+                        <label className="text-xs text-text-secondary font-semibold mb-2 font-heming">Phone *</label>
                         <input
                           type="tel"
                           className="w-full bg-bg-secondary border border-white/5 focus:border-[#00d4ff]/30 text-text-primary rounded-xl px-4 py-3 text-xs md:text-sm outline-none transition-colors"
@@ -223,7 +223,7 @@ export default function Booking() {
                         />
                       </div>
                       <div className="flex flex-col">
-                        <label className="text-xs text-text-secondary font-semibold mb-2">Business Type *</label>
+                        <label className="text-xs text-text-secondary font-semibold mb-2 font-heming">Business Type *</label>
                         <select
                           className="w-full bg-bg-secondary border border-white/5 focus:border-[#00d4ff]/30 text-text-primary rounded-xl px-4 py-3 text-xs md:text-sm outline-none transition-colors"
                           value={formData.businessType}
@@ -240,7 +240,7 @@ export default function Booking() {
 
                     {/* Interactive Calendar DatePicker */}
                     <div className="flex flex-col">
-                      <label className="text-xs text-text-secondary font-semibold mb-3">Preferred Date *</label>
+                      <label className="text-xs text-text-secondary font-semibold mb-3 font-heming">Preferred Date *</label>
                       <div className="bg-bg-secondary border border-white/5 rounded-xl p-4">
                         <div className="flex items-center justify-between mb-4">
                           <span className="text-xs font-bold text-text-primary uppercase tracking-wider">{monthName} {year}</span>
@@ -301,7 +301,7 @@ export default function Booking() {
 
                     {/* Preferred Time slots */}
                     <div className="flex flex-col">
-                      <label className="text-xs text-text-secondary font-semibold mb-3">Preferred Time *</label>
+                      <label className="text-xs text-text-secondary font-semibold mb-3 font-heming">Preferred Time *</label>
                       <div className="grid grid-cols-3 gap-2">
                         {TIME_SLOTS.map((slot) => (
                           <button
@@ -323,7 +323,7 @@ export default function Booking() {
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className="w-full text-center py-4 rounded-full bg-gradient-to-r from-[#00d4ff] to-[#7c3aed] text-text-primary font-extrabold text-xs md:text-sm tracking-wider shadow-[0_8px_24px_rgba(0,212,255,0.3)] hover:shadow-[0_8px_35px_rgba(0,212,255,0.5)] transition-all hover:scale-102"
+                      className="w-full text-center py-4 rounded-full bg-gradient-to-r from-[#00d4ff] to-[#7c3aed] text-text-primary font-extrabold text-xs md:text-sm tracking-wider shadow-[0_8px_24px_rgba(0,212,255,0.3)] hover:shadow-[0_8px_35px_rgba(0,212,255,0.5)] transition-all hover:scale-102 font-rankim"
                     >
                       {isLoading ? 'Booking...' : "Confirm Booking — It's Free →"}
                     </button>
@@ -334,8 +334,8 @@ export default function Booking() {
                   <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-2xl text-emerald-400 mb-6 animate-bounce">
                     ✓
                   </div>
-                  <h3 className="text-2xl font-bold text-text-primary mb-2 font-display">You're All Set! 🎉</h3>
-                  <p className="text-text-secondary text-sm max-w-sm leading-relaxed">
+                  <h3 className="text-2xl font-bold text-text-primary mb-2 font-durer">You're All Set! 🎉</h3>
+                  <p className="text-text-secondary text-sm max-w-sm leading-relaxed font-heming">
                     Your strategy call has been booked. I'll send a confirmation to your email shortly. Talk soon!
                   </p>
                 </div>

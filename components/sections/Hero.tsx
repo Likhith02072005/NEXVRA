@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { EncryptedText } from '@/components/ui/encrypted-text';
 import { NoiseBackground } from '@/components/ui/noise-background';
-import Ballpit from '@/components/Ballpit';
+import GradientBlinds from '@/components/ui/GradientBlinds';
 
 interface StatProps {
   end: number;
@@ -17,10 +17,10 @@ interface StatProps {
 function StatCounter({ end, suffix = '', prefix = '', decimals = false, label }: StatProps) {
   return (
     <div className="flex flex-col">
-      <div className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed]">
+      <div className="text-3xl md:text-4xl font-nothern font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed]">
         {prefix}{decimals ? end.toFixed(1) : end}{suffix}
       </div>
-      <div className="text-text-secondary text-xs md:text-sm font-medium mt-1">{label}</div>
+      <div className="text-text-secondary text-xs md:text-sm font-heming font-medium mt-1">{label}</div>
     </div>
   );
 }
@@ -28,27 +28,49 @@ function StatCounter({ end, suffix = '', prefix = '', decimals = false, label }:
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-bg-primary bg-[radial-gradient(circle_at_70%_50%,rgba(124,58,237,0.06)_0%,rgba(0,212,255,0.03)_50%,rgba(10,10,18,1)_100%)]">
-      {/* Grid Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.005)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.005)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)] pointer-events-none" />
+    <section id="hero" className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-bg-primary">
+      
+      {/* GradientBlinds WebGL Background */}
+      <div 
+        style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, overflow: 'hidden', pointerEvents: 'none', userSelect: 'none' }}
+        className="z-0"
+      >
+        <GradientBlinds
+          gradientColors={['#00d4ff', '#7c3aed']}
+          angle={20}
+          noise={0.5}
+          blindCount={16}
+          blindMinWidth={60}
+          spotlightRadius={0.5}
+          spotlightSoftness={1}
+          spotlightOpacity={1}
+          mouseDampening={0.15}
+          distortAmount={0}
+          shineDirection="left"
+          mixBlendMode="lighten"
+        />
+      </div>
+
+      {/* Dark overlay for text contrast */}
+      <div className="absolute inset-0 z-10 bg-[#0a0a12]/80 lg:bg-gradient-to-r lg:from-[#0a0a12]/95 lg:via-[#0a0a12]/75 lg:to-[#0a0a12]/30 pointer-events-none select-none" />
 
       <div className="max-w-7xl mx-auto px-6 w-full relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Side text */}
           <div className="lg:col-span-8 flex flex-col items-start text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-accent/40 bg-gold-accent/5 text-xs font-semibold tracking-wide text-text-primary mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-accent/40 bg-gold-accent/5 text-xs font-resist-mono tracking-wide text-text-primary mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-gold-accent animate-pulse"></span>
               Now accepting 3 new clients for July
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-text-primary mb-6 leading-[1.1] font-display">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-durer tracking-tight text-text-primary mb-6 leading-[1.1]">
               We Build Websites That <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed] glow-hover inline-block">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed] glow-hover inline-block font-magilio">
                 Print Money
               </span>
             </h1>
 
-            <p className="text-text-secondary text-base md:text-lg font-medium max-w-xl mb-10 leading-relaxed">
+            <p className="text-text-secondary text-base md:text-lg font-heming font-medium max-w-xl mb-10 leading-relaxed">
               Full-stack web development + Meta Ads that turn your Bangalore business into a lead-generating machine. No fluff — just results.
             </p>
 
@@ -62,7 +84,7 @@ export default function Hero() {
               >
                 <a 
                   href="#booking" 
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#0a0a12]/95 hover:bg-[#0a0a12]/80 text-text-primary font-bold text-sm tracking-wide transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#0a0a12]/95 hover:bg-[#0a0a12]/80 text-text-primary font-rankim text-sm tracking-wide transition-all duration-300"
                   data-cursor-label="Book Call"
                 >
                   Book Your Free Strategy Call
@@ -79,7 +101,7 @@ export default function Hero() {
               >
                 <a 
                   href="#results" 
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#0a0a12]/95 hover:bg-[#0a0a12]/80 text-text-primary font-bold text-sm tracking-wide transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#0a0a12]/95 hover:bg-[#0a0a12]/80 text-text-primary font-rankim text-sm tracking-wide transition-all duration-300"
                   data-cursor-label="See Proof"
                 >
                   See Results
@@ -96,24 +118,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-
-      {/* Full-bleed 3D Ballpit physics background covering the entire hero space */}
-      <div 
-        style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, overflow: 'hidden', pointerEvents: 'none', userSelect: 'none', opacity: 0.8 }}
-        className="z-0"
-      >
-        <Ballpit
-          count={100}
-          gravity={0.01}
-          friction={0.9975}
-          wallBounce={0.95}
-          followCursor={true}
-          colors={['#00d4ff', '#7c3aed', '#b8860b']}
-        />
-      </div>
-
-      {/* Primary dark vignette and layout overlay to guarantee high text contrast */}
-      <div className="absolute inset-0 z-10 bg-[#0a0a12]/85 lg:bg-gradient-to-r lg:from-[#0a0a12] lg:via-[#0a0a12]/80 lg:to-[#0a0a12]/20 pointer-events-none select-none" />
 
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:block">
         <div className="w-6 h-10 border-2 border-text-secondary/10 rounded-full flex justify-center p-1.5 opacity-60">

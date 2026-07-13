@@ -1,24 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, Geist } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from '@/components/SmoothScrollProvider';
 import GrainOverlay from '@/components/GrainOverlay';
 import CursorProvider from '@/components/CursorProvider';
-import { cn } from "@/lib/utils";
-
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "NEXVRA Digital | Award-Winning Web Design & AI Automation Agency",
@@ -44,11 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={cn("scroll-smooth", inter.variable, spaceGrotesk.variable, "font-sans", geist.variable)}
-    >
-      <body className="bg-[#0a0a12] text-[#f5f0e8] font-sans selection:bg-[#00d4ff]/30 selection:text-white">
+    <html lang="en" className="scroll-smooth">
+      <body className="bg-[#0a0a12] text-[#f5f0e8] selection:bg-[#00d4ff]/30 selection:text-white">
         <SmoothScrollProvider>
           <GrainOverlay />
           <CursorProvider />
