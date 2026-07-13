@@ -13,7 +13,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing specData payload' }, { status: 400 });
     }
 
-    const projectRoot = '/Users/likhith/NEXVRA/agency-website';
+    const defaultRoot = '/Users/likhith/NEXVRA/agency-website';
+    const projectRoot = fs.existsSync(defaultRoot) ? defaultRoot : process.cwd();
     const specJsonPath = path.join(projectRoot, 'website_specification.json');
     const uploadsDir = path.join(projectRoot, 'public', 'spec-uploads');
 

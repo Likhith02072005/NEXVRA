@@ -4,7 +4,8 @@ import path from 'path';
 
 export async function GET() {
   try {
-    const projectRoot = '/Users/likhith/NEXVRA/agency-website';
+    const defaultRoot = '/Users/likhith/NEXVRA/agency-website';
+    const projectRoot = fs.existsSync(defaultRoot) ? defaultRoot : process.cwd();
     const specJsonPath = path.join(projectRoot, 'website_specification.json');
 
     // 1. Read or initialize JSON
