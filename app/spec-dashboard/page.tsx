@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 interface SectionSpec {
   prompt: string;
+  font: string;
   screenshot: string;
 }
 
@@ -122,7 +123,7 @@ export default function SpecDashboard() {
       const updated = { ...prev };
       if (activeSection === 'brandSettings') {
         if (!updated.brandSettings) {
-          updated.brandSettings = { prompt: '', screenshot: '' };
+          updated.brandSettings = { prompt: '', font: '', screenshot: '' };
         }
         updated.brandSettings.prompt = val;
       } else {
@@ -130,9 +131,30 @@ export default function SpecDashboard() {
           updated.sections = {};
         }
         if (!updated.sections[activeSection]) {
-          updated.sections[activeSection] = { prompt: '', screenshot: '' };
+          updated.sections[activeSection] = { prompt: '', font: '', screenshot: '' };
         }
         updated.sections[activeSection].prompt = val;
+      }
+      return updated;
+    });
+  };
+
+  const handleFontChange = (val: string) => {
+    setSpecData(prev => {
+      const updated = { ...prev };
+      if (activeSection === 'brandSettings') {
+        if (!updated.brandSettings) {
+          updated.brandSettings = { prompt: '', font: '', screenshot: '' };
+        }
+        updated.brandSettings.font = val;
+      } else {
+        if (!updated.sections) {
+          updated.sections = {};
+        }
+        if (!updated.sections[activeSection]) {
+          updated.sections[activeSection] = { prompt: '', font: '', screenshot: '' };
+        }
+        updated.sections[activeSection].font = val;
       }
       return updated;
     });
@@ -179,8 +201,8 @@ export default function SpecDashboard() {
   };
 
   const getSectionSpec = (key: string): SectionSpec => {
-    if (key === 'brandSettings') return specData.brandSettings || { prompt: '', screenshot: '' };
-    return (specData.sections && specData.sections[key]) || { prompt: '', screenshot: '' };
+    if (key === 'brandSettings') return specData.brandSettings || { prompt: '', font: '', screenshot: '' };
+    return (specData.sections && specData.sections[key]) || { prompt: '', font: '', screenshot: '' };
   };
 
   // Progress calculator
@@ -314,8 +336,19 @@ export default function SpecDashboard() {
                     className="w-full h-64 bg-[#0a0a14] border border-white/5 focus:border-[#00d4ff]/30 text-text-primary rounded-2xl p-6 text-sm outline-none transition-all focus:shadow-[0_0_20px_rgba(0,212,255,0.05)] resize-none font-medium leading-relaxed"
                     placeholder={`e.g. In the ${SECTION_LABELS[activeSection].label}, replace the main text with "A digital studio built on performance" and change the background to black metal mesh...`}
                     value={getSectionSpec(activeSection).prompt}
-                    onChange={(e) => handlePromptChange(e.target.value)}
                   ></textarea>
+                </div>
+
+                {/* Font style input */}
+                <div className="space-y-3">
+                  <label className="text-xs font-bold text-[#00d4ff] uppercase tracking-wider block">FONT STYLE / TYPOGRAPHY TO USE</label>
+                  <input
+                    type="text"
+                    className="w-full bg-[#0a0a14] border border-white/5 focus:border-[#00d4ff]/30 text-text-primary rounded-xl px-6 py-3.5 text-xs md:text-sm outline-none transition-all focus:shadow-[0_0_20px_rgba(0,212,255,0.05)] font-medium"
+                    placeholder="e.g. Font family, size, weight (like Space Grotesk, bold)"
+                    value={getSectionSpec(activeSection).font || ''}
+                    onChange={(e) => handleFontChange(e.target.value)}
+                  />
                 </div>
 
                 {/* Drag-and-drop Image Upload */}

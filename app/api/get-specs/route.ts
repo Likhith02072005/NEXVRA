@@ -9,24 +9,36 @@ export async function GET() {
     const specJsonPath = path.join(projectRoot, 'website_specification.json');
 
     // 1. Read or initialize JSON
-    let specData = {
-      brandSettings: { prompt: '', screenshot: '' },
+    let specData: any = {
+      brandSettings: { prompt: '', font: '', screenshot: '' },
       sections: {
-        navbar: { prompt: '', screenshot: '' },
-        hero: { prompt: '', screenshot: '' },
-        trusted_by: { prompt: '', screenshot: '' },
-        problem: { prompt: '', screenshot: '' },
-        services: { prompt: '', screenshot: '' },
-        results: { prompt: '', screenshot: '' },
-        process: { prompt: '', screenshot: '' },
-        pricing: { prompt: '', screenshot: '' },
-        booking: { prompt: '', screenshot: '' },
-        footer: { prompt: '', screenshot: '' }
+        navbar: { prompt: '', font: '', screenshot: '' },
+        hero: { prompt: '', font: '', screenshot: '' },
+        trusted_by: { prompt: '', font: '', screenshot: '' },
+        problem: { prompt: '', font: '', screenshot: '' },
+        services: { prompt: '', font: '', screenshot: '' },
+        results: { prompt: '', font: '', screenshot: '' },
+        process: { prompt: '', font: '', screenshot: '' },
+        pricing: { prompt: '', font: '', screenshot: '' },
+        booking: { prompt: '', font: '', screenshot: '' },
+        footer: { prompt: '', font: '', screenshot: '' }
       }
     };
 
     if (fs.existsSync(specJsonPath)) {
-      specData = JSON.parse(fs.readFileSync(specJsonPath, 'utf-8'));
+      const existing = JSON.parse(fs.readFileSync(specJsonPath, 'utf-8'));
+      if (existing.brandSettings) {
+        specData.brandSettings = { ...specData.brandSettings, ...existing.brandSettings };
+      }
+      if (existing.sections) {
+        Object.keys(existing.sections).forEach(key => {
+          if (specData.sections[key]) {
+            specData.sections[key] = { ...specData.sections[key], ...existing.sections[key] };
+          } else {
+            specData.sections[key] = existing.sections[key];
+          }
+        });
+      }
     }
 
     // Helper to read code safely
