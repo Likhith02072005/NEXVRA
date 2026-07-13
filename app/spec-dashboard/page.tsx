@@ -121,8 +121,14 @@ export default function SpecDashboard() {
     setSpecData(prev => {
       const updated = { ...prev };
       if (activeSection === 'brandSettings') {
+        if (!updated.brandSettings) {
+          updated.brandSettings = { prompt: '', screenshot: '' };
+        }
         updated.brandSettings.prompt = val;
       } else {
+        if (!updated.sections) {
+          updated.sections = {};
+        }
         if (!updated.sections[activeSection]) {
           updated.sections[activeSection] = { prompt: '', screenshot: '' };
         }
@@ -173,8 +179,8 @@ export default function SpecDashboard() {
   };
 
   const getSectionSpec = (key: string): SectionSpec => {
-    if (key === 'brandSettings') return specData.brandSettings;
-    return specData.sections[key] || { prompt: '', screenshot: '' };
+    if (key === 'brandSettings') return specData.brandSettings || { prompt: '', screenshot: '' };
+    return (specData.sections && specData.sections[key]) || { prompt: '', screenshot: '' };
   };
 
   // Progress calculator
