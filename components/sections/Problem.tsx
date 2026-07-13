@@ -7,7 +7,7 @@ export default function Problem() {
       <div className="absolute top-0 left-1/4 w-[1px] h-full bg-[linear-gradient(to_bottom,rgba(255,255,255,0.03),transparent)] pointer-events-none" />
       <div className="absolute top-0 right-1/4 w-[1px] h-full bg-[linear-gradient(to_bottom,rgba(255,255,255,0.03),transparent)] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">

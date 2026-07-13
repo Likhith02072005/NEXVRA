@@ -1,0 +1,1194 @@
+[0] Normal: NEXVRA Website Overhaul Specification
+[1] Normal: This document serves as your interactive section-by-section layout planner. For each section below, we have loaded the current code. Type your custom prompts or changes in the designated blocks, specify reference screenshots, and save this file. The developer agent will read and execute your instructions directly.
+
+FONTS
+[2] Normal: Soo for the Font style I have created a file named fonts please check it in NEXVRA folder I want you to add all the fonts and align it in such a way that it looks attractive and everything in right alignment use all the fonts don’t leave any I want all the fonts in one or the other the present font in the website completely remove it …
+[3] Heading 1: Navbar Section (components/sections/Navbar.tsx)
+[4] font-claude-response-body: Your Prompt / Changes to Make:
+Replace the current navbar with a glassmorphic floating pill design. Here's the reference implementation to adapt:
+[5] font-claude-response-body: [paste the code above]
+[6] font-claude-response-body: Integration notes:
+[7] font-claude-response-body: This should replace the existing full-width navbar, not add a second one — remove the old navbar component entirely.
+[8] font-claude-response-body: Keep our actual nav items and the 'Book a Call' button — merge our existing logo and CTA button into this new structure, positioned appropriately (logo on the left outside the pill, or integrate as needed to match our current layout hierarchy).
+[9] font-claude-response-body: Test the bg-black/40 backdrop-blur-md values against our actual busy backgrounds (the marquee, gradients) — increase opacity further if nav text isn't clearly legible when scrolling over bright/light areas of the page.
+[10] font-claude-response-body: Confirm the hover glow colors show our cyan (#00d4ff) and purple (#7c3aed) brand accents, not the original amber.
+[11] font-claude-response-body: Make sure this is responsive — on mobile, this pill-shaped nav needs to either collapse into a hamburger menu or adapt gracefully, since a wide horizontal pill won't fit small screens.
+[12] Heading 2: 
+
+[13] Normal: const navLinks = [
+[14] Normal:   { name: "Services", href: "#services" },
+[15] Normal:   { name: "Results", href: "#results" },
+[16] Normal:   { name: "Process", href: "#process" },
+[17] Normal:   { name: "Pricing", href: "#pricing" },
+[18] Normal: ];
+[19] Normal: 
+[20] Normal: const NavbarButton = ({ name, href }: { name: string; href: string }) => {
+[21] Normal:   return (
+[22] Normal:     
+[23] Normal:       href={href}
+[24] Normal:       className="relative group flex items-center justify-center overflow-hidden rounded-lg"
+[25] Normal:     >
+[26] Normal:       <div className="absolute -bottom-1 translate-y-1/2 size-10 rounded-full bg-cyan-400 opacity-0 blur-lg group-hover:opacity-100 cursor-pointer" />
+[27] Normal:       <div className="absolute size-6 rounded-full bg-purple-500 opacity-0 blur-xl group-hover:opacity-100 cursor-pointer" />
+[28] Normal:       <div className="relative px-6 py-2 rounded-lg text-gray-300 transition-colors duration-300 ease-out group-hover:text-white">
+[29] Normal:         <div className="text-sm font-semibold cursor-pointer">{name}</div>
+[30] Normal:       </div>
+[31] Normal:     </a>
+[32] Normal:   );
+[33] Normal: };
+[34] Normal: 
+[35] Normal: const Navbar = () => {
+[36] Normal:   return (
+[37] Normal:     <div className="w-full pt-4 fixed text-white z-50">
+[38] Normal:       <div className="max-w-4xl mx-auto px-4 py-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10">
+[39] Normal:         <div className="flex items-center justify-between">
+[40] Normal:           {navLinks.map(({ name, href }) => (
+[41] Normal:             <NavbarButton key={href} name={name} href={href} />
+[42] Normal:           ))}
+[43] Normal:         </div>
+[44] Normal:       </div>
+[45] Normal:     </div>
+[46] Normal:   );
+[47] Normal: };
+[48] Heading 2: Reference Screenshot
+[49] Heading 2: Current React Code Reference:
+[50] Normal: 'use client';
+
+import { useState } from 'react';
+import Image from 'next/image';
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
+
+  return (
+    <>
+      <nav className="fixed top-0 left-0 w-full z-50 border-b border-white/5 bg-bg-primary/80 backdrop-blur-md transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <a href="#" className="flex items-center text-xl font-extrabold tracking-tight text-[#f5f0e8]" data-cursor-label="NEXVRA">
+            <span className="relative w-8 h-8 rounded-lg overflow-hidden mr-2.5">
+              <Image 
+                src="/brand-assets/nexvra-icon-square.jpg" 
+                alt="NEXVRA" 
+                fill 
+                sizes="32px"
+                className="object-cover"
+              />
+            </span>
+            NEXVRA <span className="text-[#00d4ff] ml-1.5 font-medium">Digital</span>
+          </a>
+
+          {/* Desktop Nav */}
+          <ul className="hidden md:flex items-center gap-8 font-medium text-text-secondary text-sm">
+            <li>
+              <a href="#services" className="relative hover:text-[#f5f0e8] transition-colors group py-1" data-cursor-label="Services">
+                Services
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#b8860b] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+              </a>
+            </li>
+            <li>
+              <a href="#results" className="relative hover:text-[#f5f0e8] transition-colors group py-1" data-cursor-label="Results">
+                Results
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#b8860b] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+              </a>
+            </li>
+            <li>
+              <a href="#process" className="relative hover:text-[#f5f0e8] transition-colors group py-1" data-cursor-label="Process">
+                Process
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#b8860b] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+              </a>
+            </li>
+            <li>
+              <a href="#pricing" className="relative hover:text-[#f5f0e8] transition-colors group py-1" data-cursor-label="Pricing">
+                Pricing
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#b8860b] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+              </a>
+            </li>
+            <li>
+              <a 
+                href="#booking" 
+                className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#00d4ff] to-[#7c3aed] text-text-primary font-semibold text-xs tracking-wide shadow-[0_4px_12px_rgba(0,212,255,0.25)] 
+... (truncated for document spacing)
+[51] Normal: 
+replace this 
+[52] Heading 1: Hero Section (components/sections/Hero.tsx)
+[53] Heading 2: Your Prompt / Changes to Make:
+[54] Heading 2: ## Integrate the <GradientBlinds /> component from React Bits
+[55] Heading 2: 
+[56] Heading 2: You are helping integrate an open-source React component into an existing application.
+[57] Heading 2: 
+[58] Heading 2: ### Component: GradientBlinds
+[59] Heading 2: ### Variant: JavaScript + Tailwind
+[60] Heading 2: ### Dependencies: ogl
+[61] Heading 2: 
+[62] Heading 2: ---
+[63] Heading 2: 
+[64] Heading 2: ### Usage Example
+[65] Heading 2: ```jsx
+[66] Heading 2: import GradientBlinds from './GradientBlinds';
+[67] Heading 2: 
+[68] Heading 2: <div style={{ width: '100%', height: '600px', position: 'relative' }}>
+[69] Heading 2:   <GradientBlinds
+[70] Heading 2:     gradientColors={['#FF9FFC', '#5227FF']}
+[71] Heading 2:     angle={0}
+[72] Heading 2:     noise={0.3}
+[73] Heading 2:     blindCount={12}
+[74] Heading 2:     blindMinWidth={50}
+[75] Heading 2:     spotlightRadius={0.5}
+[76] Heading 2:     spotlightSoftness={1}
+[77] Heading 2:     spotlightOpacity={1}
+[78] Heading 2:     mouseDampening={0.15}
+[79] Heading 2:     distortAmount={0}
+[80] Heading 2:     shineDirection="left"
+[81] Heading 2:     mixBlendMode="lighten"
+[82] Heading 2:   />
+[83] Heading 2: </div>
+[84] Heading 2: ```
+[85] Heading 2: 
+[86] Heading 2: ### Props
+[87] Heading 2: | Prop | Type | Default | Description |
+[88] Heading 2: |------|------|---------|-------------|
+[89] Heading 2: | gradientColors | string[] | ['#FF9FFC', '#5227FF'] | Array of hex colors (up to 8) forming the animated gradient. If one color is provided it is duplicated. |
+[90] Heading 2: | angle | number | 0 | Rotation of the gradient in degrees (0 = horizontal left→right). |
+[91] Heading 2: | noise | number | 0.3 | Strength of per‑pixel noise added to the final color (0 = clean). |
+[92] Heading 2: | blindCount | number | 16 | Target number of vertical blinds. Acts as an upper bound when blindMinWidth is set. |
+[93] Heading 2: | blindMinWidth | number | 60 | Minimum pixel width for each blind. Reduces effective blindCount if necessary to satisfy this width. |
+[94] Heading 2: | mouseDampening | number | 0.15 | Easing time constant (seconds) for the spotlight to follow the cursor. 0 = immediate. |
+[95] Heading 2: | mirrorGradient | boolean | false | Creates a mirrored ping‑pong gradient progression instead of a linear wrap. |
+[96] Heading 2: | spotlightRadius | number | 0.5 | Normalized spotlight radius relative to the shorter canvas dimension. |
+[97] Heading 2: | spotlightSoftness | number | 1 | Falloff exponent for spotlight edge. Higher = sharper edge (values >1 increase contrast). |
+[98] Heading 2: | spotlightOpacity | number | 1 | Overall intensity multiplier for the spotlight highlight. |
+[99] Heading 2: | distortAmount | number | 0 | Sin/cos warp intensity applied to UVs for subtle wavy distortion. |
+[100] Heading 2: | shineDirection | 'left' | 'right' | left | Flips the bright side of each blind; useful for composition with other elements. |
+[101] Heading 2: | mixBlendMode | string | 'lighten' | CSS mix-blend-mode applied to the canvas (e.g. 'screen', 'overlay', 'multiply'). |
+[102] Heading 2: | paused | boolean | false | If true, stops rendering updates (freezing the current frame). |
+[103] Heading 2: | dpr | number | window.devicePixelRatio | Overrides device pixel ratio; lower for performance, higher for sharpness. |
+[104] Heading 2: | className | string | — | Additional class names for the root container. |
+[105] Heading 2: 
+[106] Heading 2: ### Full Component Source
+[107] Heading 2: ```jsx
+[108] Heading 2: import { useEffect, useRef } from 'react';
+[109] Heading 2: import { Renderer, Program, Mesh, Triangle } from 'ogl';
+[110] Heading 2: 
+[111] Heading 2: const MAX_COLORS = 8;
+[112] Heading 2: const hexToRGB = hex => {
+[113] Heading 2:   const c = hex.replace('#', '').padEnd(6, '0');
+[114] Heading 2:   const r = parseInt(c.slice(0, 2), 16) / 255;
+[115] Heading 2:   const g = parseInt(c.slice(2, 4), 16) / 255;
+[116] Heading 2:   const b = parseInt(c.slice(4, 6), 16) / 255;
+[117] Heading 2:   return [r, g, b];
+[118] Heading 2: };
+[119] Heading 2: const prepStops = stops => {
+[120] Heading 2:   const base = (stops && stops.length ? stops : ['#FF9FFC', '#5227FF']).slice(0, MAX_COLORS);
+[121] Heading 2:   if (base.length === 1) base.push(base[0]);
+[122] Heading 2:   while (base.length < MAX_COLORS) base.push(base[base.length - 1]);
+[123] Heading 2:   const arr = [];
+[124] Heading 2:   for (let i = 0; i < MAX_COLORS; i++) arr.push(hexToRGB(base[i]));
+[125] Heading 2:   const count = Math.max(2, Math.min(MAX_COLORS, stops?.length ?? 2));
+[126] Heading 2:   return { arr, count };
+[127] Heading 2: };
+[128] Heading 2: 
+[129] Heading 2: const GradientBlinds = ({
+[130] Heading 2:   className,
+[131] Heading 2:   dpr,
+[132] Heading 2:   paused = false,
+[133] Heading 2:   gradientColors,
+[134] Heading 2:   angle = 0,
+[135] Heading 2:   noise = 0.3,
+[136] Heading 2:   blindCount = 16,
+[137] Heading 2:   blindMinWidth = 60,
+[138] Heading 2:   mouseDampening = 0.15,
+[139] Heading 2:   mirrorGradient = false,
+[140] Heading 2:   spotlightRadius = 0.5,
+[141] Heading 2:   spotlightSoftness = 1,
+[142] Heading 2:   spotlightOpacity = 1,
+[143] Heading 2:   distortAmount = 0,
+[144] Heading 2:   shineDirection = 'left',
+[145] Heading 2:   mixBlendMode = 'lighten'
+[146] Heading 2: }) => {
+[147] Heading 2:   const containerRef = useRef(null);
+[148] Heading 2:   const rafRef = useRef(null);
+[149] Heading 2:   const programRef = useRef(null);
+[150] Heading 2:   const meshRef = useRef(null);
+[151] Heading 2:   const geometryRef = useRef(null);
+[152] Heading 2:   const rendererRef = useRef(null);
+[153] Heading 2:   const mouseTargetRef = useRef([0, 0]);
+[154] Heading 2:   const lastTimeRef = useRef(0);
+[155] Heading 2:   const firstResizeRef = useRef(true);
+[156] Heading 2: 
+[157] Heading 2:   useEffect(() => {
+[158] Heading 2:     const container = containerRef.current;
+[159] Heading 2:     if (!container) return;
+[160] Heading 2: 
+[161] Heading 2:     const renderer = new Renderer({
+[162] Heading 2:       dpr: dpr ?? (typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1),
+[163] Heading 2:       alpha: true,
+[164] Heading 2:       antialias: true
+[165] Heading 2:     });
+[166] Heading 2:     rendererRef.current = renderer;
+[167] Heading 2:     const gl = renderer.gl;
+[168] Heading 2:     const canvas = gl.canvas;
+[169] Heading 2: 
+[170] Heading 2:     canvas.style.width = '100%';
+[171] Heading 2:     canvas.style.height = '100%';
+[172] Heading 2:     canvas.style.display = 'block';
+[173] Heading 2:     container.appendChild(canvas);
+[174] Heading 2: 
+[175] Heading 2:     const vertex = `
+[176] Heading 2: attribute vec2 position;
+[177] Heading 2: attribute vec2 uv;
+[178] Heading 2: varying vec2 vUv;
+[179] Heading 2: 
+[180] Heading 2: void main() {
+[181] Heading 2:   vUv = uv;
+[182] Heading 2:   gl_Position = vec4(position, 0.0, 1.0);
+[183] Heading 2: }
+[184] Heading 2: `;
+[185] Heading 2: 
+[186] Heading 2:     const fragment = `
+[187] Heading 2: #ifdef GL_ES
+[188] Heading 2: precision mediump float;
+[189] Heading 2: #endif
+[190] Heading 2: 
+[191] Heading 2: uniform vec3  iResolution;
+[192] Heading 2: uniform vec2  iMouse;
+[193] Heading 2: uniform float iTime;
+[194] Heading 2: 
+[195] Heading 2: uniform float uAngle;
+[196] Heading 2: uniform float uNoise;
+[197] Heading 2: uniform float uBlindCount;
+[198] Heading 2: uniform float uSpotlightRadius;
+[199] Heading 2: uniform float uSpotlightSoftness;
+[200] Heading 2: uniform float uSpotlightOpacity;
+[201] Heading 2: uniform float uMirror;
+[202] Heading 2: uniform float uDistort;
+[203] Heading 2: uniform float uShineFlip;
+[204] Heading 2: uniform vec3  uColor0;
+[205] Heading 2: uniform vec3  uColor1;
+[206] Heading 2: uniform vec3  uColor2;
+[207] Heading 2: uniform vec3  uColor3;
+[208] Heading 2: uniform vec3  uColor4;
+[209] Heading 2: uniform vec3  uColor5;
+[210] Heading 2: uniform vec3  uColor6;
+[211] Heading 2: uniform vec3  uColor7;
+[212] Heading 2: uniform int   uColorCount;
+[213] Heading 2: 
+[214] Heading 2: varying vec2 vUv;
+[215] Heading 2: 
+[216] Heading 2: float rand(vec2 co){
+[217] Heading 2:   return fract(sin(dot(co, vec2(12.9898,78.233))) * 43758.5453);
+[218] Heading 2: }
+[219] Heading 2: 
+[220] Heading 2: vec2 rotate2D(vec2 p, float a){
+[221] Heading 2:   float c = cos(a);
+[222] Heading 2:   float s = sin(a);
+[223] Heading 2:   return mat2(c, -s, s, c) * p;
+[224] Heading 2: }
+[225] Heading 2: 
+[226] Heading 2: vec3 getGradientColor(float t){
+[227] Heading 2:   float tt = clamp(t, 0.0, 1.0);
+[228] Heading 2:   int count = uColorCount;
+[229] Heading 2:   if (count < 2) count = 2;
+[230] Heading 2:   float scaled = tt * float(count - 1);
+[231] Heading 2:   float seg = floor(scaled);
+[232] Heading 2:   float f = fract(scaled);
+[233] Heading 2: 
+[234] Heading 2:   if (seg < 1.0) return mix(uColor0, uColor1, f);
+[235] Heading 2:   if (seg < 2.0 && count > 2) return mix(uColor1, uColor2, f);
+[236] Heading 2:   if (seg < 3.0 && count > 3) return mix(uColor2, uColor3, f);
+[237] Heading 2:   if (seg < 4.0 && count > 4) return mix(uColor3, uColor4, f);
+[238] Heading 2:   if (seg < 5.0 && count > 5) return mix(uColor4, uColor5, f);
+[239] Heading 2:   if (seg < 6.0 && count > 6) return mix(uColor5, uColor6, f);
+[240] Heading 2:   if (seg < 7.0 && count > 7) return mix(uColor6, uColor7, f);
+[241] Heading 2:   if (count > 7) return uColor7;
+[242] Heading 2:   if (count > 6) return uColor6;
+[243] Heading 2:   if (count > 5) return uColor5;
+[244] Heading 2:   if (count > 4) return uColor4;
+[245] Heading 2:   if (count > 3) return uColor3;
+[246] Heading 2:   if (count > 2) return uColor2;
+[247] Heading 2:   return uColor1;
+[248] Heading 2: }
+[249] Heading 2: 
+[250] Heading 2: void mainImage( out vec4 fragColor, in vec2 fragCoord )
+[251] Heading 2: {
+[252] Heading 2:     vec2 uv0 = fragCoord.xy / iResolution.xy;
+[253] Heading 2: 
+[254] Heading 2:     float aspect = iResolution.x / iResolution.y;
+[255] Heading 2:     vec2 p = uv0 * 2.0 - 1.0;
+[256] Heading 2:     p.x *= aspect;
+[257] Heading 2:     vec2 pr = rotate2D(p, uAngle);
+[258] Heading 2:     pr.x /= aspect;
+[259] Heading 2:     vec2 uv = pr * 0.5 + 0.5;
+[260] Heading 2: 
+[261] Heading 2:     vec2 uvMod = uv;
+[262] Heading 2:     if (uDistort > 0.0) {
+[263] Heading 2:       float a = uvMod.y * 6.0;
+[264] Heading 2:       float b = uvMod.x * 6.0;
+[265] Heading 2:       float w = 0.01 * uDistort;
+[266] Heading 2:       uvMod.x += sin(a) * w;
+[267] Heading 2:       uvMod.y += cos(b) * w;
+[268] Heading 2:     }
+[269] Heading 2:     float t = uvMod.x;
+[270] Heading 2:     if (uMirror > 0.5) {
+[271] Heading 2:       t = 1.0 - abs(1.0 - 2.0 * fract(t));
+[272] Heading 2:     }
+[273] Heading 2:     vec3 base = getGradientColor(t);
+[274] Heading 2: 
+[275] Heading 2:     vec2 offset = vec2(iMouse.x/iResolution.x, iMouse.y/iResolution.y);
+[276] Heading 2:   float d = length(uv0 - offset);
+[277] Heading 2:   float r = max(uSpotlightRadius, 1e-4);
+[278] Heading 2:   float dn = d / r;
+[279] Heading 2:   float spot = (1.0 - 2.0 * pow(dn, uSpotlightSoftness)) * uSpotlightOpacity;
+[280] Heading 2:   vec3 cir = vec3(spot);
+[281] Heading 2:   float stripe = fract(uvMod.x * max(uBlindCount, 1.0));
+[282] Heading 2:   if (uShineFlip > 0.5) stripe = 1.0 - stripe;
+[283] Heading 2:     vec3 ran = vec3(stripe);
+[284] Heading 2: 
+[285] Heading 2:     vec3 col = cir + base - ran;
+[286] Heading 2:     col += (rand(gl_FragCoord.xy + iTime) - 0.5) * uNoise;
+[287] Heading 2: 
+[288] Heading 2:     fragColor = vec4(col, 1.0);
+[289] Heading 2: }
+[290] Heading 2: 
+[291] Heading 2: void main() {
+[292] Heading 2:     vec4 color;
+[293] Heading 2:     mainImage(color, vUv * iResolution.xy);
+[294] Heading 2:     gl_FragColor = color;
+[295] Heading 2: }
+[296] Heading 2: `;
+[297] Heading 2: 
+[298] Heading 2:     const { arr: colorArr, count: colorCount } = prepStops(gradientColors);
+[299] Heading 2:     const uniforms = {
+[300] Heading 2:       iResolution: {
+[301] Heading 2:         value: [gl.drawingBufferWidth, gl.drawingBufferHeight, 1]
+[302] Heading 2:       },
+[303] Heading 2:       iMouse: { value: [0, 0] },
+[304] Heading 2:       iTime: { value: 0 },
+[305] Heading 2:       uAngle: { value: (angle * Math.PI) / 180 },
+[306] Heading 2:       uNoise: { value: noise },
+[307] Heading 2:       uBlindCount: { value: Math.max(1, blindCount) },
+[308] Heading 2:       uSpotlightRadius: { value: spotlightRadius },
+[309] Heading 2:       uSpotlightSoftness: { value: spotlightSoftness },
+[310] Heading 2:       uSpotlightOpacity: { value: spotlightOpacity },
+[311] Heading 2:       uMirror: { value: mirrorGradient ? 1 : 0 },
+[312] Heading 2:       uDistort: { value: distortAmount },
+[313] Heading 2:       uShineFlip: { value: shineDirection === 'right' ? 1 : 0 },
+[314] Heading 2:       uColor0: { value: colorArr[0] },
+[315] Heading 2:       uColor1: { value: colorArr[1] },
+[316] Heading 2:       uColor2: { value: colorArr[2] },
+[317] Heading 2:       uColor3: { value: colorArr[3] },
+[318] Heading 2:       uColor4: { value: colorArr[4] },
+[319] Heading 2:       uColor5: { value: colorArr[5] },
+[320] Heading 2:       uColor6: { value: colorArr[6] },
+[321] Heading 2:       uColor7: { value: colorArr[7] },
+[322] Heading 2:       uColorCount: { value: colorCount }
+[323] Heading 2:     };
+[324] Heading 2: 
+[325] Heading 2:     const program = new Program(gl, {
+[326] Heading 2:       vertex,
+[327] Heading 2:       fragment,
+[328] Heading 2:       uniforms
+[329] Heading 2:     });
+[330] Heading 2:     programRef.current = program;
+[331] Heading 2: 
+[332] Heading 2:     const geometry = new Triangle(gl);
+[333] Heading 2:     geometryRef.current = geometry;
+[334] Heading 2:     const mesh = new Mesh(gl, { geometry, program });
+[335] Heading 2:     meshRef.current = mesh;
+[336] Heading 2: 
+[337] Heading 2:     const resize = () => {
+[338] Heading 2:       const rect = container.getBoundingClientRect();
+[339] Heading 2:       renderer.setSize(rect.width, rect.height);
+[340] Heading 2:       uniforms.iResolution.value = [gl.drawingBufferWidth, gl.drawingBufferHeight, 1];
+[341] Heading 2: 
+[342] Heading 2:       if (blindMinWidth && blindMinWidth > 0) {
+[343] Heading 2:         const maxByMinWidth = Math.max(1, Math.floor(rect.width / blindMinWidth));
+[344] Heading 2: 
+[345] Heading 2:         const effective = blindCount ? Math.min(blindCount, maxByMinWidth) : maxByMinWidth;
+[346] Heading 2:         uniforms.uBlindCount.value = Math.max(1, effective);
+[347] Heading 2:       } else {
+[348] Heading 2:         uniforms.uBlindCount.value = Math.max(1, blindCount);
+[349] Heading 2:       }
+[350] Heading 2: 
+[351] Heading 2:       if (firstResizeRef.current) {
+[352] Heading 2:         firstResizeRef.current = false;
+[353] Heading 2:         const cx = gl.drawingBufferWidth / 2;
+[354] Heading 2:         const cy = gl.drawingBufferHeight / 2;
+[355] Heading 2:         uniforms.iMouse.value = [cx, cy];
+[356] Heading 2:         mouseTargetRef.current = [cx, cy];
+[357] Heading 2:       }
+[358] Heading 2:     };
+[359] Heading 2: 
+[360] Heading 2:     resize();
+[361] Heading 2:     const ro = new ResizeObserver(resize);
+[362] Heading 2:     ro.observe(container);
+[363] Heading 2: 
+[364] Heading 2:     const onPointerMove = e => {
+[365] Heading 2:       const rect = canvas.getBoundingClientRect();
+[366] Heading 2:       const scale = renderer.dpr || 1;
+[367] Heading 2:       const x = (e.clientX - rect.left) * scale;
+[368] Heading 2:       const y = (rect.height - (e.clientY - rect.top)) * scale;
+[369] Heading 2:       mouseTargetRef.current = [x, y];
+[370] Heading 2:       if (mouseDampening <= 0) {
+[371] Heading 2:         uniforms.iMouse.value = [x, y];
+[372] Heading 2:       }
+[373] Heading 2:     };
+[374] Heading 2:     canvas.addEventListener('pointermove', onPointerMove);
+[375] Heading 2: 
+[376] Heading 2:     const loop = t => {
+[377] Heading 2:       rafRef.current = requestAnimationFrame(loop);
+[378] Heading 2:       uniforms.iTime.value = t * 0.001;
+[379] Heading 2:       if (mouseDampening > 0) {
+[380] Heading 2:         if (!lastTimeRef.current) lastTimeRef.current = t;
+[381] Heading 2:         const dt = (t - lastTimeRef.current) / 1000;
+[382] Heading 2:         lastTimeRef.current = t;
+[383] Heading 2:         const tau = Math.max(1e-4, mouseDampening);
+[384] Heading 2:         let factor = 1 - Math.exp(-dt / tau);
+[385] Heading 2:         if (factor > 1) factor = 1;
+[386] Heading 2:         const target = mouseTargetRef.current;
+[387] Heading 2:         const cur = uniforms.iMouse.value;
+[388] Heading 2:         cur[0] += (target[0] - cur[0]) * factor;
+[389] Heading 2:         cur[1] += (target[1] - cur[1]) * factor;
+[390] Heading 2:       } else {
+[391] Heading 2:         lastTimeRef.current = t;
+[392] Heading 2:       }
+[393] Heading 2:       if (!paused && programRef.current && meshRef.current) {
+[394] Heading 2:         try {
+[395] Heading 2:           renderer.render({ scene: meshRef.current });
+[396] Heading 2:         } catch (e) {
+[397] Heading 2:           console.error(e);
+[398] Heading 2:         }
+[399] Heading 2:       }
+[400] Heading 2:     };
+[401] Heading 2:     rafRef.current = requestAnimationFrame(loop);
+[402] Heading 2: 
+[403] Heading 2:     return () => {
+[404] Heading 2:       if (rafRef.current) cancelAnimationFrame(rafRef.current);
+[405] Heading 2:       canvas.removeEventListener('pointermove', onPointerMove);
+[406] Heading 2:       ro.disconnect();
+[407] Heading 2:       if (canvas.parentElement === container) {
+[408] Heading 2:         container.removeChild(canvas);
+[409] Heading 2:       }
+[410] Heading 2:       const callIfFn = (obj, key) => {
+[411] Heading 2:         if (obj && typeof obj[key] === 'function') {
+[412] Heading 2:           obj[key].call(obj);
+[413] Heading 2:         }
+[414] Heading 2:       };
+[415] Heading 2:       callIfFn(programRef.current, 'remove');
+[416] Heading 2:       callIfFn(geometryRef.current, 'remove');
+[417] Heading 2:       callIfFn(meshRef.current, 'remove');
+[418] Heading 2:       callIfFn(rendererRef.current, 'destroy');
+[419] Heading 2:       programRef.current = null;
+[420] Heading 2:       geometryRef.current = null;
+[421] Heading 2:       meshRef.current = null;
+[422] Heading 2:       rendererRef.current = null;
+[423] Heading 2:     };
+[424] Heading 2:   }, [
+[425] Heading 2:     dpr,
+[426] Heading 2:     paused,
+[427] Heading 2:     gradientColors,
+[428] Heading 2:     angle,
+[429] Heading 2:     noise,
+[430] Heading 2:     blindCount,
+[431] Heading 2:     blindMinWidth,
+[432] Heading 2:     mouseDampening,
+[433] Heading 2:     mirrorGradient,
+[434] Heading 2:     spotlightRadius,
+[435] Heading 2:     spotlightSoftness,
+[436] Heading 2:     spotlightOpacity,
+[437] Heading 2:     distortAmount,
+[438] Heading 2:     shineDirection
+[439] Heading 2:   ]);
+[440] Heading 2: 
+[441] Heading 2:   return (
+[442] Heading 2:     <div
+[443] Heading 2:       ref={containerRef}
+[444] Heading 2:       className={`w-full h-full overflow-hidden relative ${className}`}
+[445] Heading 2:       style={{
+[446] Heading 2:         ...(mixBlendMode && {
+[447] Heading 2:           mixBlendMode: mixBlendMode
+[448] Heading 2:         })
+[449] Heading 2:       }}
+[450] Heading 2:     />
+[451] Heading 2:   );
+[452] Heading 2: };
+[453] Heading 2: 
+[454] Heading 2: export default GradientBlinds;
+[455] Heading 2: 
+[456] Heading 2: ```
+[457] Heading 2: 
+[458] Heading 2: ### Integration Instructions
+[459] Heading 2: 1. Install any listed dependencies.
+[460] Heading 2: 2. Copy the component source into the appropriate directory in the project.
+[461] Heading 2: 3. Import and render the component using the usage example above as a starting point.
+[462] Heading 2: 4. Adjust props as needed for the specific use case — refer to the props table for all available options.
+[463] Heading 2: Reference Screenshot:
+[464] Heading 2: Current React Code Reference:
+[465] Normal: 'use client';
+
+import { useState, useEffect } from 'react';
+import { EncryptedText } from '@/components/ui/encrypted-text';
+import { NoiseBackground } from '@/components/ui/noise-background';
+import Ballpit from '@/components/Ballpit';
+
+interface StatProps {
+  end: number;
+  suffix?: string;
+  prefix?: string;
+  decimals?: boolean;
+  duration?: number;
+  label: string;
+}
+
+function StatCounter({ end, suffix = '', prefix = '', decimals = false, label }: StatProps) {
+  return (
+    <div className="flex flex-col">
+      <div className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed]">
+        {prefix}{decimals ? end.toFixed(1) : end}{suffix}
+      </div>
+      <div className="text-text-secondary text-xs md:text-sm font-medium mt-1">{label}</div>
+    </div>
+  );
+}
+
+
+export default function Hero() {
+  return (
+    <section id="hero" className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-bg-primary bg-[radial-gradient(circle_at_70%_50%,rgba(124,58,237,0.06)_0%,rgba(0,212,255,0.03)_50%,rgba(10,10,18,1)_100%)]">
+      {/* Grid Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.005)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.005)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black_70%,transparent_100%)] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 w-full relative z-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          {/* Left Side text */}
+          <div className="lg:col-span-8 flex flex-col items-start text-left">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-accent/40 bg-gold-accent/5 text-xs font-semibold tracking-wide text-text-primary mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-gold-accent animate-pulse"></span>
+              Now accepting 3 new clients for July
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-text-primary mb-6 leading-[1.1] font-display">
+              We Build Websites That <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed] glow-hover inline-block">
+                Print Money
+              </span>
+            </h1>
+
+            <p className="text-text-secondary text-base md:text-lg font-medium max-w-xl mb-10 leading-relaxed">
+              Full-stack web development + Meta Ads that turn your Bangalore business into a lead-generating machine. No fluff — just results.
+            </p>
+
+            <div className="flex flex-wrap gap-4 mb-14">
+              <NoiseBackground
+                containerClassName="p-[1px] rounded-full overflow-hidden"
+                className="rounded-full overflow-hidden"
+                gradientColors={["rgb(0, 212, 255
+... (truncated for document spacing)
+[466] Heading 1: Trusted By Bar (Inline in app/page.tsx)
+[467] Heading 2: Your Prompt / Changes to Make:
+[468] Normal: [Type your prompt or instruction for this section here...]
+[469] Heading 2: Reference Screenshot:
+[470] Normal: [Insert image here or type local image file path...]
+[471] Heading 2: Current React Code Reference:
+[472] Normal: {/* Trusted By Bar */}
+<section className="py-10 bg-bg-secondary border-y border-white/5 overflow-hidden">
+  <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+    <p className="text-text-secondary text-xs md:text-sm font-semibold tracking-wider uppercase shrink-0">
+      Trusted by businesses across Bangalore
+    </p>
+    <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm md:text-base font-extrabold text-text-muted">
+      <span className="hover:text-text-secondary transition-colors" data-cursor-label="Client">NEXVRA Studios</span>
+      <span className="hover:text-text-secondary transition-colors" data-cursor-label="Client">Makeover by Thirumala</span>
+      <span className="hover:text-text-secondary transition-colors" data-cursor-label="Client">BloomCafe</span>
+      <span className="hover:text-text-secondary transition-colors" data-cursor-label="Client">UrbanFit Studio</span>
+      <span className="hover:text-text-secondary transition-colors" data-cursor-label="Client">KriyaTech</span>
+    </div>
+  </div>
+</section>
+[473] Heading 1: Problem Section (components/sections/Problem.tsx)
+[474] Heading 2: Your Prompt / Changes to Make:
+[475] Normal: [Type your prompt or instruction for this section here...]
+[476] Heading 2: Reference Screenshot:
+[477] Normal: [Insert image here or type local image file path...]
+[478] Heading 2: Current React Code Reference:
+[479] Normal: 'use client';
+
+export default function Problem() {
+  return (
+    <section id="problems" className="py-24 bg-bg-primary relative overflow-hidden">
+      {/* Subtle details */}
+      <div className="absolute top-0 left-1/4 w-[1px] h-full bg-[linear-gradient(to_bottom,rgba(255,255,255,0.03),transparent)] pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-[1px] h-full bg-[linear-gradient(to_bottom,rgba(255,255,255,0.03),transparent)] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#7c3aed] bg-[#7c3aed]/10 px-3.5 py-1.5 rounded-full border border-[#7c3aed]/15">
+            The Problem
+          </span>
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text-primary mt-6 mb-4 leading-tight font-display">
+            Your Competitors Are Eating<br />Your Lunch. Here's Why.
+          </h2>
+          <p className="text-text-secondary text-sm md:text-base">
+            Most local businesses in Bangalore are bleeding money on bad websites and worse ads. Sound familiar?
+          </p>
+        </div>
+
+        {/* Problems Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          {/* Card 1 */}
+          <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-[#7c3aed]/20 transition-all hover:-translate-y-1 hover:bg-white/[0.04]" data-cursor-label="Pain Point">
+            <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-red-500/10 text-2xl mb-6">💸</span>
+            <h3 className="text-lg font-bold text-text-primary mb-3">Burning Money on Ads That Don't Convert</h3>
+            <p className="text-text-secondary text-sm leading-relaxed">
+              You're pouring ₹10,000/month into Meta Ads but getting nothing back. No leads, no calls, no ROI. Your ad spend is funding Meta's shareholders, not your growth.
+            </p>
+          </div>
+
+          {/* Card 2 */}
+          <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-[#7c3aed]/20 transition-all hover:-translate-y-1 hover:bg-white/[0.04]" data-cursor-label="Pain Point">
+            <span className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-orange-500/10 text-2xl mb-6">🕸️</span>
+            <h3 className="text-lg font-bold text-text-primary mb-3">Your Website Looks Like It's From 2010</h3>
+            <p className="text-text-secondary text-sm leading-relaxed">
+              Visitors land on your site and bounce in 3 seconds. A slow, ugly, mobile-unfriendly website is silently killing your credibility and costing you customers every single day.
+            </p>
+          </div>
+
+          {/* Card 3 */}
+          <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:borde
+... (truncated for document spacing)
+[480] Heading 1: Services Section (components/sections/Services.tsx)
+[481] Heading 2: Your Prompt / Changes to Make:
+[482] Normal: [Type your prompt or instruction for this section here...]
+[483] Heading 2: Reference Screenshot:
+[484] Normal: [Insert image here or type local image file path...]
+[485] Heading 2: Current React Code Reference:
+[486] Normal: 'use client';
+
+interface ServiceCardProps {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+  tags: string[];
+}
+
+function ServiceCard({ icon, title, desc, tags }: ServiceCardProps) {
+  return (
+    <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-[#00d4ff]/20 transition-all duration-300 hover:scale-[1.02] hover:bg-white/[0.04] flex flex-col items-start" data-cursor-label="Services">
+      <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-[#00d4ff]/10 to-[#7c3aed]/10 border border-[#00d4ff]/15 flex items-center justify-center text-text-primary mb-6">
+        {icon}
+      </div>
+      <h3 className="text-xl font-bold text-text-primary mb-3">{title}</h3>
+      <p className="text-text-secondary text-sm leading-relaxed mb-6 flex-grow">{desc}</p>
+      <div className="flex flex-wrap gap-2">
+        {tags.map((tag, idx) => (
+          <span key={idx} className="text-[10px] md:text-xs font-semibold px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-text-secondary">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function Services() {
+  return (
+    <section id="services" className="py-24 bg-bg-primary relative overflow-hidden">
+      {/* Background gradients */}
+      <div className="absolute top-1/4 right-0 w-[300px] h-[300px] rounded-full bg-[#00d4ff]/5 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[300px] h-[300px] rounded-full bg-[#7c3aed]/5 blur-[120px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#00d4ff] bg-[#00d4ff]/10 px-3.5 py-1.5 rounded-full border border-[#00d4ff]/15">
+            What I Do
+          </span>
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text-primary mt-6 mb-4 leading-tight font-display">
+            Services That Move<br />The Revenue Needle
+          </h2>
+          <p className="text-text-secondary text-sm md:text-base">
+            End-to-end digital solutions designed for Bangalore businesses that want to dominate their market.
+          </p>
+        </div>
+
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <ServiceCard
+            icon={
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+              </svg>
+            }
+            title="Custom Web Development"
+            desc="Blazing-fast, mobile-first websites built with modern tech that load in under 2 seconds and convert visitors into paying customers."
+            tags={["React / Next.js", "Responsive", "
+... (truncated for document spacing)
+[487] Heading 1: Results Section (components/sections/Results.tsx)
+[488] Heading 2: Your Prompt / Changes to Make:
+[489] Normal: [Type your prompt or instruction for this section here...]
+[490] Heading 2: Reference Screenshot:
+[491] Normal: [Insert image here or type local image file path...]
+[492] Heading 2: Current React Code Reference:
+[493] Normal: 'use client';
+
+import { useState, useEffect, useRef } from 'react';
+
+interface NumberProps {
+  end: number;
+  suffix?: string;
+  prefix?: string;
+  decimals?: boolean;
+}
+
+function AnimatedNumber({ end, suffix = '', prefix = '', decimals = false }: NumberProps) {
+  return (
+    <div className="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed]">
+      {prefix}{decimals ? end.toFixed(1) : end}{suffix}
+    </div>
+  );
+}
+
+export default function Results() {
+  return (
+    <section id="results" className="py-24 bg-bg-primary relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#7c3aed] bg-[#7c3aed]/10 px-3.5 py-1.5 rounded-full border border-[#7c3aed]/15">
+            Proven Results
+          </span>
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text-primary mt-6 mb-4 leading-tight font-display">
+            Numbers Don't Lie.<br />Neither Do My Clients.
+          </h2>
+          <p className="text-text-secondary text-sm md:text-base">
+            Real results from real Bangalore businesses. This is what happens when strategy meets execution.
+          </p>
+        </div>
+
+        {/* Stats Row */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+          <div className="p-6 rounded-2xl bg-white/[0.01] border border-white/5 text-center">
+            <AnimatedNumber end={3} suffix="x" />
+            <div className="text-text-secondary text-xs md:text-sm mt-2">Average ROAS</div>
+          </div>
+          <div className="p-6 rounded-2xl bg-white/[0.01] border border-white/5 text-center">
+            <AnimatedNumber end={200} suffix="%" />
+            <div className="text-text-secondary text-xs md:text-sm mt-2">More Qualified Leads</div>
+          </div>
+          <div className="p-6 rounded-2xl bg-white/[0.01] border border-white/5 text-center">
+            <AnimatedNumber end={40} suffix="+" />
+            <div className="text-text-secondary text-xs md:text-sm mt-2">Happy Clients</div>
+          </div>
+          <div className="p-6 rounded-2xl bg-white/[0.01] border border-white/5 text-center">
+            <AnimatedNumber end={95} suffix="%" />
+            <div className="text-text-secondary text-xs md:text-sm mt-2">Client Retention Rate</div>
+          </div>
+        </div>
+
+        {/* Case Studies */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+          
+          {/* Case 1 */}
+          <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 flex flex-col justify-between hover:border-[#00d4ff]/20 transition-all hover:bg-white/[0.04]" data-cursor-label="Case Study">
+            <div>
+              <span className="text-[10px] font-bold text-[#00d4ff] bg-[#00d4ff]/10 border border-[#00
+... (truncated for document spacing)
+[494] Heading 1: Process Section (components/sections/Process.tsx)
+[495] Heading 2: Your Prompt / Changes to Make:
+[496] Normal: [Type your prompt or instruction for this section here...]
+[497] Heading 2: Reference Screenshot:
+[498] Normal: [Insert image here or type local image file path...]
+[499] Heading 2: Current React Code Reference:
+[500] Normal: 'use client';
+
+export default function Process() {
+  return (
+    <section id="process" className="py-24 bg-bg-primary relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-20">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#00d4ff] bg-[#00d4ff]/10 px-3.5 py-1.5 rounded-full border border-[#00d4ff]/15">
+            How It Works
+          </span>
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text-primary mt-6 mb-4 leading-tight font-display">
+            From Zero to Revenue<br />in 3 Simple Steps
+          </h2>
+          <p className="text-text-secondary text-sm md:text-base">
+            No complexity. No buzzwords. Just a proven system that gets your business online and growing.
+          </p>
+        </div>
+
+        {/* Process Timeline */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+          
+          {/* Connecting line */}
+          <div className="absolute top-1/2 left-0 w-full h-[1px] bg-[linear-gradient(90deg,rgba(0,212,255,0.05)_0%,rgba(124,58,237,0.05)_50%,transparent_100%)] hidden md:block z-0 pointer-events-none" />
+
+          {/* Step 1 */}
+          <div className="flex flex-col items-start relative z-10" data-cursor-label="Step 1">
+            <div className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed] mb-4">
+              01
+            </div>
+            <h3 className="text-lg font-bold text-text-primary mb-2">Book Your Free Call</h3>
+            <p className="text-text-secondary text-sm leading-relaxed">
+              We hop on a 30-minute strategy call. I learn about your business, your goals, and your competition. Zero obligation.
+            </p>
+          </div>
+
+          {/* Step 2 */}
+          <div className="flex flex-col items-start relative z-10" data-cursor-label="Step 2">
+            <div className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed] mb-4">
+              02
+            </div>
+            <h3 className="text-lg font-bold text-text-primary mb-2">We Build Your System</h3>
+            <p className="text-text-secondary text-sm leading-relaxed">
+              I design and develop your website + ad campaigns in 7-14 days. You get unlimited revisions until it's perfect.
+            </p>
+          </div>
+
+          {/* Step 3 */}
+          <div className="flex flex-col items-start relative z-10" data-cursor-label="Step 3">
+            <div className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed] mb-4">
+              03
+            </div>
+            <h3 className="text-lg font-bold text-text-primary mb-2">You Watch It Grow</h3>
+            <p className="text-text-secondary text-sm leading-relaxed">
+              Leads start flowin
+... (truncated for document spacing)
+[501] Heading 1: Pricing Section (components/sections/Pricing.tsx)
+[502] Heading 2: Your Prompt / Changes to Make:
+[503] Normal: [Type your prompt or instruction for this section here...]
+[504] Heading 2: Reference Screenshot:
+[505] Normal: [Insert image here or type local image file path...]
+[506] Heading 2: Current React Code Reference:
+[507] Normal: 'use client';
+
+import ElectricBorder from '@/components/ui/electric-border';
+
+export default function Pricing() {
+  return (
+    <section id="pricing" className="py-24 bg-bg-primary relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#7c3aed] bg-[#7c3aed]/10 px-3.5 py-1.5 rounded-full border border-[#7c3aed]/15">
+            Investment
+          </span>
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text-primary mt-6 mb-4 leading-tight font-display">
+            Choose Your Growth Plan
+          </h2>
+          <p className="text-text-secondary text-sm md:text-base">
+            Transparent pricing. No hidden fees. Every plan includes a personal strategy call before we start.
+          </p>
+        </div>
+
+        {/* Pricing Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          
+          {/* Starter Plan */}
+          <div className="p-8 rounded-2xl bg-white/[0.01] border border-white/5 flex flex-col hover:bg-white/[0.02] transition-colors" data-cursor-label="Starter">
+            <span className="text-xs font-semibold uppercase text-text-secondary tracking-wider block mb-2">Starter</span>
+            <h3 className="text-xl font-bold text-text-primary mb-4">Landing Page</h3>
+            <div className="text-3xl font-extrabold text-text-primary mb-6">
+              ₹15,000 <span className="text-sm text-text-secondary font-normal">one-time</span>
+            </div>
+            <p className="text-text-secondary text-xs md:text-sm mb-6 leading-relaxed">
+              Perfect for businesses that need a single, high-converting page to capture leads.
+            </p>
+            <ul className="space-y-3.5 mb-8 text-xs md:text-sm text-text-secondary flex-grow">
+              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Custom Landing Page Design</li>
+              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Mobile Responsive</li>
+              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> SEO Optimized</li>
+              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Contact Form / Lead Capture</li>
+              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> 7-Day Delivery</li>
+              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> 2 Rounds of Revision</li>
+            </ul>
+            <a href="#booking" className="w-full text-center py-3.5 rounded-full border border-white/10 hover:border-[#00d4ff]/20 text-text-primary font-bold text-xs tracking-wider transition-all hover:bg-white/5">
+           
+... (truncated for document spacing)
+[508] Heading 1: Booking Section (components/sections/Booking.tsx)
+[509] Heading 2: Your Prompt / Changes to Make:
+[510] Normal: [Type your prompt or instruction for this section here...]
+[511] Heading 2: Reference Screenshot:
+[512] Normal: [Insert image here or type local image file path...]
+[513] Heading 2: Current React Code Reference:
+[514] Normal: 'use client';
+
+import React, { useState, useEffect } from 'react';
+
+const TIME_SLOTS = [
+  '10:00 AM', '11:00 AM', '12:00 PM',
+  '2:00 PM', '3:00 PM', '4:00 PM',
+  '5:00 PM', '6:00 PM', '7:00 PM'
+];
+
+const BUSINESS_TYPES = [
+  { value: 'restaurant', label: 'Restaurant / Cafe' },
+  { value: 'retail', label: 'Retail / E-commerce' },
+  { value: 'fitness', label: 'Fitness / Wellness' },
+  { value: 'beauty', label: 'Beauty / Salon' },
+  { value: 'healthcare', label: 'Healthcare / Clinic' },
+  { value: 'education', label: 'Education / Coaching' },
+  { value: 'real-estate', label: 'Real Estate' },
+  { value: 'startup', label: 'Startup / Tech' },
+  { value: 'other', label: 'Other' }
+];
+
+export default function Booking() {
+  // Form State
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    businessType: ''
+  });
+
+  // Calendar & Slot State
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [selectedDateStr, setSelectedDateStr] = useState('');
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState('');
+
+  // Status State
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
+
+  // Render Calendar Helper
+  const getDaysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate();
+  const getFirstDayIndex = (year: number, month: number) => {
+    const day = new Date(year, month, 1).getDay();
+    return day === 0 ? 6 : day - 1; // Map Sunday=6, Monday=0
+  };
+
+  const year = currentDate.getFullYear();
+  const monthIdx = currentDate.getMonth();
+
+  const handlePrevMonth = () => {
+    setCurrentDate(new Date(year, monthIdx - 1, 1));
+  };
+
+  const handleNextMonth = () => {
+    setCurrentDate(new Date(year, monthIdx + 1, 1));
+  };
+
+  const daysInMonth = getDaysInMonth(year, monthIdx);
+  const firstDayIdx = getFirstDayIndex(year, monthIdx);
+  const monthName = currentDate.toLocaleString('default', { month: 'long' });
+
+  // Generate days array
+  const calendarCells: (number | null)[] = [];
+  for (let i = 0; i < firstDayIdx; i++) {
+    calendarCells.push(null);
+  }
+  for (let i = 1; i <= daysInMonth; i++) {
+    calendarCells.push(i);
+  }
+
+  const selectDate = (day: number) => {
+    const formatted = `${year}-${String(monthIdx + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    setSelectedDateStr(formatted);
+  };
+
+  const isDaySelected = (day: number) => {
+    const formatted = `${year}-${String(monthIdx + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    return selectedDateStr === formatted;
+  };
+
+  const isDayPast = (day: number) => {
+    const d = new Date(year, monthIdx, day);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return d < today;
+  };
+
+  // Form Submit Action
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMsg('');
+
+    if (!formData.name.trim()) return setErrorMsg('Full Name is required.');
+    if 
+... (truncated for document spacing)
+[515] Heading 1: Footer Section (components/sections/Footer.tsx)
+[516] Heading 2: Your Prompt / Changes to Make:
+
+[517] Heading 2: 
+just huse this as to display the Instagram and all icons by respacing it and keeping it in the particular place 
+[518] Heading 2: .card {
+[519] Heading 2:   max-width: fit-content;
+[520] Heading 2:   border-radius: 15px;
+[521] Heading 2:   display: flex;
+[522] Heading 2:   flex-direction: column;
+[523] Heading 2:   align-content: center;
+[524] Heading 2:   justify-content: center;
+[525] Heading 2:   gap: 1rem;
+[526] Heading 2:   backdrop-filter: blur(15px);
+[527] Heading 2:   box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.192),
+[528] Heading 2:     inset 0 0 5px rgba(255, 255, 255, 0.274), 0 5px 5px rgba(0, 0, 0, 0.164);
+[529] Heading 2:   transition: 0.5s;
+[530] Heading 2: }
+[531] Heading 2: 
+[532] Heading 2: .card:hover {
+[533] Heading 2:   animation: ease-out 5s;
+[534] Heading 2:   background: rgba(173, 173, 173, 0.05);
+[535] Heading 2: }
+[536] Heading 2: 
+[537] Heading 2: .card ul {
+[538] Heading 2:   padding: 1rem;
+[539] Heading 2:   display: flex;
+[540] Heading 2:   list-style: none;
+[541] Heading 2:   gap: 1rem;
+[542] Heading 2:   align-items: center;
+[543] Heading 2:   justify-content: center;
+[544] Heading 2:   align-content: center;
+[545] Heading 2:   flex-wrap: wrap;
+[546] Heading 2:   flex-direction: column;
+[547] Heading 2: }
+[548] Heading 2: 
+[549] Heading 2: .card ul li {
+[550] Heading 2:   cursor: pointer;
+[551] Heading 2: }
+[552] Heading 2: 
+[553] Heading 2: .svg {
+[554] Heading 2:   transition: all 0.3s;
+[555] Heading 2:   /* if you find some problems change w - h : 30px*/
+[556] Heading 2:   padding: 1rem;
+[557] Heading 2:   height: 60px;
+[558] Heading 2:   width: 60px;
+[559] Heading 2:   border-radius: 100%;
+[560] Heading 2:   color: rgb(0, 157, 162);
+[561] Heading 2:   fill: currentColor;
+[562] Heading 2:   box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3),
+[563] Heading 2:     inset 0 0 5px rgba(255, 255, 255, 0.5), 0 5px 5px rgba(0, 0, 0, 0.164);
+[564] Heading 2: }
+[565] Heading 2: 
+[566] Heading 2: .text {
+[567] Heading 2:   opacity: 0;
+[568] Heading 2:   border-radius: 5px;
+[569] Heading 2:   font-weight: bold;
+[570] Heading 2:   padding: 5px;
+[571] Heading 2:   transition: all 0.3s;
+[572] Heading 2:   color: rgb(0, 157, 162);
+[573] Heading 2:   background-color: rgba(255, 255, 255, 0.3);
+[574] Heading 2:   position: absolute;
+[575] Heading 2:   z-index: 9999;
+[576] Heading 2:   box-shadow: -5px 0 1px rgba(153, 153, 153, 0.2),
+[577] Heading 2:     -10px 0 1px rgba(153, 153, 153, 0.2),
+[578] Heading 2:     inset 0 0 20px rgba(255, 255, 255, 0.3),
+[579] Heading 2:     inset 0 0 5px rgba(255, 255, 255, 0.5), 0 5px 5px rgba(0, 0, 0, 0.082);
+[580] Heading 2: }
+[581] Heading 2: 
+[582] Heading 2: /*isometric prooyection*/
+[583] Heading 2: .iso-pro {
+[584] Heading 2:   transition: 0.5s;
+[585] Heading 2: }
+[586] Heading 2: .iso-pro:hover a > .svg {
+[587] Heading 2:   transform: translate(15px, -15px);
+[588] Heading 2:   border-radius: 100%;
+[589] Heading 2: }
+[590] Heading 2: 
+[591] Heading 2: .iso-pro:hover .text {
+[592] Heading 2:   opacity: 1;
+[593] Heading 2:   transform: translate(25px, -2px) skew(-5deg);
+[594] Heading 2: }
+[595] Heading 2: 
+[596] Heading 2: .iso-pro:hover .svg {
+[597] Heading 2:   transform: translate(5px, -5px);
+[598] Heading 2: }
+[599] Heading 2: 
+[600] Heading 2: .iso-pro span {
+[601] Heading 2:   opacity: 0;
+[602] Heading 2:   position: absolute;
+[603] Heading 2:   color: #1877f2;
+[604] Heading 2:   border-color: #1877f2;
+[605] Heading 2:   box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3),
+[606] Heading 2:     inset 0 0 5px rgba(255, 255, 255, 0.5), 0 5px 5px rgba(0, 0, 0, 0.164);
+[607] Heading 2:   border-radius: 50%;
+[608] Heading 2:   transition: all 0.3s;
+[609] Heading 2:   height: 60px;
+[610] Heading 2:   width: 60px;
+[611] Heading 2: }
+[612] Heading 2: 
+[613] Heading 2: .iso-pro:hover span {
+[614] Heading 2:   opacity: 1;
+[615] Heading 2: }
+[616] Heading 2: 
+[617] Heading 2: .iso-pro:hover span:nth-child(1) {
+[618] Heading 2:   opacity: 0.2;
+[619] Heading 2: }
+[620] Heading 2: 
+[621] Heading 2: .iso-pro:hover span:nth-child(2) {
+[622] Heading 2:   opacity: 0.4;
+[623] Heading 2:   transform: translate(5px, -5px);
+[624] Heading 2: }
+[625] Heading 2: 
+[626] Heading 2: .iso-pro:hover span:nth-child(3) {
+[627] Heading 2:   opacity: 0.6;
+[628] Heading 2:   transform: translate(10px, -10px);
+[629] Heading 2: }Reference Screenshot:
+[630] Normal: [Insert image here or type local image file path...]
+[631] Heading 2: Current React Code Reference:
+[632] Normal: 'use client';
+
+import Image from 'next/image';
+
+export default function Footer() {
+  return (
+    <footer className="bg-bg-primary border-t border-white/5 pt-20 pb-10">
+      <div className="max-w-7xl mx-auto px-6">
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-16">
+          
+          {/* Logo & Description */}
+          <div className="lg:col-span-5 flex flex-col items-start gap-4">
+            <a href="#" className="flex items-center text-lg font-extrabold text-text-primary">
+              <span className="relative w-8 h-8 rounded-lg overflow-hidden mr-2.5">
+                <Image 
+                  src="/brand-assets/nexvra-icon-square.jpg" 
+                  alt="NEXVRA" 
+                  fill 
+                  sizes="32px"
+                  className="object-cover"
+                />
+              </span>
+              NEXVRA <span className="text-[#00d4ff] ml-1.5 font-medium">Digital</span>
+            </a>
+            <p className="text-text-secondary text-xs md:text-sm leading-relaxed max-w-sm">
+              Premium digital solutions for Bangalore businesses. Web development, Meta Ads, and branding that actually moves the needle.
+            </p>
+            <div className="flex gap-3 mt-2">
+              <a 
+                href="https://www.instagram.com/nexvra.in" 
+                target="_blank" 
+                rel="noopener" 
+                aria-label="Instagram"
+                className="w-9 h-9 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors"
+                data-cursor-label="Instagram"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+              <a 
+                href="#" 
+                aria-label="LinkedIn"
+                className="w-9 h-9 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors"
+                data-cursor-label="LinkedIn"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+              <a 
+                href="#" 
+                aria-label="Twitter / X"
+                className="w-9 h-9 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center text-text-secondary hover:text-text-primary transition-colors"
+                data-cursor-label="Twitter"
+      
+... (truncated for document spacing)

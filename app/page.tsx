@@ -20,7 +20,7 @@ export default function Home() {
         
         {/* Trusted By Bar */}
         <section className="py-10 bg-bg-secondary border-y border-white/5 overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="w-full px-6 md:px-12 lg:px-20 flex flex-col md:flex-row items-center justify-between gap-6">
             <p className="text-text-secondary text-xs md:text-sm font-nothern font-semibold tracking-wider uppercase shrink-0">
               Trusted by businesses across Bangalore
             </p>

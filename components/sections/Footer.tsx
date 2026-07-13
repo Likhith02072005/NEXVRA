@@ -22,7 +22,7 @@ function SocialIcon({ href, label, svgPath, ariaLabel }: { href: string; label: 
 export default function Footer() {
   return (
     <footer className="bg-bg-primary border-t border-white/5 pt-20 pb-10">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="w-full px-6 md:px-12 lg:px-20">
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-16">
           

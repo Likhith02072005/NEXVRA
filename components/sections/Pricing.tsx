@@ -5,7 +5,7 @@ import ElectricBorder from '@/components/ui/electric-border';
 export default function Pricing() {
   return (
     <section id="pricing" className="py-24 bg-bg-primary relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">

@@ -35,7 +35,7 @@ export default function Navbar() {
   return (
     <>
       <div className="w-full pt-4 fixed text-white z-50">
-        <div className="max-w-5xl mx-auto px-4">
+        <div className="w-full px-6 md:px-12">
           <div className="flex items-center justify-between">
             {/* Logo — outside pill on left */}
             <a href="#" className="flex items-center gap-2.5 shrink-0 mr-4" data-cursor-label="NEXVRA">

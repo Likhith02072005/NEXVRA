@@ -54,7 +54,7 @@ export default function Hero() {
       {/* Dark overlay for text contrast */}
       <div className="absolute inset-0 z-10 bg-[#0a0a12]/80 lg:bg-gradient-to-r lg:from-[#0a0a12]/95 lg:via-[#0a0a12]/75 lg:to-[#0a0a12]/30 pointer-events-none select-none" />
 
-      <div className="max-w-7xl mx-auto px-6 w-full relative z-20">
+      <div className="w-full px-6 md:px-12 lg:px-20 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Side text */}
           <div className="lg:col-span-8 flex flex-col items-start text-left">
