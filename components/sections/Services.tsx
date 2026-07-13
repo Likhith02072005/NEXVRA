@@ -9,15 +9,15 @@ interface ServiceCardProps {
 
 function ServiceCard({ icon, title, desc, tags }: ServiceCardProps) {
   return (
-    <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-[#00d4ff]/20 transition-all duration-300 hover:scale-[1.02] hover:bg-white/[0.04] flex flex-col items-start" data-cursor-label="Services">
-      <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-[#00d4ff]/10 to-[#7c3aed]/10 border border-[#00d4ff]/15 flex items-center justify-center text-text-primary mb-6">
+    <div className="p-8 rounded-2xl bg-white/60 border border-black/5 hover:border-[#B25F4C]/25 transition-all duration-300 hover:scale-[1.01] hover:bg-white flex flex-col items-start shadow-[0_4px_20px_rgba(42,42,42,0.015)]" data-cursor-label="Services">
+      <div className="w-12 h-12 rounded-xl bg-[#B25F4C]/5 border border-[#B25F4C]/10 flex items-center justify-center text-[#B25F4C] mb-6">
         {icon}
       </div>
-      <h3 className="text-xl font-bold text-text-primary mb-3 font-nevera">{title}</h3>
-      <p className="text-text-secondary text-sm leading-relaxed mb-6 flex-grow font-heming">{desc}</p>
+      <h3 className="text-xl font-rankim font-normal text-[#2A2A2A] mb-3">{title}</h3>
+      <p className="text-text-secondary text-sm leading-relaxed mb-6 flex-grow font-nothern font-light">{desc}</p>
       <div className="flex flex-wrap gap-2">
         {tags.map((tag, idx) => (
-          <span key={idx} className="text-[10px] md:text-xs font-semibold px-2.5 py-1 rounded-full bg-white/5 border border-white/5 text-text-secondary font-resist-mono">
+          <span key={idx} className="text-[10px] font-resist-mono font-medium uppercase tracking-[0.08em] px-2.5 py-1.5 rounded-full bg-black/5 border border-black/5 text-[#2A2A2A]/70">
             {tag}
           </span>
         ))}
@@ -30,20 +30,20 @@ export default function Services() {
   return (
     <section id="services" className="py-24 bg-bg-primary relative overflow-hidden">
       {/* Background gradients */}
-      <div className="absolute top-1/4 right-0 w-[300px] h-[300px] rounded-full bg-[#00d4ff]/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-1/4 left-0 w-[300px] h-[300px] rounded-full bg-[#7c3aed]/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 right-0 w-[300px] h-[300px] rounded-full bg-[#B25F4C]/3 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-0 w-[300px] h-[300px] rounded-full bg-[#B25F4C]/2 blur-[120px] pointer-events-none" />
 
       <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#00d4ff] bg-[#00d4ff]/10 px-3.5 py-1.5 rounded-full border border-[#00d4ff]/15 font-nothern">
+          <span className="text-[11px] font-resist-mono font-medium tracking-[0.1em] text-[#B25F4C] bg-[#B25F4C]/5 px-3.5 py-1.5 rounded-full border border-[#B25F4C]/10 uppercase">
             What I Do
           </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text-primary mt-6 mb-4 leading-tight font-durer">
+          <h2 className="text-4xl md:text-5xl font-rankim font-light tracking-tight text-[#2A2A2A] mt-6 mb-4 leading-[1.1]">
             Services That Move<br />The Revenue Needle
           </h2>
-          <p className="text-text-secondary text-sm md:text-base font-heming">
+          <p className="text-text-secondary text-base font-nothern font-light leading-relaxed">
             End-to-end digital solutions designed for Bangalore businesses that want to dominate their market.
           </p>
         </div>
@@ -53,7 +53,7 @@ export default function Services() {
           
           <ServiceCard
             icon={
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B25F4C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
               </svg>
             }
@@ -64,7 +64,7 @@ export default function Services() {
 
           <ServiceCard
             icon={
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B25F4C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
               </svg>
             }
@@ -75,7 +75,7 @@ export default function Services() {
 
           <ServiceCard
             icon={
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00d4ff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B25F4C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
               </svg>
             }
@@ -86,7 +86,7 @@ export default function Services() {
 
           <ServiceCard
             icon={
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#B25F4C" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
               </svg>
             }

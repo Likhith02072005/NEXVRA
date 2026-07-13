@@ -15,13 +15,12 @@ const NavbarButton = ({ name, href, onClick }: { name: string; href: string; onC
     <a
       href={href}
       onClick={onClick}
-      className="relative group flex items-center justify-center overflow-hidden rounded-lg"
+      className="relative group flex items-center justify-center overflow-hidden rounded-lg px-5 py-2"
     >
-      <div className="absolute -bottom-1 translate-y-1/2 size-10 rounded-full bg-[#00d4ff] opacity-0 blur-lg group-hover:opacity-100 cursor-pointer transition-opacity duration-300" />
-      <div className="absolute size-6 rounded-full bg-[#7c3aed] opacity-0 blur-xl group-hover:opacity-100 cursor-pointer transition-opacity duration-300" />
-      <div className="relative px-5 py-2 rounded-lg text-gray-300 transition-colors duration-300 ease-out group-hover:text-white">
-        <div className="text-sm font-rankim cursor-pointer">{name}</div>
-      </div>
+      <div className="absolute -bottom-1 translate-y-1/2 size-8 rounded-full bg-[#B25F4C]/10 opacity-0 blur-lg group-hover:opacity-100 cursor-pointer transition-opacity duration-300" />
+      <span className="relative text-xs font-resist-mono font-medium uppercase tracking-wider text-[#2A2A2A]/70 transition-colors duration-300 ease-out group-hover:text-[#B25F4C]">
+        {name}
+      </span>
     </a>
   );
 };
@@ -34,12 +33,12 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="w-full pt-4 fixed text-white z-50">
-        <div className="w-full px-6 md:px-12">
+      <div className="w-full pt-4 fixed text-[#2A2A2A] z-50">
+        <div className="w-full px-6 md:px-12 lg:px-20">
           <div className="flex items-center justify-between">
             {/* Logo — outside pill on left */}
             <a href="#" className="flex items-center gap-2.5 shrink-0 mr-4" data-cursor-label="NEXVRA">
-              <span className="relative w-8 h-8 rounded-lg overflow-hidden">
+              <span className="relative w-8 h-8 rounded-lg overflow-hidden border border-black/5">
                 <Image 
                   src="/brand-assets/nexvra-icon-square.jpg" 
                   alt="NEXVRA" 
@@ -48,13 +47,13 @@ export default function Navbar() {
                   className="object-cover"
                 />
               </span>
-              <span className="text-lg font-baunk tracking-tight text-[#f5f0e8]">
-                NEXVRA <span className="text-[#00d4ff] font-heming font-light text-sm">Digital</span>
+              <span className="text-lg font-baunk tracking-tight text-[#2A2A2A]">
+                NEXVRA <span className="text-[#B25F4C] font-heming font-light text-sm">Digital</span>
               </span>
             </a>
 
             {/* Floating Pill — desktop */}
-            <div className="hidden md:flex items-center py-2 px-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10">
+            <div className="hidden md:flex items-center py-1.5 px-2 rounded-full bg-white/80 backdrop-blur-md border border-black/5 shadow-sm">
               {navLinks.map(({ name, href }) => (
                 <NavbarButton key={href} name={name} href={href} />
               ))}
@@ -63,7 +62,7 @@ export default function Navbar() {
             {/* CTA — outside pill on right */}
             <a 
               href="#booking" 
-              className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#00d4ff] to-[#7c3aed] text-[#f5f0e8] font-rankim text-xs tracking-wide shadow-[0_4px_12px_rgba(0,212,255,0.25)] hover:shadow-[0_4px_20px_rgba(0,212,255,0.4)] transition-all hover:scale-105 ml-4"
+              className="hidden md:inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#B25F4C] text-[#F9F9F6] font-rankim text-xs font-bold tracking-wider hover:bg-[#B25F4C]/90 shadow-[0_4px_12px_rgba(178,95,76,0.15)] transition-all hover:scale-102 ml-4"
               data-cursor-label="Book Call"
             >
               Book a Call
@@ -75,9 +74,9 @@ export default function Navbar() {
               className="md:hidden flex flex-col justify-between w-6 h-5 z-50 focus:outline-none"
               aria-label="Toggle Navigation Menu"
             >
-              <span className={`w-full h-0.5 bg-white rounded-full transition-transform duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-              <span className={`w-full h-0.5 bg-white rounded-full transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`}></span>
-              <span className={`w-full h-0.5 bg-white rounded-full transition-transform duration-300 ${isOpen ? '-rotate-45 -translate-y-2.5' : ''}`}></span>
+              <span className={`w-full h-0.5 bg-[#2A2A2A] rounded-full transition-transform duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+              <span className={`w-full h-0.5 bg-[#2A2A2A] rounded-full transition-opacity duration-300 ${isOpen ? 'opacity-0' : ''}`}></span>
+              <span className={`w-full h-0.5 bg-[#2A2A2A] rounded-full transition-transform duration-300 ${isOpen ? '-rotate-45 -translate-y-2.5' : ''}`}></span>
             </button>
           </div>
         </div>
@@ -85,17 +84,17 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div 
-        className={`fixed inset-0 z-40 bg-[#0a0a12]/95 backdrop-blur-lg flex flex-col items-center justify-center gap-8 text-xl font-durer text-text-primary transition-all duration-300 md:hidden ${
+        className={`fixed inset-0 z-40 bg-[#F9F9F6]/98 backdrop-blur-xl flex flex-col items-center justify-center gap-8 text-xl font-durer text-[#2A2A2A] transition-all duration-300 md:hidden ${
           isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
         {navLinks.map(({ name, href }) => (
-          <a key={href} href={href} onClick={closeMenu} className="hover:text-[#00d4ff] transition-colors font-rankim text-lg">{name}</a>
+          <a key={href} href={href} onClick={closeMenu} className="hover:text-[#B25F4C] transition-colors font-rankim text-lg">{name}</a>
         ))}
         <a 
           href="#booking" 
           onClick={closeMenu} 
-          className="px-7 py-3 rounded-full bg-gradient-to-r from-[#00d4ff] to-[#7c3aed] text-[#f5f0e8] font-rankim text-base shadow-[0_4px_12px_rgba(0,212,255,0.25)]"
+          className="px-8 py-3.5 rounded-full bg-[#B25F4C] text-[#F9F9F6] font-rankim text-base font-bold shadow-[0_4px_12px_rgba(178,95,76,0.2)]"
         >
           Book a Call
         </a>

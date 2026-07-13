@@ -21,14 +21,14 @@ function SocialIcon({ href, label, svgPath, ariaLabel }: { href: string; label: 
 
 export default function Footer() {
   return (
-    <footer className="bg-bg-primary border-t border-white/5 pt-20 pb-10">
+    <footer className="bg-bg-primary border-t border-black/5 pt-20 pb-10">
       <div className="w-full px-6 md:px-12 lg:px-20">
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-16">
           
           {/* Logo & Description */}
           <div className="lg:col-span-5 flex flex-col items-start gap-4">
-            <a href="#" className="flex items-center text-lg font-baunk text-text-primary">
+            <a href="#" className="flex items-center text-lg font-rankim text-[#2A2A2A]">
               <span className="relative w-8 h-8 rounded-lg overflow-hidden mr-2.5">
                 <Image 
                   src="/brand-assets/nexvra-icon-square.jpg" 
@@ -38,9 +38,9 @@ export default function Footer() {
                   className="object-cover"
                 />
               </span>
-              NEXVRA <span className="text-[#00d4ff] ml-1.5 font-heming font-light text-sm">Digital</span>
+              NEXVRA <span className="text-[#B25F4C] ml-1.5 font-resist-mono text-xs uppercase tracking-wider font-medium">Digital</span>
             </a>
-            <p className="text-text-secondary text-xs md:text-sm leading-relaxed max-w-sm font-heming">
+            <p className="text-text-secondary text-xs md:text-sm leading-relaxed max-w-sm font-nothern font-light">
               Premium digital solutions for Bangalore businesses. Web development, Meta Ads, and branding that actually moves the needle.
             </p>
 
@@ -77,39 +77,39 @@ export default function Footer() {
 
           {/* Links Column 1 */}
           <div className="lg:col-span-2 lg:col-start-7 flex flex-col gap-4">
-            <h4 className="text-sm font-nothern font-semibold text-text-primary uppercase tracking-wider">Services</h4>
-            <ul className="space-y-2 text-xs md:text-sm text-text-secondary font-heming">
-              <li><a href="#services" className="hover:text-text-primary transition-colors">Web Development</a></li>
-              <li><a href="#services" className="hover:text-text-primary transition-colors">Meta Ads</a></li>
-              <li><a href="#services" className="hover:text-text-primary transition-colors">Landing Pages</a></li>
-              <li><a href="#services" className="hover:text-text-primary transition-colors">Branding</a></li>
+            <h4 className="text-xs font-resist-mono font-medium text-[#2A2A2A] uppercase tracking-[0.1em]">Services</h4>
+            <ul className="space-y-2 text-xs md:text-sm text-text-secondary font-nothern font-light">
+              <li><a href="#services" className="hover:text-[#B25F4C] transition-colors">Web Development</a></li>
+              <li><a href="#services" className="hover:text-[#B25F4C] transition-colors">Meta Ads</a></li>
+              <li><a href="#services" className="hover:text-[#B25F4C] transition-colors">Landing Pages</a></li>
+              <li><a href="#services" className="hover:text-[#B25F4C] transition-colors">Branding</a></li>
             </ul>
           </div>
 
           {/* Links Column 2 */}
           <div className="lg:col-span-2 flex flex-col gap-4">
-            <h4 className="text-sm font-nothern font-semibold text-text-primary uppercase tracking-wider">Company</h4>
-            <ul className="space-y-2 text-xs md:text-sm text-text-secondary font-heming">
-              <li><a href="#results" className="hover:text-text-primary transition-colors">Results</a></li>
-              <li><a href="#process" className="hover:text-text-primary transition-colors">Process</a></li>
-              <li><a href="#pricing" className="hover:text-text-primary transition-colors">Pricing</a></li>
-              <li><a href="#booking" className="hover:text-text-primary transition-colors">Contact</a></li>
+            <h4 className="text-xs font-resist-mono font-medium text-[#2A2A2A] uppercase tracking-[0.1em]">Company</h4>
+            <ul className="space-y-2 text-xs md:text-sm text-text-secondary font-nothern font-light">
+              <li><a href="#results" className="hover:text-[#B25F4C] transition-colors">Results</a></li>
+              <li><a href="#process" className="hover:text-[#B25F4C] transition-colors">Process</a></li>
+              <li><a href="#pricing" className="hover:text-[#B25F4C] transition-colors">Pricing</a></li>
+              <li><a href="#booking" className="hover:text-[#B25F4C] transition-colors">Contact</a></li>
             </ul>
           </div>
 
           {/* Links Column 3 */}
           <div className="lg:col-span-2 flex flex-col gap-4">
-            <h4 className="text-sm font-nothern font-semibold text-text-primary uppercase tracking-wider">Contact</h4>
-            <ul className="space-y-2 text-xs md:text-sm text-text-secondary font-heming">
-              <li><a href="mailto:nexvratech@gmail.com" className="hover:text-text-primary transition-colors font-resist-mono text-xs">nexvratech@gmail.com</a></li>
-              <li><a href="tel:+919606610059" className="hover:text-text-primary transition-colors font-resist-mono text-xs">+91 96066 10059</a></li>
+            <h4 className="text-xs font-resist-mono font-medium text-[#2A2A2A] uppercase tracking-[0.1em]">Contact</h4>
+            <ul className="space-y-2 text-xs md:text-sm text-text-secondary font-nothern font-light">
+              <li><a href="mailto:nexvratech@gmail.com" className="hover:text-[#B25F4C] transition-colors font-resist-mono text-xs">nexvratech@gmail.com</a></li>
+              <li><a href="tel:+919606610059" className="hover:text-[#B25F4C] transition-colors font-resist-mono text-xs">+91 96066 10059</a></li>
               <li><span className="text-text-muted">Bangalore, India</span></li>
             </ul>
           </div>
 
         </div>
 
-        <div className="flex flex-col md:flex-row items-center justify-between border-t border-white/5 pt-8 text-[11px] md:text-xs text-text-muted font-heming">
+        <div className="flex flex-col md:flex-row items-center justify-between border-t border-black/5 pt-8 text-[11px] md:text-xs text-text-muted font-nothern font-light">
           <p>© 2026 NEXVRA Digital by Likhith. All rights reserved.</p>
           <div className="flex gap-4 mt-4 md:mt-0">
             <a href="/privacy" className="hover:text-text-secondary transition-colors">Privacy Policy</a>

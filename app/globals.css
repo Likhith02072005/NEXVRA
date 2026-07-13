@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ═══════════════════════════════════════════════════════
-   CUSTOM FONT FACES (Only Rankim, Magilio, Heming)
+   CUSTOM FONT FACES (Rankim, Magilio, Nothern, Resist Mono)
    ═══════════════════════════════════════════════════════ */
 @font-face {
   font-family: 'Rankim';
@@ -24,84 +24,100 @@
 }
 
 @font-face {
-  font-family: 'Heming';
-  src: url('/fonts/heming-variable.ttf') format('truetype');
-  font-weight: 100 900;
+  font-family: 'Nothern';
+  src: url('/fonts/nothern.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Resist Mono';
+  src: url('/fonts/resist-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Resist Mono';
+  src: url('/fonts/resist-medium.otf') format('opentype');
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
 /* ═══════════════════════════════════════════════════════
-   DESIGN TOKENS
+   DESIGN TOKENS (Alabaster & Terracotta Redesign)
    ═══════════════════════════════════════════════════════ */
 :root {
-  --bg-primary: #0a0a12;
-  --bg-secondary: #0e0e1b;
-  --bg-card: rgba(245, 240, 232, 0.02);
-  --bg-card-hover: rgba(245, 240, 232, 0.05);
-  --text-primary: #f5f0e8;
-  --text-secondary: #a8a4b8;
-  --text-muted: #747087;
-  --accent-blue: #00d4ff;
-  --accent-violet: #7c3aed;
-  --accent-gold: #b8860b;
-  --accent-gradient: linear-gradient(135deg, #00d4ff, #7c3aed);
-  --accent-gradient-reverse: linear-gradient(135deg, #7c3aed, #00d4ff);
-  --glass-border: rgba(245, 240, 232, 0.06);
-  --glass-bg: rgba(245, 240, 232, 0.03);
-  --glass-bg-strong: rgba(245, 240, 232, 0.06);
-  --shadow-glow: 0 0 60px rgba(0, 212, 255, 0.1);
+  --bg-primary: #F9F9F6;
+  --bg-secondary: #F3F3EF;
+  --bg-card: rgba(255, 255, 255, 0.7);
+  --bg-card-hover: rgba(255, 255, 255, 0.98);
+  --text-primary: #2A2A2A;
+  --text-secondary: #5E5E5E;
+  --text-muted: #888888;
+  --accent-blue: #B25F4C;
+  --accent-violet: #d27c69;
+  --accent-gold: #B25F4C;
+  --accent-gradient: linear-gradient(135deg, #B25F4C, #d27c69);
+  --accent-gradient-reverse: linear-gradient(135deg, #d27c69, #B25F4C);
+  --glass-border: rgba(42, 42, 42, 0.06);
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-bg-strong: rgba(255, 255, 255, 0.9);
+  --shadow-glow: 0 10px 40px rgba(178, 95, 76, 0.05);
 
   /* Font families */
-  --font-durer: var(--font-rankim);
-  --font-nevera: var(--font-rankim);
+  --font-durer: 'Rankim', Georgia, serif;
+  --font-nevera: 'Rankim', Georgia, serif;
   --font-rankim: 'Rankim', Georgia, serif;
   --font-magilio: 'Magilio', cursive;
-  --font-nothern: var(--font-heming);
-  --font-resist-mono: var(--font-heming);
-  --font-baunk: var(--font-rankim);
-  --font-heming: 'Heming', 'Helvetica Neue', sans-serif;
+  --font-nothern: 'Nothern', sans-serif;
+  --font-resist-mono: 'Resist Mono', monospace;
+  --font-baunk: 'Rankim', Georgia, serif;
+  --font-heming: var(--font-nothern);
 
-  --font-body: var(--font-heming);
+  --font-body: var(--font-nothern);
   --font-display: var(--font-rankim);
 
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: oklch(0.98 0 0);
+  --foreground: oklch(0.2 0 0);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.2 0 0);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.2 0 0);
+  --primary: oklch(0.2 0 0);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.95 0 0);
+  --secondary-foreground: oklch(0.2 0 0);
+  --muted: oklch(0.95 0 0);
+  --muted-foreground: oklch(0.5 0 0);
+  --accent: oklch(0.6 0.1 20);
+  --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.9 0 0);
+  --ring: oklch(0.6 0.1 20);
+  --chart-1: oklch(0.6 0.1 20);
+  --chart-2: oklch(0.5 0.1 20);
+  --chart-3: oklch(0.4 0.1 20);
+  --chart-4: oklch(0.3 0.1 20);
+  --chart-5: oklch(0.2 0.1 20);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: oklch(0.98 0 0);
+  --sidebar-foreground: oklch(0.2 0 0);
+  --sidebar-primary: oklch(0.2 0 0);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.95 0 0);
+  --sidebar-accent-foreground: oklch(0.2 0 0);
+  --sidebar-border: oklch(0.9 0 0);
+  --sidebar-ring: oklch(0.6 0.1 20);
 }
 
 @theme {
-  --font-sans: var(--font-heming);
-  --font-display: var(--font-durer);
+  --font-sans: var(--font-nothern);
+  --font-display: var(--font-rankim);
   --font-durer: var(--font-durer);
   --font-nevera: var(--font-nevera);
   --font-rankim: var(--font-rankim);
@@ -109,27 +125,28 @@
   --font-nothern: var(--font-nothern);
   --font-resist-mono: var(--font-resist-mono);
   --font-baunk: var(--font-baunk);
-  --font-heming: var(--font-heming);
+  --font-heming: var(--font-nothern);
 
-  /* Override Tailwind v4 slate colors to match warm ivory & lavender-gray theme */
-  --color-slate-50: var(--text-primary);
-  --color-slate-100: var(--text-primary);
-  --color-slate-200: var(--text-primary);
-  --color-slate-300: var(--text-secondary);
+  /* Override slate colors to match warm light theme */
+  --color-slate-50: var(--bg-primary);
+  --color-slate-100: var(--bg-secondary);
+  --color-slate-200: #e2e2da;
+  --color-slate-300: var(--text-muted);
   --color-slate-400: var(--text-secondary);
-  --color-slate-500: var(--text-muted);
-  --color-slate-600: var(--text-muted);
+  --color-slate-500: var(--text-secondary);
+  --color-slate-600: var(--text-primary);
 
-  --color-gray-100: var(--text-primary);
-  --color-gray-200: var(--text-primary);
-  --color-gray-300: var(--text-secondary);
+  --color-gray-100: var(--bg-secondary);
+  --color-gray-200: #e2e2da;
+  --color-gray-300: var(--text-muted);
   --color-gray-400: var(--text-secondary);
-  --color-gray-500: var(--text-muted);
+  --color-gray-500: var(--text-primary);
 
-  /* Register custom background & gold accent */
+  /* Register custom background & accents */
   --color-bg-primary: var(--bg-primary);
   --color-bg-secondary: var(--bg-secondary);
   --color-gold-accent: var(--accent-gold);
+  --color-accent-terracotta: var(--accent-gold);
 }
 
 /* Base resets & adjustments */
@@ -137,7 +154,9 @@ html, body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   overflow-x: hidden;
-  font-family: var(--font-heming);
+  font-family: var(--font-body);
+  line-height: 1.7; /* loose and breathable */
+  letter-spacing: 0.02em; /* crisp letter spacing */
 }
 
 
@@ -369,6 +388,6 @@ html, body {
     @apply bg-background text-foreground;
   }
   html {
-    font-family: var(--font-heming);
+    font-family: var(--font-body);
   }
 }

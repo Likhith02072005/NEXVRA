@@ -9,13 +9,13 @@ export default function Pricing() {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#7c3aed] bg-[#7c3aed]/10 px-3.5 py-1.5 rounded-full border border-[#7c3aed]/15 font-nothern">
+          <span className="text-[11px] font-resist-mono font-medium tracking-[0.1em] text-[#B25F4C] bg-[#B25F4C]/5 px-3.5 py-1.5 rounded-full border border-[#B25F4C]/10 uppercase">
             Investment
           </span>
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-text-primary mt-6 mb-4 leading-tight font-durer">
+          <h2 className="text-4xl md:text-5xl font-rankim font-light tracking-tight text-[#2A2A2A] mt-6 mb-4 leading-[1.1]">
             Choose Your Growth Plan
           </h2>
-          <p className="text-text-secondary text-sm md:text-base font-heming">
+          <p className="text-text-secondary text-base font-nothern font-light leading-relaxed">
             Transparent pricing. No hidden fees. Every plan includes a personal strategy call before we start.
           </p>
         </div>
@@ -24,92 +24,92 @@ export default function Pricing() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
           
           {/* Starter Plan */}
-          <div className="p-8 rounded-2xl bg-white/[0.01] border border-white/5 flex flex-col hover:bg-white/[0.02] transition-colors" data-cursor-label="Starter">
-            <span className="text-xs font-semibold uppercase text-text-secondary tracking-wider block mb-2 font-nothern">Starter</span>
-            <h3 className="text-xl font-bold text-text-primary mb-4 font-nevera">Landing Page</h3>
-            <div className="text-3xl font-extrabold text-text-primary mb-6 font-nothern">
-              ₹15,000 <span className="text-sm text-text-secondary font-normal">one-time</span>
+          <div className="p-8 rounded-2xl bg-white/50 border border-black/5 flex flex-col hover:bg-white transition-all shadow-sm" data-cursor-label="Starter">
+            <span className="text-xs font-semibold uppercase text-text-secondary tracking-wider block mb-2 font-resist-mono">Starter</span>
+            <h3 className="text-xl font-rankim font-normal text-[#2A2A2A] mb-4">Landing Page</h3>
+            <div className="text-3xl font-semibold text-[#2A2A2A] mb-6 font-nothern">
+              ₹15,000 <span className="text-sm text-text-secondary font-light">one-time</span>
             </div>
-            <p className="text-text-secondary text-xs md:text-sm mb-6 leading-relaxed font-heming">
+            <p className="text-text-secondary text-xs md:text-sm mb-6 leading-relaxed font-nothern font-light">
               Perfect for businesses that need a single, high-converting page to capture leads.
             </p>
-            <ul className="space-y-3.5 mb-8 text-xs md:text-sm text-text-secondary flex-grow font-heming">
-              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Custom Landing Page Design</li>
-              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Mobile Responsive</li>
-              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> SEO Optimized</li>
-              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Contact Form / Lead Capture</li>
-              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> 7-Day Delivery</li>
-              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> 2 Rounds of Revision</li>
+            <ul className="space-y-3.5 mb-8 text-xs md:text-sm text-text-secondary flex-grow font-nothern font-light">
+              <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> Custom Landing Page Design</li>
+              <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> Mobile Responsive</li>
+              <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> SEO Optimized</li>
+              <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> Contact Form / Lead Capture</li>
+              <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> 7-Day Delivery</li>
+              <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> 2 Rounds of Revision</li>
             </ul>
-            <a href="#booking" className="w-full text-center py-3.5 rounded-full border border-white/10 hover:border-[#00d4ff]/20 text-text-primary font-bold text-xs tracking-wider transition-all hover:bg-white/5 font-rankim">
+            <a href="#booking" className="w-full text-center py-3.5 rounded-full border border-black/10 hover:border-[#B25F4C]/20 text-[#2A2A2A] font-bold text-xs tracking-wider transition-all hover:bg-black/5 font-rankim">
               Get Started →
             </a>
           </div>
 
           {/* Growth Plan (Popular) */}
           <ElectricBorder
-            color="#00d4ff"
+            color="#B25F4C"
             speed={1.2}
             chaos={0.08}
             borderRadius={16}
             className="h-full flex flex-col relative"
             style={{ width: '100%' }}
           >
-            <div className="p-8 rounded-2xl bg-[#00d4ff]/5 border border-[#00d4ff]/10 flex flex-col h-full relative" data-cursor-label="Popular!">
-              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#00d4ff] to-[#7c3aed] text-text-primary text-[10px] font-extrabold uppercase px-3 py-1 rounded-full tracking-wider z-[3] font-nothern">
+            <div className="p-8 rounded-2xl bg-white border border-[#B25F4C]/35 flex flex-col h-full relative shadow-md" data-cursor-label="Popular!">
+              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#B25F4C] to-[#d27c69] text-[#F9F9F6] text-[10px] font-resist-mono font-medium tracking-[0.08em] uppercase px-3 py-1 rounded-full z-[3]">
                 ⚡ Most Popular
               </span>
-              <span className="text-xs font-semibold uppercase text-[#00d4ff] tracking-wider block mb-2 mt-2 font-nothern">Growth</span>
-              <h3 className="text-xl font-bold text-text-primary mb-4 font-nevera">Full Website + Ads</h3>
-              <div className="text-3xl font-extrabold text-text-primary mb-6 font-nothern">
-                ₹35,000 <span className="text-sm text-text-secondary font-normal">one-time</span>
+              <span className="text-xs font-semibold uppercase text-[#B25F4C] tracking-wider block mb-2 mt-2 font-resist-mono">Growth</span>
+              <h3 className="text-xl font-rankim font-normal text-[#2A2A2A] mb-4">Full Website + Ads</h3>
+              <div className="text-3xl font-semibold text-[#2A2A2A] mb-6 font-nothern">
+                ₹35,000 <span className="text-sm text-text-secondary font-light">one-time</span>
               </div>
-              <p className="text-text-secondary text-xs md:text-sm mb-6 leading-relaxed font-heming">
+              <p className="text-text-secondary text-xs md:text-sm mb-6 leading-relaxed font-nothern font-light">
                 The complete package for businesses ready to generate consistent leads online.
               </p>
-              <ul className="space-y-3.5 mb-8 text-xs md:text-sm text-text-primary flex-grow font-heming">
-                <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Multi-page Custom Website</li>
-                <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Meta Ads Setup & 1st Campaign</li>
-                <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Pixel & Analytics Installation</li>
-                <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Content Strategy Guide</li>
-                <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> 14-Day Delivery</li>
-                <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Unlimited Revisions</li>
-                <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> 30-Day Post-Launch Support</li>
+              <ul className="space-y-3.5 mb-8 text-xs md:text-sm text-[#2A2A2A] flex-grow font-nothern font-light">
+                <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> Multi-page Custom Website</li>
+                <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> Meta Ads Setup & 1st Campaign</li>
+                <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> Pixel & Analytics Installation</li>
+                <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> Content Strategy Guide</li>
+                <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> 14-Day Delivery</li>
+                <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> Unlimited Revisions</li>
+                <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> 30-Day Post-Launch Support</li>
               </ul>
-              <a href="#booking" className="w-full text-center py-3.5 rounded-full bg-gradient-to-r from-[#00d4ff] to-[#7c3aed] text-text-primary font-bold text-xs tracking-wider shadow-[0_4px_12px_rgba(0,212,255,0.25)] hover:shadow-[0_4px_20px_rgba(0,212,255,0.4)] transition-all hover:scale-102 font-rankim">
+              <a href="#booking" className="w-full text-center py-3.5 rounded-full bg-[#B25F4C] text-[#F9F9F6] font-bold text-xs tracking-wider shadow-[0_4px_12px_rgba(178,95,76,0.15)] hover:bg-[#B25F4C]/90 transition-all hover:scale-102 font-rankim">
                 Get Started →
               </a>
             </div>
           </ElectricBorder>
 
           {/* Scale Plan */}
-          <div className="p-8 rounded-2xl bg-white/[0.01] border border-white/5 flex flex-col hover:bg-white/[0.02] transition-colors" data-cursor-label="Scale">
-            <span className="text-xs font-semibold uppercase text-text-secondary tracking-wider block mb-2 font-nothern">Scale</span>
-            <h3 className="text-xl font-bold text-text-primary mb-4 font-nevera">Everything + Retainer</h3>
-            <div className="text-3xl font-extrabold text-text-primary mb-6 font-nothern">
-              ₹75,000 <span className="text-xs text-text-secondary font-normal">/month</span>
+          <div className="p-8 rounded-2xl bg-white/50 border border-black/5 flex flex-col hover:bg-white transition-all shadow-sm" data-cursor-label="Scale">
+            <span className="text-xs font-semibold uppercase text-text-secondary tracking-wider block mb-2 font-resist-mono">Scale</span>
+            <h3 className="text-xl font-rankim font-normal text-[#2A2A2A] mb-4">Everything + Retainer</h3>
+            <div className="text-3xl font-semibold text-[#2A2A2A] mb-6 font-nothern">
+              ₹75,000 <span className="text-xs text-text-secondary font-light">/month</span>
             </div>
-            <p className="text-text-secondary text-xs md:text-sm mb-6 leading-relaxed font-heming">
+            <p className="text-text-secondary text-xs md:text-sm mb-6 leading-relaxed font-nothern font-light">
               For businesses that want a full-time digital partner managing everything month over month.
             </p>
-            <ul className="space-y-3.5 mb-8 text-xs md:text-sm text-text-secondary flex-grow font-heming">
-              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Everything in Growth</li>
-              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Monthly Ad Management</li>
-              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> A/B Testing & Optimization</li>
-              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Monthly Performance Reports</li>
-              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Content Creation (4 posts/week)</li>
-              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Priority WhatsApp Support</li>
-              <li className="flex items-center gap-2"><span className="text-[#00d4ff] font-bold">✓</span> Brand Strategy Sessions</li>
+            <ul className="space-y-3.5 mb-8 text-xs md:text-sm text-text-secondary flex-grow font-nothern font-light">
+              <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> Everything in Growth</li>
+              <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> Monthly Ad Management</li>
+              <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> A/B Testing & Optimization</li>
+              <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> Monthly Performance Reports</li>
+              <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> Content Creation (4 posts/week)</li>
+              <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> Priority WhatsApp Support</li>
+              <li className="flex items-center gap-2"><span className="text-[#B25F4C] font-bold">✓</span> Brand Strategy Sessions</li>
             </ul>
-            <a href="#booking" className="w-full text-center py-3.5 rounded-full border border-white/10 hover:border-[#00d4ff]/20 text-text-primary font-bold text-xs tracking-wider transition-all hover:bg-white/5 font-rankim">
+            <a href="#booking" className="w-full text-center py-3.5 rounded-full border border-black/10 hover:border-[#B25F4C]/20 text-[#2A2A2A] font-bold text-xs tracking-wider transition-all hover:bg-black/5 font-rankim">
               Get Started →
             </a>
           </div>
 
         </div>
 
-        <div className="text-center p-6 rounded-2xl bg-white/[0.01] border border-white/5 max-w-2xl mx-auto">
-          <p className="text-text-secondary text-xs md:text-sm font-heming">
+        <div className="text-center p-6 rounded-2xl bg-white/40 border border-black/5 max-w-2xl mx-auto shadow-sm">
+          <p className="text-text-secondary text-xs md:text-sm font-nothern font-light">
             🛡️ <strong>100% Satisfaction Guarantee</strong> — If you're not happy with the final product, I'll revise until you are, or you don't pay. Zero risk.
           </p>
         </div>

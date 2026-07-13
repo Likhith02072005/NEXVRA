@@ -29,7 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="bg-[#0a0a12] text-[#f5f0e8] selection:bg-[#00d4ff]/30 selection:text-white">
+      <body className="bg-[#faf8f5] text-[#2a2a2a] selection:bg-[#B25F4C]/20 selection:text-[#2a2a2a]">
         <SmoothScrollProvider>
           <GrainOverlay />
           <CursorProvider />

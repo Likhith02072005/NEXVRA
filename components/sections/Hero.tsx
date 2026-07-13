@@ -17,10 +17,10 @@ interface StatProps {
 function StatCounter({ end, suffix = '', prefix = '', decimals = false, label }: StatProps) {
   return (
     <div className="flex flex-col">
-      <div className="text-3xl md:text-4xl font-nothern font-semibold text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed]">
+      <div className="text-3xl md:text-4xl font-nothern font-semibold text-[#B25F4C]">
         {prefix}{decimals ? end.toFixed(1) : end}{suffix}
       </div>
-      <div className="text-text-secondary text-xs md:text-sm font-heming font-medium mt-1">{label}</div>
+      <div className="text-text-secondary text-[11px] font-resist-mono font-medium tracking-[0.08em] uppercase mt-1.5">{label}</div>
     </div>
   );
 }
@@ -28,7 +28,7 @@ function StatCounter({ end, suffix = '', prefix = '', decimals = false, label }:
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-bg-primary">
+    <section id="hero" className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-24 pb-12 overflow-hidden bg-[#FAF8F5]">
       
       {/* GradientBlinds WebGL Background */}
       <div 
@@ -36,41 +36,41 @@ export default function Hero() {
         className="z-0"
       >
         <GradientBlinds
-          gradientColors={['#00d4ff', '#7c3aed']}
+          gradientColors={['#F9F9F6', '#F3F3EF', '#F2E4DF']}
           angle={20}
-          noise={0.5}
+          noise={0.15}
           blindCount={16}
           blindMinWidth={60}
-          spotlightRadius={0.5}
-          spotlightSoftness={1}
-          spotlightOpacity={1}
+          spotlightRadius={0.4}
+          spotlightSoftness={1.2}
+          spotlightOpacity={0.2}
           mouseDampening={0.15}
           distortAmount={0}
           shineDirection="left"
-          mixBlendMode="lighten"
+          mixBlendMode="multiply"
         />
       </div>
 
-      {/* Dark overlay for text contrast */}
-      <div className="absolute inset-0 z-10 bg-[#0a0a12]/80 lg:bg-gradient-to-r lg:from-[#0a0a12]/95 lg:via-[#0a0a12]/75 lg:to-[#0a0a12]/30 pointer-events-none select-none" />
+      {/* Light overlay for text contrast */}
+      <div className="absolute inset-0 z-10 bg-[#FAF8F5]/60 lg:bg-gradient-to-r lg:from-[#FAF8F5]/90 lg:via-[#FAF8F5]/70 lg:to-[#FAF8F5]/20 pointer-events-none select-none" />
 
       <div className="w-full px-6 md:px-12 lg:px-20 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Side text */}
-          <div className="lg:col-span-8 flex flex-col items-start text-left">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-accent/40 bg-gold-accent/5 text-xs font-resist-mono tracking-wide text-text-primary mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-gold-accent animate-pulse"></span>
+          <div className="lg:col-span-10 flex flex-col items-start text-left">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#B25F4C]/20 bg-[#B25F4C]/5 text-[11px] font-resist-mono font-medium tracking-[0.1em] text-[#B25F4C] uppercase mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#B25F4C] animate-pulse"></span>
               Now accepting 3 new clients for July
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-durer tracking-tight text-text-primary mb-6 leading-[1.1]">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] font-rankim font-light tracking-tight text-[#2A2A2A] mb-8 leading-[0.95]">
               We Build Websites That <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00d4ff] to-[#7c3aed] glow-hover inline-block font-magilio">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B25F4C] to-[#d27c69] inline-block font-magilio italic">
                 Print Money
               </span>
             </h1>
 
-            <p className="text-text-secondary text-base md:text-lg font-heming font-medium max-w-xl mb-10 leading-relaxed">
+            <p className="text-text-secondary text-base md:text-lg font-nothern font-light max-w-xl mb-10 leading-[1.75] tracking-wide">
               Full-stack web development + Meta Ads that turn your Bangalore business into a lead-generating machine. No fluff — just results.
             </p>
 
@@ -78,13 +78,13 @@ export default function Hero() {
               <NoiseBackground
                 containerClassName="p-[1px] rounded-full overflow-hidden"
                 className="rounded-full overflow-hidden"
-                gradientColors={["rgb(0, 212, 255)", "rgb(124, 58, 237)", "rgb(184, 134, 11)"]}
-                noiseIntensity={0.12}
+                gradientColors={["rgb(178, 95, 76)", "rgb(210, 124, 105)", "rgb(249, 249, 246)"]}
+                noiseIntensity={0.05}
                 speed={0.15}
               >
                 <a 
                   href="#booking" 
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#0a0a12]/95 hover:bg-[#0a0a12]/80 text-text-primary font-rankim text-sm tracking-wide transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#B25F4C] text-[#F9F9F6] font-rankim text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:bg-[#B25F4C]/90 shadow-[0_4px_12px_rgba(178,95,76,0.2)]"
                   data-cursor-label="Book Call"
                 >
                   Book Your Free Strategy Call
@@ -95,13 +95,13 @@ export default function Hero() {
               <NoiseBackground
                 containerClassName="p-[1px] rounded-full overflow-hidden"
                 className="rounded-full overflow-hidden"
-                gradientColors={["rgb(0, 212, 255)", "rgb(124, 58, 237)", "rgb(184, 134, 11)"]}
-                noiseIntensity={0.12}
+                gradientColors={["rgb(42, 42, 42)", "rgb(94, 94, 94)", "rgb(243, 243, 239)"]}
+                noiseIntensity={0.05}
                 speed={0.15}
               >
                 <a 
                   href="#results" 
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#0a0a12]/95 hover:bg-[#0a0a12]/80 text-text-primary font-rankim text-sm tracking-wide transition-all duration-300"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#F3F3EF] text-[#2A2A2A] font-rankim text-xs font-bold tracking-wider uppercase transition-all duration-300 hover:bg-[#F3F3EF]/80 border border-black/5"
                   data-cursor-label="See Proof"
                 >
                   See Results
@@ -110,7 +110,7 @@ export default function Hero() {
               </NoiseBackground>
             </div>
 
-            <div className="grid grid-cols-3 gap-6 md:gap-10 border-t border-text-secondary/10 pt-8 w-full max-w-lg">
+            <div className="grid grid-cols-3 gap-6 md:gap-10 border-t border-black/5 pt-8 w-full max-w-lg">
               <StatCounter end={40} suffix="+" label="Projects Delivered" />
               <StatCounter end={3} suffix="x" decimals={true} label="Avg. ROAS" />
               <StatCounter end={15} prefix="₹" suffix="L+" label="Ad Spend Managed" />
@@ -120,8 +120,8 @@ export default function Hero() {
       </div>
 
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:block">
-        <div className="w-6 h-10 border-2 border-text-secondary/10 rounded-full flex justify-center p-1.5 opacity-60">
-          <div className="w-1.5 h-1.5 rounded-full bg-text-primary animate-bounce"></div>
+        <div className="w-6 h-10 border-2 border-black/5 rounded-full flex justify-center p-1.5 opacity-60">
+          <div className="w-1.5 h-1.5 rounded-full bg-[#2A2A2A] animate-bounce"></div>
         </div>
       </div>
     </section>
