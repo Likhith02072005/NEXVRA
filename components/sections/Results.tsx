@@ -97,6 +97,18 @@ function TestimonialCarousel() {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : 1024
+  );
+
+  // Resize listener for responsive layout calculation
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const count = testimonials.length;
 
   // Auto-rotation
@@ -131,7 +143,7 @@ function TestimonialCarousel() {
     }
   }
 
-  // Calculate card transforms for 3D cylinder effect
+  // Calculate card transforms for 3D cylinder effect dynamically
   function getCardStyle(index: number) {
     let diff = index - activeIndex;
     // Wrap around for shortest path
@@ -139,11 +151,18 @@ function TestimonialCarousel() {
     if (diff < -count / 2) diff += count;
 
     const rotateY = diff * 45; // degrees between cards
-    const translateZ = 380; // radius of the cylinder
-    const opacity = Math.abs(diff) === 0 ? 1 : Math.abs(diff) === 1 ? 0.5 : 0.15;
-    const scale = Math.abs(diff) === 0 ? 1 : Math.abs(diff) === 1 ? 0.85 : 0.7;
+    
+    // Dynamic dimensions based on current window width
+    const isMobile = windowWidth < 640;
+    const isTablet = windowWidth < 1024;
+    
+    const cardWidth = isMobile ? Math.min(290, windowWidth - 32) : isTablet ? 340 : 400;
+    const translateZ = isMobile ? 180 : isTablet ? 280 : 380;
+    
+    const opacity = Math.abs(diff) === 0 ? 1 : Math.abs(diff) === 1 ? 0.45 : 0.12;
+    const scale = Math.abs(diff) === 0 ? 1 : Math.abs(diff) === 1 ? (isMobile ? 0.8 : 0.85) : 0.7;
     const zIndex = count - Math.abs(diff);
-    const blur = Math.abs(diff) > 1 ? 4 : 0;
+    const blur = Math.abs(diff) > 1 ? (isMobile ? 6 : 4) : 0;
 
     return {
       transform: `rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`,
@@ -154,9 +173,9 @@ function TestimonialCarousel() {
       position: 'absolute' as const,
       left: '50%',
       top: '50%',
-      marginLeft: '-200px',
+      marginLeft: `${-cardWidth / 2}px`,
       marginTop: '-160px',
-      width: '400px',
+      width: `${cardWidth}px`,
     };
   }
 
@@ -188,7 +207,7 @@ function TestimonialCarousel() {
                 className="backface-hidden cursor-pointer"
                 onClick={() => goTo(i)}
               >
-                <div className="group relative p-8 rounded-2xl bg-[#2A2A2A] border border-[#2A2A2A]/80 flex flex-col justify-between h-[320px] shadow-[0_16px_48px_rgba(0,0,0,0.2)]">
+                <div className="group relative p-8 rounded-2xl bg-[#000000] border border-white/10 flex flex-col justify-between h-[320px] shadow-[0_16px_48px_rgba(0,0,0,0.3)] hover:border-[#B25F4C]/35 transition-all duration-300">
                   {/* Decorative quote mark */}
                   <div className="absolute top-6 right-8 text-[#B25F4C]/10 text-7xl font-rankim leading-none select-none pointer-events-none">
                     &ldquo;
@@ -204,7 +223,7 @@ function TestimonialCarousel() {
                       ))}
                     </div>
 
-                    <p className="text-[#F9F9F6]/85 text-sm md:text-base leading-[1.8] font-nothern font-light italic line-clamp-5">
+                    <p className="text-[#F9F9F6]/85 text-xs md:text-sm lg:text-base leading-[1.8] font-nothern font-light italic line-clamp-5">
                       &ldquo;{t.quote}&rdquo;
                     </p>
                   </div>

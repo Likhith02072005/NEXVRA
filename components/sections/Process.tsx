@@ -44,7 +44,7 @@ function ProcessCard({ step, title, description }: ProcessCardProps) {
         </div>
 
         {/* Back Face */}
-        <div className="flip-card-back absolute inset-0 bg-[#2A2A2A] rounded-2xl p-8 min-h-[250px] md:min-h-[280px] flex flex-col justify-center">
+        <div className="flip-card-back absolute inset-0 bg-[#000000] border border-white/10 rounded-2xl p-8 min-h-[250px] md:min-h-[280px] flex flex-col justify-center">
           <span className="absolute top-4 right-5 text-[#B25F4C]/30 text-sm font-nothern font-semibold">
             {step}
           </span>
