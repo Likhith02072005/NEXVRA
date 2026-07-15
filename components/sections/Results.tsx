@@ -150,26 +150,26 @@ function TestimonialCarousel() {
     if (diff > count / 2) diff -= count;
     if (diff < -count / 2) diff += count;
 
-    const rotateY = diff * 45; // degrees between cards
+    const rotateY = diff * 60; // Spread cards out with a wider angle (60 degrees)
     
     // Dynamic dimensions based on current window width
     const isMobile = windowWidth < 640;
     const isTablet = windowWidth < 1024;
     
-    const cardWidth = isMobile ? Math.min(290, windowWidth - 32) : isTablet ? 340 : 400;
-    const translateZ = isMobile ? 180 : isTablet ? 280 : 380;
+    const cardWidth = isMobile ? Math.min(280, windowWidth - 40) : isTablet ? 340 : 400;
+    const translateZ = isMobile ? 240 : isTablet ? 380 : 480; // Pushed back further to increase radius/spacing
     
-    const opacity = Math.abs(diff) === 0 ? 1 : Math.abs(diff) === 1 ? 0.45 : 0.12;
-    const scale = Math.abs(diff) === 0 ? 1 : Math.abs(diff) === 1 ? (isMobile ? 0.8 : 0.85) : 0.7;
+    const opacity = Math.abs(diff) === 0 ? 1 : Math.abs(diff) === 1 ? 0.35 : 0.08; // Lowered side opacity to reduce congestion
+    const scale = Math.abs(diff) === 0 ? 1 : Math.abs(diff) === 1 ? 0.8 : 0.65; // Side cards are scaled down more
     const zIndex = count - Math.abs(diff);
-    const blur = Math.abs(diff) > 1 ? (isMobile ? 6 : 4) : 0;
+    const blur = Math.abs(diff) === 1 ? 1.5 : Math.abs(diff) > 1 ? 6 : 0; // Added subtle blur to immediate side cards for focus
 
     return {
       transform: `rotateY(${rotateY}deg) translateZ(${translateZ}px) scale(${scale})`,
       opacity,
       zIndex,
       filter: blur > 0 ? `blur(${blur}px)` : 'none',
-      transition: 'all 600ms cubic-bezier(0.25, 0.1, 0.25, 1)',
+      transition: 'all 650ms cubic-bezier(0.25, 0.1, 0.25, 1)',
       position: 'absolute' as const,
       left: '50%',
       top: '50%',
@@ -189,10 +189,10 @@ function TestimonialCarousel() {
         <div className="flex-1 h-[1px] bg-black/5"></div>
       </div>
 
-      {/* 3D Carousel */}
+      {/* 3D Carousel Container - optimized width and overflow-visible to prevent card clipping */}
       <div
-        className="relative mx-auto overflow-hidden"
-        style={{ height: '400px', maxWidth: '900px' }}
+        className="relative mx-auto overflow-visible"
+        style={{ height: '400px', maxWidth: '100%' }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
