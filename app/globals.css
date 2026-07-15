@@ -47,6 +47,22 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Luthon Southard Serif';
+  src: url('/fonts/luthon-southard-serif.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Luthon Southard Script';
+  src: url('/fonts/luthon-southard-script.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ═══════════════════════════════════════════════════════
    DESIGN TOKENS (Alabaster & Terracotta Redesign)
    ═══════════════════════════════════════════════════════ */
@@ -77,6 +93,8 @@
   --font-resist-mono: 'Resist Mono', monospace;
   --font-baunk: 'Rankim', Georgia, serif;
   --font-heming: var(--font-nothern);
+  --font-luthon-serif: 'Luthon Southard Serif', Georgia, serif;
+  --font-luthon-script: 'Luthon Southard Script', cursive;
 
   --font-body: var(--font-nothern);
   --font-display: var(--font-rankim);
@@ -126,6 +144,8 @@
   --font-resist-mono: var(--font-resist-mono);
   --font-baunk: var(--font-baunk);
   --font-heming: var(--font-nothern);
+  --font-luthon-serif: var(--font-luthon-serif);
+  --font-luthon-script: var(--font-luthon-script);
 
   /* Override slate colors to match warm light theme */
   --color-slate-50: var(--bg-primary);
@@ -378,6 +398,137 @@ html, body {
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+/* ═══════════════════════════════════════════════════════
+   3D ANIMATION UTILITIES
+   ═══════════════════════════════════════════════════════ */
+
+/* Floating animation for featured elements */
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes float-rotate {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-6px) rotate(0.5deg); }
+  75% { transform: translateY(-4px) rotate(-0.5deg); }
+}
+
+@keyframes shimmer-3d {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.float-gentle {
+  animation: float-gentle 4s ease-in-out infinite;
+}
+
+.float-rotate {
+  animation: float-rotate 5s ease-in-out infinite;
+}
+
+/* 3D perspective containers */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Multi-layer depth shadows */
+.shadow-depth {
+  box-shadow:
+    0 2px 4px rgba(42, 42, 42, 0.02),
+    0 8px 16px rgba(42, 42, 42, 0.04),
+    0 24px 48px rgba(42, 42, 42, 0.06);
+}
+
+.shadow-depth-hover {
+  box-shadow:
+    0 4px 8px rgba(42, 42, 42, 0.03),
+    0 16px 32px rgba(42, 42, 42, 0.06),
+    0 32px 64px rgba(42, 42, 42, 0.08),
+    0 0 0 1px rgba(178, 95, 76, 0.05);
+}
+
+.shadow-depth-terracotta {
+  box-shadow:
+    0 4px 8px rgba(178, 95, 76, 0.04),
+    0 16px 32px rgba(178, 95, 76, 0.06),
+    0 32px 64px rgba(178, 95, 76, 0.08);
+}
+
+/* 3D Carousel */
+.carousel-3d-container {
+  perspective: 1200px;
+  perspective-origin: center center;
+}
+
+.carousel-3d-track {
+  transform-style: preserve-3d;
+  transition: transform 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Flip card */
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  transform-style: preserve-3d;
+  transition: transform 600ms cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.flip-card:hover .flip-card-inner,
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* ═══════════════════════════════════════════════════════
+   REDUCED MOTION OVERRIDES (Accessibility)
+   ═══════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  .float-gentle,
+  .float-rotate {
+    animation: none;
+  }
+
+  .flip-card:hover .flip-card-inner,
+  .flip-card.flipped .flip-card-inner {
+    transform: none;
+  }
+
+  .carousel-3d-track {
+    transition: none;
+  }
+
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 @layer base {

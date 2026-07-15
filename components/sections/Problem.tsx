@@ -1,4 +1,5 @@
-'use client';
+import { FontDuo } from '@/components/ui/FontDuo';
+import { ScrollReveal, StaggerReveal } from '@/components/ui/ScrollReveal';
 
 export default function Problem() {
   return (
@@ -10,20 +11,28 @@ export default function Problem() {
       <div className="w-full px-6 md:px-12 lg:px-20 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="text-[11px] font-resist-mono font-medium tracking-[0.1em] text-[#B25F4C] bg-[#B25F4C]/5 px-3.5 py-1.5 rounded-full border border-[#B25F4C]/10 uppercase">
-            The Problem
-          </span>
-          <h2 className="text-4xl md:text-5xl font-rankim font-light tracking-tight text-[#2A2A2A] mt-6 mb-4 leading-[1.1]">
-            Your Competitors Are Eating<br />Your Lunch. Here's Why.
-          </h2>
-          <p className="text-text-secondary text-base font-nothern font-light leading-relaxed">
-            Most local businesses in Bangalore are bleeding money on bad websites and worse ads. Sound familiar?
-          </p>
-        </div>
+        <ScrollReveal>
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <span className="text-[11px] font-resist-mono font-medium tracking-[0.1em] text-[#B25F4C] bg-[#B25F4C]/5 px-3.5 py-1.5 rounded-full border border-[#B25F4C]/10 uppercase">
+              The Problem
+            </span>
+            <h2 className="mt-6 mb-4 leading-[1.2]">
+              <FontDuo 
+                serifText="Your Competitors Are Eating" 
+                scriptText="Your Lunch" 
+                serifClassName="text-3xl md:text-5xl font-light tracking-tight text-[#2A2A2A]"
+                scriptClassName="text-2xl md:text-4xl text-[#B25F4C] left-[35%] top-[25%] rotate-[-3deg]"
+              />
+              <span className="block text-3xl md:text-5xl font-luthon-serif font-light tracking-tight text-[#2A2A2A] mt-2">Here&apos;s Why.</span>
+            </h2>
+            <p className="text-text-secondary text-base font-nothern font-light leading-relaxed">
+              Most local businesses in Bangalore are bleeding money on bad websites and worse ads. Sound familiar?
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* Problems Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <StaggerReveal stagger={0.12} className="grid grid-cols-1 md:grid-cols-3 gap-8">
           
           {/* Card 1 */}
           <div className="p-8 rounded-2xl bg-white/60 border border-black/5 hover:border-[#B25F4C]/25 transition-all duration-300 hover:-translate-y-1 hover:bg-white shadow-[0_4px_20px_rgba(42,42,42,0.015)]" data-cursor-label="Pain Point">
@@ -52,9 +61,10 @@ export default function Problem() {
             </p>
           </div>
 
-        </div>
+        </StaggerReveal>
 
       </div>
     </section>
   );
 }
+

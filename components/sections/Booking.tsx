@@ -1,6 +1,6 @@
-'use client';
-
 import React, { useState, useEffect } from 'react';
+import { FontDuo } from '@/components/ui/FontDuo';
+import { ScrollReveal, StaggerReveal } from '@/components/ui/ScrollReveal';
 
 const TIME_SLOTS = [
   '10:00 AM', '11:00 AM', '12:00 PM',
@@ -139,19 +139,23 @@ export default function Booking() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
           {/* Left Column: Benefits Info */}
-          <div className="lg:col-span-6 flex flex-col items-start">
+          <ScrollReveal className="lg:col-span-6 flex flex-col items-start">
             <span className="text-[11px] font-resist-mono font-medium tracking-[0.1em] text-[#B25F4C] bg-[#B25F4C]/5 px-3.5 py-1.5 rounded-full border border-[#B25F4C]/10 uppercase">
               Let's Talk
             </span>
-            <h2 className="text-4xl md:text-5xl font-rankim font-light tracking-tight text-[#2A2A2A] mt-6 mb-6 leading-[1.1]">
-              Book Your Free <br />
-              <span className="text-[#B25F4C]">Strategy Call</span>
+            <h2 className="mt-6 mb-6 leading-[1.2]">
+              <FontDuo 
+                serifText="Book Your Free" 
+                scriptText="Strategy Call" 
+                serifClassName="text-3xl md:text-5xl font-light tracking-tight text-[#2A2A2A]"
+                scriptClassName="text-2xl md:text-4xl text-[#B25F4C] left-[35%] top-[25%] rotate-[-3deg]"
+              />
             </h2>
             <p className="text-text-secondary text-base font-nothern font-light leading-relaxed mb-8 max-w-xl">
               In 30 minutes, I'll show you exactly how to turn your website into a lead-generating machine. No pitch, no pressure — just value.
             </p>
 
-            <ul className="space-y-6">
+            <StaggerReveal stagger={0.08} className="space-y-6">
               {[
                 { emoji: '🎯', title: 'Personalized audit of your current digital presence' },
                 { emoji: '📊', title: 'Competitor analysis and opportunity mapping' },
@@ -159,16 +163,16 @@ export default function Booking() {
                 { emoji: '💰', title: 'Revenue projection based on your industry benchmarks' },
                 { emoji: '🤝', title: 'Zero obligation — keep the strategy even if we don\'t work together' }
               ].map((b, idx) => (
-                <li key={idx} className="flex gap-4 items-start">
+                <div key={idx} className="flex gap-4 items-start">
                   <span className="text-lg bg-black/5 border border-black/5 w-8 h-8 rounded-lg flex items-center justify-center shrink-0">{b.emoji}</span>
                   <span className="text-text-secondary text-sm font-nothern font-light pt-1.5">{b.title}</span>
-                </li>
+                </div>
               ))}
-            </ul>
-          </div>
+            </StaggerReveal>
+          </ScrollReveal>
 
           {/* Right Column: Dynamic Form Card */}
-          <div className="lg:col-span-6">
+          <ScrollReveal className="lg:col-span-6" delay={0.2}>
             <div className="p-8 rounded-2xl bg-white border border-black/5 relative overflow-hidden shadow-md" data-cursor-label="Schedule">
               
               {!success ? (
@@ -342,7 +346,7 @@ export default function Booking() {
               )}
 
             </div>
-          </div>
+          </ScrollReveal>
 
         </div>
       </div>

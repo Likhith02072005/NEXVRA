@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { EncryptedText } from '@/components/ui/encrypted-text';
 import { NoiseBackground } from '@/components/ui/noise-background';
 import GradientBlinds from '@/components/ui/GradientBlinds';
+import { FontDuo } from '@/components/ui/FontDuo';
+import { ScrollReveal, StaggerReveal } from '@/components/ui/ScrollReveal';
 
 interface StatProps {
   end: number;
@@ -57,16 +59,21 @@ export default function Hero() {
       <div className="w-full px-6 md:px-12 lg:px-20 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Left Side text */}
-          <div className="lg:col-span-10 flex flex-col items-start text-left">
+          <StaggerReveal stagger={0.12} delay={0.15} className="lg:col-span-10 flex flex-col items-start text-left">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#B25F4C]/20 bg-[#B25F4C]/5 text-[11px] font-resist-mono font-medium tracking-[0.1em] text-[#B25F4C] uppercase mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-[#B25F4C] animate-pulse"></span>
               Now accepting 3 new clients for July
             </div>
 
-            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7rem] font-rankim font-light tracking-tight text-[#2A2A2A] mb-8 leading-[0.95]">
-              We Build Websites That <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B25F4C] to-[#d27c69] inline-block font-magilio italic">
-                Print Money
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[7.2rem] leading-[1.0] mb-8">
+              <span className="font-luthon-serif font-light tracking-tight text-[#2A2A2A] block mb-2 sm:mb-4">We Build Websites That</span>
+              <span className="block mt-[-0.1em]">
+                <FontDuo 
+                  serifText="PRINT" 
+                  scriptText="Money" 
+                  serifClassName="text-5xl sm:text-7xl md:text-8xl lg:text-[7.2rem] font-bold text-[#2A2A2A] tracking-[0.05em]"
+                  scriptClassName="text-4xl sm:text-6xl md:text-7xl lg:text-[6.5rem] text-[#B25F4C] left-[25%] top-[15%] rotate-[-4deg]"
+                />
               </span>
             </h1>
 
@@ -115,7 +122,7 @@ export default function Hero() {
               <StatCounter end={3} suffix="x" decimals={true} label="Avg. ROAS" />
               <StatCounter end={15} prefix="₹" suffix="L+" label="Ad Spend Managed" />
             </div>
-          </div>
+          </StaggerReveal>
         </div>
       </div>
 
