@@ -19,6 +19,39 @@ interface CRMData {
   dailyLog: Record<string, string>;
 }
 
+// Robust data normalization to prevent frontend crashes on legacy/empty DB fields
+const normalizeLeads = (rawLeads: any[]): Lead[] => {
+  if (!Array.isArray(rawLeads)) return [];
+  return rawLeads.map((lead: any) => {
+    let status = String(lead.status || 'new').toLowerCase();
+    // Map old status codes to new brutalist CRM equivalents
+    if (status === 'lead') status = 'new';
+    if (status === 'call') status = 'contacted';
+    
+    const validStatuses: LeadStatus[] = ['new', 'contacted', 'qualified', 'proposal', 'closed', 'lost'];
+    if (!validStatuses.includes(status as LeadStatus)) {
+      status = 'new';
+    }
+
+    return {
+      id: String(lead.id || lead.email || Date.now() + Math.random().toString(36).substr(2, 5)),
+      name: String(lead.name || 'Unknown Lead'),
+      company: String(lead.company || lead.business || 'Individual'),
+      email: String(lead.email || ''),
+      phone: String(lead.phone || ''),
+      status: status as LeadStatus,
+      source: String(lead.source || 'Website'),
+      value: Number(lead.value) || 0,
+      location: String(lead.location || 'Bangalore'),
+      date: String(lead.date || lead.createdAt?.split('T')[0] || new Date().toISOString().split('T')[0]),
+      lastContact: String(lead.lastContact || lead.createdAt?.split('T')[0] || new Date().toISOString().split('T')[0]),
+      notes: String(lead.notes || ''),
+      service: String(lead.service || 'Web Development'),
+      assignedTo: String(lead.assignedTo || 'Admin')
+    };
+  });
+};
+
 export default function App() {
   const [activeView, setActiveView] = useState('dashboard');
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,6 +62,7 @@ export default function App() {
   const [passcode, setPasscode] = useState('');
   const [authError, setAuthError] = useState(false);
   const [loading, setLoading] = useState(false);
+  
   const [crmData, setCrmData] = useState<CRMData>({
     leads: [],
     events: [],
@@ -37,7 +71,7 @@ export default function App() {
     dailyLog: {}
   });
 
-  // Check sessionStorage on mount
+  // Check sessionStorage on mount for saved auth
   useEffect(() => {
     const savedCode = sessionStorage.getItem('crm_passcode');
     const isAuth = sessionStorage.getItem('crm_authenticated');
@@ -58,7 +92,18 @@ export default function App() {
       });
       if (response.ok) {
         const data = await response.json();
-        setCrmData(data);
+        
+        // Normalize leads data to guarantee clean React states
+        const cleanedLeads = normalizeLeads(data?.leads);
+        
+        setCrmData({
+          leads: cleanedLeads,
+          events: Array.isArray(data?.events) ? data.events : [],
+          counters: data?.counters || {},
+          checklist: data?.checklist || {},
+          dailyLog: data?.dailyLog || {}
+        });
+        
         setIsAuthenticated(true);
         sessionStorage.setItem('crm_authenticated', 'true');
         sessionStorage.setItem('crm_passcode', code);
@@ -98,13 +143,15 @@ export default function App() {
   };
 
   const handleUpdateLeadStatus = async (id: string, newStatus: LeadStatus) => {
+    const currentLeads = crmData.leads || [];
     let updatedLeads = [];
+    
     if ((newStatus as string) === 'delete') {
       const confirmed = window.confirm("Are you sure you want to permanently delete this lead?");
       if (!confirmed) return;
-      updatedLeads = crmData.leads.filter(l => l.id !== id);
+      updatedLeads = currentLeads.filter(l => l.id !== id);
     } else {
-      updatedLeads = crmData.leads.map(l => {
+      updatedLeads = currentLeads.map(l => {
         if (l.id === id) {
           return { ...l, status: newStatus, lastContact: new Date().toISOString().split('T')[0] };
         }
@@ -118,6 +165,7 @@ export default function App() {
   };
 
   const handleAddLead = async (leadInfo: any) => {
+    const currentLeads = crmData.leads || [];
     const newLead: Lead = {
       id: String(Date.now()),
       name: leadInfo.name,
@@ -135,22 +183,23 @@ export default function App() {
       assignedTo: 'Admin'
     };
 
-    const updatedLeads = [...crmData.leads, newLead];
+    const updatedLeads = [...currentLeads, newLead];
     const updatedData = { ...crmData, leads: updatedLeads };
     setCrmData(updatedData);
     await saveCrmData(updatedData);
   };
 
   const renderView = () => {
+    const leadsList = crmData.leads || [];
     switch (activeView) {
-      case 'dashboard': return <Dashboard leads={crmData.leads} />;
-      case 'leads': return <Leads searchQuery={searchQuery} leads={crmData.leads} onUpdateLeadStatus={handleUpdateLeadStatus} />;
-      case 'pipeline': return <Pipeline leads={crmData.leads} />;
-      case 'contacts': return <Contacts searchQuery={searchQuery} leads={crmData.leads} />;
+      case 'dashboard': return <Dashboard leads={leadsList} />;
+      case 'leads': return <Leads searchQuery={searchQuery} leads={leadsList} onUpdateLeadStatus={handleUpdateLeadStatus} />;
+      case 'pipeline': return <Pipeline leads={leadsList} />;
+      case 'contacts': return <Contacts searchQuery={searchQuery} leads={leadsList} />;
       case 'tasks': return <Tasks />;
-      case 'analytics': return <Analytics leads={crmData.leads} />;
+      case 'analytics': return <Analytics leads={leadsList} />;
       case 'settings': return <Settings />;
-      default: return <Dashboard leads={crmData.leads} />;
+      default: return <Dashboard leads={leadsList} />;
     }
   };
 
