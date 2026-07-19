@@ -744,8 +744,9 @@ function PricingSection() {
 // ===================================================
 function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [formData, setFormData] = useState({ name: '', phone: '', business: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', business: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -761,9 +762,32 @@ function ContactSection() {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/submit-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          businessType: formData.business,
+          date: new Date().toISOString().split('T')[0],
+          time: 'ASAP'
+        })
+      });
+      if (response.ok) {
+        setSubmitted(true);
+      } else {
+        alert('Failed to submit. Please try again.');
+      }
+    } catch (err) {
+      console.error('Error submitting lead:', err);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const benefits = [
@@ -838,6 +862,18 @@ function ContactSection() {
                 </div>
               </div>
               <div>
+                <label className="contact-label">Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="hello@company.com"
+                  className="contact-input"
+                />
+              </div>
+              <div>
                 <label className="contact-label">Business</label>
                 <input
                   type="text"
@@ -860,8 +896,8 @@ function ContactSection() {
                   className="contact-input contact-textarea"
                 />
               </div>
-              <button type="submit" className="contact-submit">
-                Request Consultation
+              <button type="submit" className="contact-submit" disabled={isSubmitting}>
+                {isSubmitting ? 'Submitting...' : 'Request Consultation'}
               </button>
               <div className="contact-slots">Limited availability this month</div>
             </form>
