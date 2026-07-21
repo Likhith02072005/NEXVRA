@@ -406,7 +406,7 @@ function WorkSection() {
         { val: '6WK', label: 'Series A Close' },
         { val: '98', label: 'Perf. Score' },
       ],
-      img: 'https://images.pexels.com/photos/5465156/pexels-photo-5465156.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200',
+      img: 'https://raw.githubusercontent.com/Likhith02072005/NEXVRA/main/MB%20_%20Mubien%20Brands%20_%20The%20Radd%20-%20The%20Research%20and%20Development%20District.jpeg',
     },
     {
       num: '02',
@@ -418,7 +418,7 @@ function WorkSection() {
         { val: '3X', label: 'Lead Increase' },
         { val: '4.9s', label: 'Avg. Time on Page' },
       ],
-      img: 'https://images.pexels.com/photos/29079328/pexels-photo-29079328.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200',
+      img: 'https://raw.githubusercontent.com/Likhith02072005/NEXVRA/main/_%20(1).jpeg',
     },
     {
       num: '03',
@@ -430,7 +430,7 @@ function WorkSection() {
         { val: '10WK', label: 'Ship Time' },
         { val: '40K', label: 'Daily Active' },
       ],
-      img: 'https://images.pexels.com/photos/32466569/pexels-photo-32466569.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200',
+      img: 'https://raw.githubusercontent.com/Likhith02072005/NEXVRA/main/_%20(2).jpeg',
     },
     {
       num: '04',
@@ -442,7 +442,7 @@ function WorkSection() {
         { val: '+180%', label: 'Stream Growth' },
         { val: '5', label: 'Release Campaigns' },
       ],
-      img: 'https://images.pexels.com/photos/8303947/pexels-photo-8303947.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200',
+      img: 'https://raw.githubusercontent.com/Likhith02072005/NEXVRA/main/_%20(3).jpeg',
     },
   ];
 
