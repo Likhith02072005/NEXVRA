@@ -357,39 +357,250 @@ function ServicesSection() {
 }
 
 // ===================================================
-// WORK SECTION (Horizontal Scroll — All Viewports)
+// WORK SECTION (Premium Horizontal Scroll Gallery)
 // ===================================================
 function WorkSection() {
   const outerRef = useRef<HTMLDivElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const counterRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
       const track = trackRef.current;
       const outer = outerRef.current;
-      if (!track || !outer) return;
+      const sticky = stickyRef.current;
+      if (!track || !outer || !sticky) return;
 
-      const panels = track.querySelectorAll('.work-panel');
+      const panels = gsap.utils.toArray<HTMLElement>('.work-panel');
       const totalPanels = panels.length;
       const getScrollAmount = () => (totalPanels - 1) * window.innerWidth;
 
       // Set the outer container height to create enough scroll room
       gsap.set(outer, { height: () => window.innerHeight + getScrollAmount() });
 
-      gsap.to(track, {
+      // ── Master horizontal scroll tween ──
+      const scrollTween = gsap.to(track, {
         x: () => -getScrollAmount(),
         ease: 'none',
         scrollTrigger: {
           trigger: outer,
           start: 'top top',
           end: () => `+=${getScrollAmount()}`,
-          pin: stickyRef.current,
-          scrub: 1,
+          pin: sticky,
+          scrub: 0.8,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          snap: {
+            snapTo: 1 / (totalPanels - 1),
+            duration: { min: 0.15, max: 0.4 },
+            ease: 'power1.inOut',
+          },
+          onUpdate: (self) => {
+            // Update progress bar
+            if (progressRef.current) {
+              progressRef.current.style.transform = `scaleX(${self.progress})`;
+            }
+            // Update counter
+            if (counterRef.current) {
+              const idx = Math.round(self.progress * (totalPanels - 1));
+              counterRef.current.textContent = String(idx + 1).padStart(2, '0');
+            }
+          },
         },
       });
+
+      // ── Per-panel animations using containerAnimation ──
+      panels.forEach((panel, i) => {
+        const img = panel.querySelector('.work-panel-bg img') as HTMLElement;
+        const content = panel.querySelector('.work-panel-content') as HTMLElement;
+        const num = panel.querySelector('.work-panel-num') as HTMLElement;
+        const tag = panel.querySelector('.work-tag') as HTMLElement;
+        const title = panel.querySelector('.work-title') as HTMLElement;
+        const desc = panel.querySelector('.work-desc') as HTMLElement;
+        const stats = panel.querySelectorAll('.work-stat-item');
+        const line = panel.querySelector('.work-panel-line') as HTMLElement;
+
+        // Skip first panel — it's already visible
+        if (i === 0) return;
+
+        // Image clip-path reveal (wipe from left to right)
+        if (img) {
+          gsap.fromTo(img,
+            { clipPath: 'inset(0% 100% 0% 0%)', scale: 1.3 },
+            {
+              clipPath: 'inset(0% 0% 0% 0%)',
+              scale: 1,
+              duration: 1,
+              ease: 'power3.inOut',
+              scrollTrigger: {
+                trigger: panel,
+                containerAnimation: scrollTween,
+                start: 'left 80%',
+                end: 'left 20%',
+                scrub: true,
+              },
+            }
+          );
+        }
+
+        // Giant number parallax (moves slower = depth)
+        if (num) {
+          gsap.fromTo(num,
+            { xPercent: 80, opacity: 0 },
+            {
+              xPercent: 0,
+              opacity: 0.04,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: panel,
+                containerAnimation: scrollTween,
+                start: 'left 90%',
+                end: 'left 10%',
+                scrub: true,
+              },
+            }
+          );
+        }
+
+        // Decorative line reveal
+        if (line) {
+          gsap.fromTo(line,
+            { scaleX: 0 },
+            {
+              scaleX: 1,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: panel,
+                containerAnimation: scrollTween,
+                start: 'left 50%',
+                end: 'left 25%',
+                scrub: true,
+              },
+            }
+          );
+        }
+
+        // Tag slide in
+        if (tag) {
+          gsap.fromTo(tag,
+            { x: -30, opacity: 0 },
+            {
+              x: 0,
+              opacity: 1,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: panel,
+                containerAnimation: scrollTween,
+                start: 'left 45%',
+                end: 'left 25%',
+                scrub: true,
+              },
+            }
+          );
+        }
+
+        // Title slide up with clip reveal
+        if (title) {
+          gsap.fromTo(title,
+            { yPercent: 100, opacity: 0 },
+            {
+              yPercent: 0,
+              opacity: 1,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: panel,
+                containerAnimation: scrollTween,
+                start: 'left 40%',
+                end: 'left 20%',
+                scrub: true,
+              },
+            }
+          );
+        }
+
+        // Description fade in
+        if (desc) {
+          gsap.fromTo(desc,
+            { y: 20, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: panel,
+                containerAnimation: scrollTween,
+                start: 'left 35%',
+                end: 'left 15%',
+                scrub: true,
+              },
+            }
+          );
+        }
+
+        // Stats stagger in
+        if (stats.length) {
+          gsap.fromTo(stats,
+            { y: 30, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              stagger: 0.03,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: panel,
+                containerAnimation: scrollTween,
+                start: 'left 30%',
+                end: 'left 10%',
+                scrub: true,
+              },
+            }
+          );
+        }
+      });
+
+      // ── First panel entrance animation (plays once on scroll-in) ──
+      const firstPanel = panels[0];
+      if (firstPanel) {
+        const firstImg = firstPanel.querySelector('.work-panel-bg img') as HTMLElement;
+        const firstTag = firstPanel.querySelector('.work-tag') as HTMLElement;
+        const firstTitle = firstPanel.querySelector('.work-title') as HTMLElement;
+        const firstDesc = firstPanel.querySelector('.work-desc') as HTMLElement;
+        const firstStats = firstPanel.querySelectorAll('.work-stat-item');
+        const firstLine = firstPanel.querySelector('.work-panel-line') as HTMLElement;
+
+        const firstTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: outer,
+            start: 'top 80%',
+            toggleActions: 'play none none none',
+          },
+        });
+
+        if (firstImg) {
+          firstTl.fromTo(firstImg,
+            { clipPath: 'inset(0% 100% 0% 0%)', scale: 1.3 },
+            { clipPath: 'inset(0% 0% 0% 0%)', scale: 1, duration: 1.2, ease: 'power3.inOut' },
+            0
+          );
+        }
+        if (firstLine) {
+          firstTl.fromTo(firstLine, { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: 'power2.out' }, 0.4);
+        }
+        if (firstTag) {
+          firstTl.fromTo(firstTag, { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.5);
+        }
+        if (firstTitle) {
+          firstTl.fromTo(firstTitle, { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.8, ease: 'power3.out' }, 0.6);
+        }
+        if (firstDesc) {
+          firstTl.fromTo(firstDesc, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, 0.8);
+        }
+        if (firstStats.length) {
+          firstTl.fromTo(firstStats, { y: 30, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.08, duration: 0.5, ease: 'power2.out' }, 0.9);
+        }
+      }
     });
 
     return () => ctx.revert();
@@ -455,6 +666,12 @@ function WorkSection() {
             Scroll to Navigate
           </div>
         </div>
+
+        {/* Progress bar */}
+        <div className="work-progress-track">
+          <div ref={progressRef} className="work-progress-fill" />
+        </div>
+
         <div ref={trackRef} className="work-track">
           {cases.map((c, idx) => (
             <div key={c.num} className="work-panel">
@@ -463,13 +680,14 @@ function WorkSection() {
               </div>
               <div className="work-panel-overlay" />
               <div className="work-panel-num">{c.num}</div>
+              <div className="work-panel-line" />
               <div className="work-panel-content">
                 <div className="work-tag">{c.tag}</div>
                 <h3 className="work-title">{c.title}</h3>
                 <p className="work-desc">{c.desc}</p>
                 <div className="work-stats">
                   {c.stats.map(s => (
-                    <div key={s.label}>
+                    <div key={s.label} className="work-stat-item">
                       <div className="work-stat-val">{s.val}</div>
                       <div className="work-stat-label">{s.label}</div>
                     </div>
@@ -477,7 +695,7 @@ function WorkSection() {
                 </div>
               </div>
               <div className="work-nav">
-                <span className="work-progress">{String(idx + 1).padStart(2, '0')} / {String(cases.length).padStart(2, '0')}</span>
+                <span className="work-counter"><span ref={idx === 0 ? counterRef : undefined} className="work-counter-current">01</span> / {String(cases.length).padStart(2, '0')}</span>
               </div>
             </div>
           ))}

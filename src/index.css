@@ -710,6 +710,7 @@ body {
   position: absolute;
   inset: 0;
   z-index: 1;
+  overflow: hidden;
 }
 
 .work-panel-bg img {
@@ -717,18 +718,31 @@ body {
   height: 100%;
   object-fit: cover;
   filter: grayscale(100%) brightness(0.35) contrast(1.2);
-  transition: filter 0.5s ease;
+  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: clip-path, transform;
 }
 
 .work-panel:hover .work-panel-bg img {
-  filter: grayscale(40%) brightness(0.45) contrast(1.1);
+  filter: grayscale(30%) brightness(0.5) contrast(1.1);
 }
 
 .work-panel-overlay {
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.15) 70%, transparent 100%);
+}
+
+/* Decorative accent line */
+.work-panel-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--red);
+  z-index: 5;
+  transform-origin: left center;
 }
 
 .work-panel-content {
@@ -736,6 +750,17 @@ body {
   z-index: 3;
   padding: 60px;
   max-width: 700px;
+}
+
+/* Title clip mask for reveal effect */
+.work-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  margin-bottom: 16px;
+  overflow: hidden;
 }
 
 .work-panel-num {
@@ -748,6 +773,7 @@ body {
   line-height: 1;
   z-index: 2;
   pointer-events: none;
+  will-change: transform, opacity;
 }
 
 .work-header-bar {
@@ -769,21 +795,33 @@ body {
   margin-bottom: 0;
 }
 
+/* Progress bar track + fill */
+.work-progress-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,0.06);
+  z-index: 20;
+  overflow: hidden;
+}
+
+.work-progress-fill {
+  width: 100%;
+  height: 100%;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+}
+
 .work-tag {
   font-family: 'Space Mono', monospace;
   font-size: 10px;
   color: var(--red);
   text-transform: uppercase;
   letter-spacing: 3px;
-  margin-bottom: 16px;
-}
-
-.work-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2rem, 4vw, 4rem);
-  line-height: 0.95;
-  letter-spacing: -0.01em;
-  color: var(--white);
   margin-bottom: 16px;
 }
 
@@ -799,6 +837,10 @@ body {
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
+}
+
+.work-stat-item {
+  will-change: transform, opacity;
 }
 
 .work-stat-val {
@@ -824,12 +866,18 @@ body {
   z-index: 4;
 }
 
-.work-progress {
+.work-counter {
   font-family: 'Space Mono', monospace;
   font-size: 10px;
   color: var(--gray);
   letter-spacing: 2px;
 }
+
+.work-counter-current {
+  color: var(--white);
+  font-weight: 700;
+}
+
 
 /* =================== STATS SECTION =================== */
 .stats-section {
