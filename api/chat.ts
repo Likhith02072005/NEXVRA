@@ -57,17 +57,7 @@ function isRateLimited(ip: string): boolean {
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // CORS
-  const origin = (req.headers.origin as string) || 'https://nexvra.in';
-  if (
-    origin === 'https://nexvra.in' ||
-    origin === 'https://www.nexvra.in' ||
-    origin.startsWith('http://localhost') ||
-    origin.endsWith('.vercel.app')
-  ) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  } else {
-    res.setHeader('Access-Control-Allow-Origin', 'https://nexvra.in');
-  }
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST,OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 

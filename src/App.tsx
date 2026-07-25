@@ -1332,7 +1332,8 @@ function ChatWidget() {
       } else {
         setMessages(prev => [...prev, { role: 'assistant', text: data.error || 'Sorry, I ran into an issue. Please try again or contact us at +91 96066 10059.' }]);
       }
-    } catch {
+    } catch (err) {
+      console.error('Chat fetch error:', err);
       setMessages(prev => [...prev, { role: 'assistant', text: "I'm having trouble connecting right now. You can reach us directly at +91 96066 10059 or nexvratech@gmail.com." }]);
     } finally {
       setIsTyping(false);
