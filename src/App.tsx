@@ -1192,7 +1192,7 @@ function Footer() {
           <div className="footer-col-title">Connect</div>
           <ul className="footer-links">
             <li><a href="tel:+919606610059" className="footer-link">+91 96066 10059</a></li>
-            <li><a href="mailto:hello@nexvra.in" className="footer-link">hello@nexvra.in</a></li>
+            <li><a href="mailto:nexvratech@gmail.com" className="footer-link">nexvratech@gmail.com</a></li>
             <li><a href="https://nexvra.in" target="_blank" rel="noopener noreferrer" className="footer-link">nexvra.in</a></li>
             <li><span className="footer-link">Bangalore, Karnataka</span></li>
           </ul>
