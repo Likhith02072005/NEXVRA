@@ -1191,8 +1191,9 @@ function Footer() {
         <div>
           <div className="footer-col-title">Connect</div>
           <ul className="footer-links">
+            <li><a href="tel:+919606610059" className="footer-link">+91 96066 10059</a></li>
+            <li><a href="mailto:hello@nexvra.in" className="footer-link">hello@nexvra.in</a></li>
             <li><a href="https://nexvra.in" target="_blank" rel="noopener noreferrer" className="footer-link">nexvra.in</a></li>
-            <li><a href="#contact" className="footer-link">Request Consultation</a></li>
             <li><span className="footer-link">Bangalore, Karnataka</span></li>
           </ul>
           <div className="footer-status">
@@ -1205,7 +1206,7 @@ function Footer() {
         </div>
       </div>
       <div className="footer-bottom">
-        <div className="footer-copy">2025 NEXVRA Digital. Bangalore, India.</div>
+        <div className="footer-copy">© 2025 NEXVRA Digital. Bangalore, India.</div>
         <div className="footer-socials">
           {['Instagram', 'LinkedIn', 'Twitter'].map(s => (
             <a key={s} href="#" className="footer-social">{s}</a>
