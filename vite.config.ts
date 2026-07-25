@@ -21,6 +21,7 @@ export default defineConfig({
         main: path.resolve(__dirname, "index.html"),
         crm: path.resolve(__dirname, "crm.html"),
         aiAutomation: path.resolve(__dirname, "ai-automation-company.html"),
+        bangaloreWebDev: path.resolve(__dirname, "web-development-agency-bangalore.html"),
       },
     },
   },
