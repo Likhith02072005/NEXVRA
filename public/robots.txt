@@ -1,0 +1,7 @@
+# Robots.txt for nexvra.in
+User-agent: *
+Allow: /
+Disallow: /crm
+Disallow: /api/
+
+Sitemap: https://nexvra.in/sitemap.xml

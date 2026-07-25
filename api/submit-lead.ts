@@ -46,7 +46,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { name, email, phone, businessType, date, time } = req.body;
+    const { name, email, phone, businessType, message, date, time } = req.body;
 
     if (!name || !email) {
       return res.status(400).json({ error: 'Missing required fields (name, email)' });
@@ -135,7 +135,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       location: ipDetails ? (ipDetails.city || ipDetails.country_name || 'India') : 'India',
       date: new Date().toISOString().split('T')[0],
       lastContact: new Date().toISOString().split('T')[0],
-      notes: `Booked Strategy Call on Website. Preferred date: ${date || '—'} at ${time || '—'}${validationNotes}`,
+      notes: `Booked Strategy Call on Website. Preferred date: ${date || '—'} at ${time || '—'}\n\nProject Details/Message: ${message || 'None provided'}${validationNotes}`,
       service: 'Web Development',
       assignedTo: 'Admin'
     };

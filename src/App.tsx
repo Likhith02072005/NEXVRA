@@ -992,6 +992,7 @@ function ContactSection() {
           email: formData.email,
           phone: formData.phone,
           businessType: formData.business,
+          message: formData.message,
           date: new Date().toISOString().split('T')[0],
           time: 'ASAP'
         })
@@ -1269,6 +1270,156 @@ function Loader({ onComplete }: { onComplete: () => void }) {
 }
 
 // ===================================================
+// AI CHAT WIDGET
+// ===================================================
+interface ChatMessage {
+  role: 'user' | 'assistant';
+  text: string;
+}
+
+function ChatWidget() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    { role: 'assistant', text: "Hey! I'm NEXVRA's AI assistant. Ask me anything about our services, pricing, or process." },
+  ]);
+  const [input, setInput] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isTyping]);
+
+  useEffect(() => {
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isOpen]);
+
+  const quickQuestions = [
+    'What services do you offer?',
+    "What's your pricing?",
+    'How do I get started?',
+  ];
+
+  const sendMessage = async (text: string) => {
+    if (!text.trim()) return;
+
+    const userMsg: ChatMessage = { role: 'user', text: text.trim() };
+    setMessages(prev => [...prev, userMsg]);
+    setInput('');
+    setIsTyping(true);
+
+    try {
+      const history = messages.map(m => ({ role: m.role === 'assistant' ? 'model' : 'user', text: m.text }));
+
+      const res = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text.trim(), history }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.reply) {
+        setMessages(prev => [...prev, { role: 'assistant', text: data.reply }]);
+      } else {
+        setMessages(prev => [...prev, { role: 'assistant', text: data.error || 'Sorry, I ran into an issue. Please try again or contact us at +91 96066 10059.' }]);
+      }
+    } catch {
+      setMessages(prev => [...prev, { role: 'assistant', text: "I'm having trouble connecting right now. You can reach us directly at +91 96066 10059 or nexvratech@gmail.com." }]);
+    } finally {
+      setIsTyping(false);
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    sendMessage(input);
+  };
+
+  return (
+    <div className="chat-widget">
+      {/* Chat Panel */}
+      {isOpen && (
+        <div ref={panelRef} className="chat-panel">
+          <div className="chat-header">
+            <div className="chat-header-info">
+              <div className="chat-header-dot" />
+              <div>
+                <div className="chat-header-title">NEXVRA AI</div>
+                <div className="chat-header-subtitle">Usually replies instantly</div>
+              </div>
+            </div>
+            <button className="chat-close-btn" onClick={() => setIsOpen(false)} aria-label="Close chat">
+              ✕
+            </button>
+          </div>
+
+          <div className="chat-messages">
+            {messages.map((msg, i) => (
+              <div key={i} className={`chat-msg chat-msg-${msg.role}`}>
+                <div className="chat-msg-bubble">{msg.text}</div>
+              </div>
+            ))}
+            {isTyping && (
+              <div className="chat-msg chat-msg-assistant">
+                <div className="chat-msg-bubble chat-typing">
+                  <span /><span /><span />
+                </div>
+              </div>
+            )}
+            <div ref={messagesEndRef} />
+          </div>
+
+          {/* Quick questions (only show if just the greeting) */}
+          {messages.length === 1 && (
+            <div className="chat-quick">
+              {quickQuestions.map(q => (
+                <button key={q} className="chat-quick-btn" onClick={() => sendMessage(q)}>
+                  {q}
+                </button>
+              ))}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="chat-input-bar">
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={e => setInput(e.target.value)}
+              placeholder="Type a message..."
+              className="chat-input"
+              maxLength={500}
+              disabled={isTyping}
+            />
+            <button type="submit" className="chat-send-btn" disabled={isTyping || !input.trim()} aria-label="Send message">
+              ➤
+            </button>
+          </form>
+        </div>
+      )}
+
+      {/* Floating Button */}
+      <button
+        className={`chat-fab ${isOpen ? 'chat-fab-active' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? 'Close chat' : 'Open AI chat assistant'}
+      >
+        {isOpen ? '✕' : '💬'}
+      </button>
+    </div>
+  );
+}
+
+// ===================================================
 // APP
 // ===================================================
 export default function App() {
@@ -1312,6 +1463,7 @@ export default function App() {
         <ContactSection />
         <Footer />
       </main>
+      <ChatWidget />
     </>
   );
 }
