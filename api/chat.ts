@@ -9,7 +9,9 @@ ABOUT NEXVRA:
 - Based in Bangalore, Karnataka, India
 - Founded in 2025
 - 40+ projects delivered, 3.0x average ROAS, 200% average lead increase
-- Contact: +91 96066 10059, nexvratech@gmail.com
+- Contact Phone: +91 96066 10059 (Call or WhatsApp)
+- Contact Email: nexvratech@gmail.com
+- Instagram: https://www.instagram.com/nexvra.in?igsh=MXdicmRiaGFwbHR0Yw==
 
 SERVICES:
 1. Web Development — Custom React/Next.js websites, landing pages, e-commerce. Brutalist, modern, immersive designs with GSAP animations.
