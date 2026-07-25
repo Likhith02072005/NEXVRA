@@ -20,6 +20,7 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, "index.html"),
         crm: path.resolve(__dirname, "crm.html"),
+        aiAutomation: path.resolve(__dirname, "ai-automation-company.html"),
       },
     },
   },
