@@ -2,36 +2,27 @@ import type { VercelRequest, VercelResponse } from '@vercel/node';
 import Redis from 'ioredis';
 import getEmailHtml from './email-template';
 
-const redisUrl = process.env.REDIS_URL;
-let redis: Redis | null = null;
-
-if (redisUrl) {
-  redis = new Redis(redisUrl);
-} else {
-  console.error("❌ Missing REDIS_URL environment variable!");
+function getRedisClient() {
+  const url = process.env.REDIS_URL;
+  if (!url) return null;
+  try {
+    return new Redis(url, {
+      connectTimeout: 2000,
+      maxRetriesPerRequest: 1,
+      enableOfflineQueue: false,
+      retryStrategy: () => null,
+    });
+  } catch (e) {
+    console.error("❌ Redis init error:", e);
+    return null;
+  }
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  // Enable CORS
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
-  
-  const origin = req.headers.origin as string || 'https://nexvra.in';
-  if (
-    origin === 'https://nexvra.in' || 
-    origin === 'https://www.nexvra.in' || 
-    origin.startsWith('http://localhost') || 
-    origin.endsWith('.vercel.app')
-  ) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-  } else {
-    res.setHeader('Access-Control-Allow-Origin', 'https://nexvra.in');
-  }
-
+  // CORS
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,POST');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization'
-  );
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -39,10 +30,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
-  }
-
-  if (!redis) {
-    return res.status(500).json({ error: 'Database connection not initialized' });
   }
 
   try {
@@ -105,12 +92,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     // Load existing database data
-    const rawData = await redis.get('nexvra_crm_data');
-    const data = rawData ? JSON.parse(rawData) : { leads: [], events: [], counters: {}, checklist: {}, dailyLog: {} };
-
-    if (!data.leads) data.leads = [];
-    if (!data.events) data.events = [];
-
+    const redis = getRedisClient();
     const leadId = Date.now();
 
     // Build lead notes
@@ -122,19 +104,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       validationNotes += `\n📞 Phone Check: ${phoneDetails.valid ? '✅ Valid' : '❌ Invalid'} (Type: ${phoneDetails.line_type || '—'}, Carrier: ${phoneDetails.carrier || '—'}, country: ${phoneDetails.country_name || '—'})`;
     }
 
-    // Determine values / services
-    const val = 35000; // Default service value
-    
-    // Construct new Lead
+    // Construct new Lead & Event
     const newLead = {
       id: String(leadId),
       name: name,
       company: companyName,
       email: email,
       phone: phone || '',
-      status: 'new', // Default status in the new brutalist-crm
+      status: 'new',
       source: 'Website',
-      value: val,
+      value: 35000,
       location: ipDetails ? (ipDetails.city || ipDetails.country_name || 'India') : 'India',
       date: new Date().toISOString().split('T')[0],
       lastContact: new Date().toISOString().split('T')[0],
@@ -143,7 +122,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       assignedTo: 'Admin'
     };
 
-    // Construct Calendar Event
     const newEvent = {
       id: leadId + 1,
       title: `📞 Call: ${name} (${companyName})`,
@@ -153,11 +131,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       type: 'call'
     };
 
-    data.leads.push(newLead);
-    data.events.push(newEvent);
+    if (redis) {
+      try {
+        const rawData = await redis.get('nexvra_crm_data');
+        const data = rawData ? JSON.parse(rawData) : { leads: [], events: [], counters: {}, checklist: {}, dailyLog: {} };
+        if (!data.leads) data.leads = [];
+        if (!data.events) data.events = [];
 
-    // Write back to database
-    await redis.set('nexvra_crm_data', JSON.stringify(data));
+        data.leads.push(newLead);
+        data.events.push(newEvent);
+
+        await redis.set('nexvra_crm_data', JSON.stringify(data));
+        redis.disconnect();
+      } catch (dbErr) {
+        console.error("⚠️ Redis DB write bypassed:", dbErr);
+      }
+    }
 
     // ===== EMAIL ALERT INITIATOR (Resend) =====
     const resendApiKey = process.env.RESEND_API_KEY;
