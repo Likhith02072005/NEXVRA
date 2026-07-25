@@ -1277,6 +1277,24 @@ interface ChatMessage {
   text: string;
 }
 
+function renderFormattedMessage(text: string) {
+  const lines = text.split('\n');
+  return lines.map((line, lineIdx) => {
+    let cleanLine = line.replace(/^\*\s+/, '• ').replace(/^-\s+/, '• ');
+    const parts = cleanLine.split(/(\*\*.*?\*\*)/g);
+    return (
+      <div key={lineIdx} style={{ marginBottom: lineIdx < lines.length - 1 ? '4px' : 0 }}>
+        {parts.map((part, partIdx) => {
+          if (part.startsWith('**') && part.endsWith('**')) {
+            return <strong key={partIdx} style={{ color: '#ffffff', fontWeight: 600 }}>{part.slice(2, -2)}</strong>;
+          }
+          return part;
+        })}
+      </div>
+    );
+  });
+}
+
 function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -1366,7 +1384,7 @@ function ChatWidget() {
           <div className="chat-messages">
             {messages.map((msg, i) => (
               <div key={i} className={`chat-msg chat-msg-${msg.role}`}>
-                <div className="chat-msg-bubble">{msg.text}</div>
+                <div className="chat-msg-bubble">{renderFormattedMessage(msg.text)}</div>
               </div>
             ))}
             {isTyping && (
