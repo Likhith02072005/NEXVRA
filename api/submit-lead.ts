@@ -1,6 +1,24 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import Redis from 'ioredis';
-import getEmailHtml from './email-template';
+function getEmailHtml(name: string, email: string, phone: string, date: string, time: string): string {
+  return `<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"><title>New Booking Notification</title></head>
+<body style="margin:0;padding:0;background-color:#08080d;color:#ffffff;font-family:sans-serif;">
+  <div style="max-width:600px;margin:40px auto;padding:30px;background:#12121e;border-radius:16px;border:1px solid #1a1a2e;">
+    <h2 style="color:#00d4ff;margin-top:0;">🔥 New Strategy Call Booked</h2>
+    <p><strong>Client Name:</strong> ${name}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Phone:</strong> ${phone}</p>
+    <p><strong>Preferred Date:</strong> ${date}</p>
+    <p><strong>Preferred Time:</strong> ${time}</p>
+    <div style="margin-top:30px;">
+      <a href="https://nexvra.in/crm" style="background:#dc2626;color:#ffffff;padding:12px 24px;border-radius:99px;text-decoration:none;font-weight:600;">View in CRM →</a>
+    </div>
+  </div>
+</body>
+</html>`;
+}
 
 function getRedisClient() {
   const url = process.env.REDIS_URL;
