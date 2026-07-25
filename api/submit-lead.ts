@@ -46,11 +46,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { name, email, phone, businessType, message, date, time } = req.body;
+    const body = typeof req.body === 'string' ? JSON.parse(req.body) : (req.body || {});
+    const { name, email, phone, businessType, business, message, date, time } = body;
 
     if (!name || !email) {
       return res.status(400).json({ error: 'Missing required fields (name, email)' });
     }
+
+    const companyName = String(businessType || business || 'Individual/Personal');
 
     // 1. Detect Client IP from Vercel Forwarding Headers
     const clientIp = (req.headers['x-vercel-forwarded-for'] as string) || 
@@ -126,7 +129,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const newLead = {
       id: String(leadId),
       name: name,
-      company: businessType || 'Individual/Personal',
+      company: companyName,
       email: email,
       phone: phone || '',
       status: 'new', // Default status in the new brutalist-crm
@@ -143,7 +146,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Construct Calendar Event
     const newEvent = {
       id: leadId + 1,
-      title: `📞 Call: ${name} (${businessType || 'Biz'})`,
+      title: `📞 Call: ${name} (${companyName})`,
       date: date || new Date().toISOString().split('T')[0],
       time: time || '12:00',
       leadId: String(leadId),
@@ -171,7 +174,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           body: JSON.stringify({
             from: 'NEXVRA Bookings <onboarding@resend.dev>',
             to: ['nexvratech@gmail.com'],
-            subject: `🔥 New Strategy Call: ${name} (${businessType.toUpperCase()})`,
+            subject: `🔥 New Strategy Call: ${name} (${companyName.toUpperCase()})`,
             html: htmlTemplate
           })
         });
