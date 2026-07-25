@@ -117,43 +117,48 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       parts: [{ text: message }],
     });
 
-    // Call Gemini API
-    const geminiRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          system_instruction: {
-            parts: [{ text: SYSTEM_PROMPT }],
-          },
-          contents,
-          generationConfig: {
-            temperature: 0.7,
-            topP: 0.9,
-            maxOutputTokens: 300,
-          },
-          safetySettings: [
-            { category: 'HARM_CATEGORY_HARASSMENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-            { category: 'HARM_CATEGORY_HATE_SPEECH', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-            { category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-            { category: 'HARM_CATEGORY_DANGEROUS_CONTENT', threshold: 'BLOCK_MEDIUM_AND_ABOVE' },
-          ],
-        }),
-      }
-    );
+    // Call Gemini API with model fallback
+    const modelsToTry = ['gemini-2.5-flash', 'gemini-flash-latest'];
+    let reply = '';
+    let lastError = '';
 
-    if (!geminiRes.ok) {
-      const errorText = await geminiRes.text();
-      console.error('Gemini API error:', geminiRes.status, errorText);
-      return res.status(502).json({ error: 'AI service temporarily unavailable' });
+    for (const model of modelsToTry) {
+      try {
+        const geminiRes = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${GEMINI_API_KEY}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              system_instruction: {
+                parts: [{ text: SYSTEM_PROMPT }],
+              },
+              contents,
+              generationConfig: {
+                temperature: 0.7,
+                topP: 0.9,
+                maxOutputTokens: 300,
+              },
+            }),
+          }
+        );
+
+        if (geminiRes.ok) {
+          const data = await geminiRes.json();
+          reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+          if (reply) break;
+        } else {
+          lastError = await geminiRes.text();
+          console.error(`Gemini API model ${model} error:`, geminiRes.status, lastError);
+        }
+      } catch (e: any) {
+        lastError = e?.message || String(e);
+      }
     }
 
-    const data = await geminiRes.json();
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
     if (!reply) {
-      return res.status(502).json({ error: 'No response from AI' });
+      console.error('All Gemini API models failed:', lastError);
+      return res.status(502).json({ error: 'AI service temporarily unavailable' });
     }
 
     return res.status(200).json({ reply });
